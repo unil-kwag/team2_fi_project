@@ -3,5 +3,10 @@ import os
 # Create your views here.
 
 def index(request):
-    msg = "My MEssage"
-    return render(request, 'test1/index.html',{'message':msg})
+    return render(request, 'test1/index.html',{})
+
+def selection(request):
+    return render(request, 'test1/selection.html',{})
+
+def search(request):
+    return render(request, 'test1/search.html',{})
