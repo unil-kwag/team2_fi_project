@@ -10,3 +10,6 @@ def selection(request):
 
 def search(request):
     return render(request, 'test1/search.html',{})
+
+def news(request):
+    return render(request, 'test1/news.html',{})

@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',index,name='main'),
     path('selection/',selection,name='Location_Selection'),
-    path('search/',search,name='Search')
+    path('search/',search,name='Search'),
+    path('news/',news,name='News')
 ]
