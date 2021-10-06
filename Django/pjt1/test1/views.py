@@ -9,4 +9,5 @@ def selection(request):
     return render(request, 'test1/selection.html',{})
 
 def search(request):
-    return render(request, 'test1/search.html',{})
+    return render(request, 'test1/search2.html',{})
+
