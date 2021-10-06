@@ -23,5 +23,9 @@ urlpatterns = [
     path('',index,name='main'),
     path('selection/',selection,name='Location_Selection'),
     path('search/',search,name='Search'),
-    path('news/',news,name='News')
+    path('news/',news,name='News'),
+    path('board_main/',board_main,name='Board_main'),
+    path('board_write/',board_write,name='Board_write'),
+    path('board_view/',board_view,name='Board_view'),
+    path('board_edit/',board_edit,name='Board_edit'),
 ]
