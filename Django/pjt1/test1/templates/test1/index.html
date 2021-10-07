@@ -144,14 +144,7 @@
                 <button class="btn toggle-btn" type="button" href="/search/">
                   <i class="fa fa-bars"></i>
                 </button>
-
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="신혼부부 임대주택 검색"
-                  />
-                </div>
+<!-------------------------------------------- 지역구 선택------------------------------------->
                 <div class="form-group">
                   <select
                     id="lunchBegins"
@@ -160,26 +153,29 @@
                     data-live-search-style="begins"
                     title="지역구 선택"
                   >
-                    <option>강남구</option>
-                    <option>서초구</option>
-                    <option>마포구</option>
-                    <option>노원구</option>
-                    <option>용산구</option>
-                    <option>동대문구</option>
+                  {% for list in seoul_gu %}
+                    <option>{{list}}</option>
+                  {%endfor%}
                   </select>
                 </div>
+<!-------------------------------------------- 임대 선택------------------------------------->
                 <div class="form-group">
                   <select
                     id="basic"
                     class="selectpicker show-tick form-control"
+                    title= '전월세 임대주택'
                   >
-                    <option>전월세 임대선택</option>
-                    <option>임대</option>
-                    <option>월세</option>
-                    <option>전세</option>
+                    <option>ㅇㅇㅇ</option>
                   </select>
                 </div>
-                <button class="btn search-btn" type="submit">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="신혼부부 임대주택 검색"
+                  />
+                </div>
+                <button class="btn search-btn" type="button" onclick="location.href='/search/'">
                   <i class="fa fa-search"></i>
                 </button>
 
