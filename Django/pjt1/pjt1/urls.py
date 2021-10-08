@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 
 from test1.views import *
+import test1.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index,name='main'),
+    path('',views.index,name='main'),
+    path('<str:select_gu>',views.select_gu,name='main'),
     path('selection/',selection,name='Location_Selection'),
     path('search/',search,name='Search'),
     path('news/',news,name='News'),

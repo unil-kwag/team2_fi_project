@@ -141,7 +141,7 @@
         margin-bottom: 18px;
     }
     .search-form{
-        padding: 15px;
+        padding: 10px;
     }
     .search-form .form-inline .form-group {
         width: 100%; 
@@ -154,7 +154,7 @@
     }
     .search-form .search-toggle {
         margin-top: 15px;
-        overflow: hidden;
+        overflow: inherit;
 
         padding: 0px;
     }

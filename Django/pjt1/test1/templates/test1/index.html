@@ -140,11 +140,13 @@
             </b>
             </p>
             <div class="search-form wow pulse" data-wow-delay="0.8s">
-              <form action="" class="form-inline">
+              <form action="" class="col-sm-1" style="padding: 5px;">
                 <button class="btn toggle-btn" type="button" href="/search/">
                   <i class="fa fa-bars"></i>
                 </button>
+              </form>
 <!-------------------------------------------- 지역구 선택------------------------------------->
+              <form action="" method="GET" class="col-sm-3" style="padding: 5px;"> 
                 <div class="form-group">
                   <select
                     id="lunchBegins"
@@ -152,22 +154,30 @@
                     data-live-search="true"
                     data-live-search-style="begins"
                     title="지역구 선택"
+                    name="select_gu"
                   >
-                  {% for list in seoul_gu %}
-                    <option>{{list}}</option>
+                  {% for list in search_result1 %}
+                    <option value="{{list.gu}}">{{list.gu}}</option>
                   {%endfor%}
                   </select>
+
                 </div>
+              </form>
 <!-------------------------------------------- 임대 선택------------------------------------->
+              <form action="" class="col-sm-3" style="padding: 5px;">
                 <div class="form-group">
                   <select
                     id="basic"
                     class="selectpicker show-tick form-control"
                     title= '전월세 임대주택'
                   >
-                    <option>ㅇㅇㅇ</option>
+                  {% for list in housing_kind %}
+                    <option>{{list.kind}}</option>
+                  {%endfor%}
                   </select>
                 </div>
+              </form>
+              <form action="" class="col-sm-4" style="padding: 5px;">
                 <div class="form-group">
                   <input
                     type="text"
@@ -175,81 +185,51 @@
                     placeholder="신혼부부 임대주택 검색"
                   />
                 </div>
+              </form>
+              <form action="" class="col-sm-1"></form>
                 <button class="btn search-btn" type="button" onclick="location.href='/search/'">
                   <i class="fa fa-search"></i>
                 </button>
+              </form>
 
-                <div style="display: none" class="search-toggle">
+                <div style="display: none; overflow:inherit" class="search-toggle">
                   <div class="search-row">
                     <div class="form-group mar-r-20">
-                      <label for="price-range">임대주택 가격:</label>
+                      <label for="property-geo">임대주택 면적(m²)</label>
                       <input
                         type="text"
                         class="span2"
                         value=""
                         data-slider-min="0"
-                        data-slider-max="600"
-                        data-slider-step="5"
-                        data-slider-value="[0,450]"
-                        id="price-range"
-                      /><br />
-                      <b class="pull-left color">2000원</b>
-                      <b class="pull-right color">100000원</b>
-                    </div>
-                    <!-- End of  -->
-
-                    <div class="form-group mar-l-20">
-                      <label for="property-geo">임대주택 면적 (m2) :</label>
-                      <input
-                        type="text"
-                        class="span2"
-                        value=""
-                        data-slider-min="0"
-                        data-slider-max="600"
-                        data-slider-step="5"
-                        data-slider-value="[50,450]"
+                        data-slider-max="100"
+                        data-slider-step="10"
+                        data-slider-value="[10,30]"
                         id="property-geo"
                       /><br />
-                      <b class="pull-left color">40m</b>
-                      <b class="pull-right color">12000m</b>
+                      <b class="pull-left color">0m²</b>
+                      <b class="pull-right color">100m²</b>
                     </div>
                     <!-- End of  -->
                   </div>
 
                   <div class="search-row">
                     <div class="form-group mar-r-20">
-                      <label for="price-range">세대수 :</label>
+                      <label for="price-range">세대수</label>
                       <input
                         type="text"
                         class="span2"
                         value=""
                         data-slider-min="0"
-                        data-slider-max="600"
-                        data-slider-step="5"
-                        data-slider-value="[250,450]"
+                        data-slider-max="3000"
+                        data-slider-step="100"
+                        data-slider-value="[300,1000]"
                         id="min-baths"
                       /><br />
-                      <b class="pull-left color">1세대</b>
-                      <b class="pull-right color">1200세대</b>
+                      <b class="pull-left color">0세대</b>
+                      <b class="pull-right color">3000세대</b>
                     </div>
                     <!-- End of  -->
 
-                    <div class="form-group mar-l-20">
-                      <label for="property-geo">방 개수 :</label>
-                      <input
-                        type="text"
-                        class="span2"
-                        value=""
-                        data-slider-min="0"
-                        data-slider-max="600"
-                        data-slider-step="5"
-                        data-slider-value="[250,450]"
-                        id="min-bed"
-                      /><br />
-                      <b class="pull-left color">1개</b>
-                      <b class="pull-right color">120개</b>
-                    </div>
-                    <!-- End of  -->
                   </div>
                     <br />
                     <hr />

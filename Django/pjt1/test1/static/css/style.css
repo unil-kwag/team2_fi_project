@@ -2837,7 +2837,7 @@ blog
   width: 100%;
 }
 .large-search .search-row {
-  overflow: hidden;
+  overflow: inherit;
 }
 
 .login-blocks h2,
