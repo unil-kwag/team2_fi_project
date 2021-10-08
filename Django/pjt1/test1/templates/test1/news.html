@@ -141,152 +141,231 @@
         <!-- End page header -->
 
         <!-- news area -->
-        <div class="content-area single-news" style="background-color: #FCFCFC;">
-            <div class="container">
 
-                <div class="clearfix padding-top-40">
-                    <div class="col-md-8 single-news-content ">
-                        <div class="row">
-                            <div class="light-slide-item">            
-                                <div class="clearfix">
-                                    <div class="favorite-and-print">
-                                        <a class="add-to-fav" href="#login-modal" data-toggle="modal">
-                                            <i class="fa fa-star-o"></i>
-                                        </a>
-                                        <a class="printer-icon " href="javascript:window.print()">
-                                            <i class="fa fa-print"></i> 
-                                        </a>
-                                    </div> 
-                                </div>
+        <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    
+                    <div class="blog-asside-right col-md-3">
+                        <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
+                            <div class="panel-heading">
+                                <h3 class="panel-title">뉴스 페이지 설명</h3>
+                            </div>
+                            <div class="panel-body text-widget">
+                                <p>1. 네이버 API 사용, 검색 시 오른쪽 영역에 뉴스 검색 결과 도출(진자2 문법 사용 필요)<br><br>
+                                    2. 현재 뉴스 API를 Django에 적용하는 것과 검색 결과 화면에 나타내는 방법 필요.<br><br>
+                                    3. 추천 부동산 뉴스 Section에 웹에서 뉴스를 끌어오는 기능 및 헤드라인, 내용 요약 표시 개발필요<br><br>
+                                    4. Tag 부분, 클릭시 키워드 검색 기능 or 새로운 웹페이지 생성하여 검색창 띄우기<br><br>
+                                    5. 신문기사 본문내용 표시: 끌어오는 방법 문의, 현재 표시된 것은 html문으로 기사작성하였음.
+
+                                </p>
                             </div>
                         </div>
-                        <h1 style="color: black;"><b>서울 부동산 뉴스 검색</b></h1>
-                        <p style="color: black;">
-                            <b>< 네이버 API 이용 검색 키워드 ></b>
-                        </p>
-                                            <div class="form-group">
-                                              <input
-                                                type="text"
-                                                class="form-control"
-                                                placeholder="네이버 뉴스 검색"
-                                              />
-                                            </div>
-                            <!-- .news-meta -->
 
-                            <div class="section
-                                ">
-                                <h4 class="s-news-title">뉴스 검색 결과 페이지</h4>
-                                <div class="s-news-content">
-                                    <p>썸네일 1, 뉴스 1</p>
-                                    <p>썸네일 2, 뉴스 2</p>
-                                    <p>썸네일 3, 뉴스 3</p>
-                                    <p>썸네일 4, 뉴스 4</p>
-                                    <p>썸네일 5, 뉴스 5</p>
-                                </div>
+                        <div class="panel panel-default sidebar-menu wow  fadeInRight animated">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">네이버 뉴스 검색</h3>
                             </div>
-                            <!-- End description area  -->
+                            <div class="panel-body">
+                                <form role="search">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Search" type="text">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-smal">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
+                        <div class="panel sidebar-menu wow  fadeInRight animated">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Tags</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="tag-cloud">
+                                    <li><a href="https://www.seoul.go.kr/main/index.jsp" target="_blank">
+                                        <i class="fa fa-tags"></i> 서울시청</a> 
+                                    </li>
+                                    <li><a href="https://www.i-sh.co.kr/main/index.do" target="_blank">
+                                        <i class="fa fa-tags"></i> 서울주택도시공사</a> 
+                                    </li>
+                                    <li><a href="http://www.reb.or.kr/kab/home/main/main.jsp" target="_blank">
+                                        <i class="fa fa-tags"></i> 한국부동산원</a> 
+                                    </li>
+                                    <li><a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EC%8B%A0%ED%98%BC%EB%B6%80%EB%B6%80+%EC%A0%95%EB%B6%80%EC%A0%95%EC%B1%85" target="_blank">
+                                        <i class="fa fa-tags"></i> 신혼부부 정부정책</a> 
+                                    </li>
+                                    <li><a href="https://apply.lh.or.kr/" target="_blank"><i class="fa fa-tags"></i> lh청약센터</a> 
+                                    </li>
+                                    <li><a href="http://nhuf.molit.go.kr/FP/FP05/FP0502/FP05020401.jsp" target="_blank"><i class="fa fa-tags"></i>신혼부부전용 전세자금</a> 
+                                    </li>
+                                    <li><a href="http://nhuf.molit.go.kr/FP/FP05/FP0503/FP05030601.jsp" target="_blank"><i class="fa fa-tags"></i> 신혼부부전용 구입자금대출</a> 
+                                    </li>
+                                    <li><a href="#" target="_blank"><i class="fa fa-tags"></i> 신혼부부대출상품</a> 
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title"> < 정부 주택금융 정보 및 은행 대출 광고 ></h2>
+                                    <h3 class="panel-title">추천 부동산 뉴스</h3>
                                 </div>
-                            <div class="panel-body recent-property-widget">
-
-                                <div class="section">
-                                    <input type="radio" name="slide" id="slide01" checked>
-                                    <input type="radio" name="slide" id="slide02">
-                                    <input type="radio" name="slide" id="slide03">
-                                    <div class="slidewrap">
-                                        
-                                        <ul class="slidelist">
-                                            <!-- 슬라이드 영역 -->
-                                            <li class="slideitem">
-                                                <a>
-                                                    <div class="textbox">
-                                                        <h3>첫번째 슬라이드</h3>
-                                                        <p>첫번째 슬라이드 입니다.</p>
-                                                    </div>
-                                                    <img src="/static/img/property-1/introduce_land_money1.png">
-                                                </a>
-                                            </li>
-                                            <li class="slideitem">
-                                                <a>
-                                                    
-                                                    <div class="textbox">
-                                                        <h3>두번째 슬라이드</h3>
-                                                        <p>두번째 슬라이드 입니다.</p>
-                                                    </div>
-                                                    <img src="/static/img/property-1/introduce_land_money2.png">
-                                                </a>
-                                            </li>
-                                            <li class="slideitem">
-                                                <a>
-                                                    
-                                                    <div class="textbox">
-                                                        <h3>두번째 슬라이드</h3>
-                                                        <p>두번째 슬라이드 입니다.</p>
-                                                    </div>
-                                                    <img src="/static/img/property-1/introduce_land_money3.png">
-                                                </a>
-                                            </li class="slideitem">
-                                
-                                            <!-- 좌,우 슬라이드 버튼 -->
-                                            <div class="slide-control">
-                                                <div>
-                                                    <label for="slide03" class="left"></label>
-                                                    <label for="slide02" class="right"></label>
-                                                </div>
-                                                <div>
-                                                    <label for="slide01" class="left"></label>
-                                                    <label for="slide03" class="right"></label>
-                                                </div>
-                                                <div>
-                                                    <label for="slide02" class="left"></label>
-                                                    <label for="slide01" class="right"></label>
-                                                </div>
-                                            </div>
-                                
-                                        </ul>
-                                        <!-- 페이징 -->
-                                        <ul class="slide-pagelist">
-                                            <li><label for="slide01"></label></li>
-                                            <li><label for="slide02"></label></li>
-                                            <li><label for="slide03"></label></li>
-                                        </ul>
-                                    </div>
-                                </div>
- 
-                            <!-- End additional-details area  -->
-
-                            <!-- End features area  -->
-
-                            <!-- End video area  -->
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 p0">
-                        <aside class="sidebar sidebar-news blog-asside-right">
-                            <div class="panel panel-default sidebar-menu similar-news-wdg wow fadeInRight animated">
-                                <div class="panel-heading">
-                                    <h2 class="panel-title">TOP4 실시간 뉴스 </h2>
-                                        <ul>
-                                            <li>
-                                                <div class="col-md-15 col-sm-15 col-xs-15 blg-entry">
-                                                    <!-- <h5><a href="single.html">서울 부동산 집값 매년 2% 성장 </a></h5> -->
-                                                </div>
-                                            </li>
-                                        </ul>
-                                </div>
-                                <div class="panel-body recent-news-widget">
-                                    <ul>
+                                <div class="panel-body recent-property-widget">
+                                           <ul>
                                         <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="/static/img/demo/small-property-2.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">신문사</b>
+                                                    <b class="b-2">게시날짜</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">[헤드라인]서울 집값 상승률 매년 3% 증가 </a></h6>
+                                                <span class="property-price">[기사 내용]한국 부동산원에 따르면 2021년 1분기 서울 부동산 상승률 2020년 대비 3% 증가...</span>
+                                            </div>
                                         </li>
+                                        <li>
+                                            <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">[헤드라인] 2021년 4분기 주택 공급 늘리나? </a></h6>
+                                                <span class="property-price">최근 정부는 서울시 아파트값 안정화를 위해 위례신도시 건설 투자에 참여...</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">[헤드라인] 신혼부부 주택자금 마련 고민 상담</a></h6>
+                                                <span class="property-price">전국적으로 부동산 가격이 상승하면서 서울에 실거주를 희망하는 신혼부부의 내집마련 걱정이 늘어...</span>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6> <a href="single.html">[헤드라인] 신혼부부에게 필요한 임대주택 모습 알아보기 </a></h6>
+                                                <span class="property-price">최근 서울시 아파트가격이 뛰면서 상대적으로 임대주택에 대한 관심도가 높아지고 있는 상황...</span>
+                                            </div>
+                                        </li>
+
                                     </ul>
                                 </div>
-                            </div>                                                                                       
-                        </aside>
-                    </div>
+                            </div>
+                            
+
+                        
+                    </div>   
+                    
+                    <div class="blog-lst col-md-9 p0">
+                        <section id="id-100" class="post single">
+
+                            <div class="post-header single">
+                                <div class="">
+                                    <h2 class="wow fadeInLeft animated">서울 아파트 전셋값, 2년 연속 매매가격 밀어 올리나(검색 후 나타나는 기사)</h2>
+                                    <div class="title-line wow fadeInRight animated"></div>
+                                </div>
+                                <div class="row wow fadeInRight animated">
+                                    <div class="col-sm-6">
+                                        <p class="author-category">
+                                            By <a href="#">뉴스1</a>
+                                            in <a href="blog.html">중앙일보</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6 right" >
+                                        <p class="date-comments">
+                                            <a href="single.html"><i class="fa fa-calendar-o"></i> 2021년 10월 08일</a>
+                                            <a href="single.html"><i class="fa fa-comment-o"></i> 댓글 수</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="image wow fadeInRight animated"> 
+                                    <img src="/static/img/news/newspaper3.jpg" class="img-responsive" alt="신문기사 그림 표현 1">
+                                </div>
+                            </div> 
+
+                            <div id="post-content" class="post-body single wow fadeInLeft animated">
+                                <p>
+                                    <strong>﻿ 서울 아파트 전셋값 변동률이 2년 연속 매매가격 변동률을 넘어설 것으로 보인다.</strong> 
+                                    부동산업계는 전셋값 상승은 매매가격 상승으로 이어져 4분기 전셋값 움직임에 관심을 가질 필요가 있다고 했다.
+                                    <em>7일 부동산R114</em>에 따르면 올해 1~9월 서울 아파트 전셋값 변동률은 9.97%로 매매가격 변동률(9.74%)을 상회했다.<br>
+                                    이 모습은 지난해에 이어 2년 연속이다.
+                                    7일 부동산R114에 따르면 올해 1~9월 서울 아파트 전셋값 변동률은 9.97%로 매매가격 변동률(9.74%)을 상회했다.
+                                    이 모습은 지난해에 이어 2년 연속이다. 지난해 전셋값 상승률은 14.24%로 매맷값(13.81%)을 넘어섰다.
+                                    지역별로 서울 13개 구의 전셋값 변동률이 매매가격 변동률을 상회했다.
+                                         
+                                    중구는 9월까지 전셋값 상승률은 14.94%로 같은 기간 매매가격 변동률(11.97%)을 넘어섰다.
+                                    이런 지역은 중구 외에도 Δ성북구 Δ동작구 Δ용산구 Δ구로구 Δ마포구 Δ종로구 Δ양천구 Δ서초구
+                                    Δ영등포구 Δ동대문구 Δ광진구 Δ강남구 등으로 나타났다.<br>
+                                    자세한 뉴스 살펴보기: https://www.donga.com/news/Economy/article/all/20211007/109592306/1
+                                </p>
+
+                                <p>
+                                    <img src="/static/img/news/newspaper1.jpg" class="img-responsive" alt="신문기사 그림 표현 2">
+                                </p>
+
+                                <h2></h2>
+                                <ol>
+
+                                </ol>
+
+                                <blockquote>
+                                    <p>
+                                       
+                                    </p>
+                                </blockquote>
+
+                                <h3></h3>
+
+
+                                </ul>
+                                <p>
+                                    <img src="assets/img/blog.jpg" class="img-responsive" alt="Example blog post alt">
+                                </p>
+                                <p>
+                                    
+                                </p>
+
+                            </div>
+                            <!-- 페이지 이동 부분, 구현 힘들다면 상위 5개 기사만 뜨게 만들기 -->
+                            <div class="post-footer single wow fadeInBottum animated">
+                                <ul class="pager">
+                                    <li class="previous"><a href="#"><i class=""></i>← Older </a></li>
+                                    <li class="next disabled"><a href="#">Newer →<i class=""></i> </a></li>
+                                </ul> 
+                            </div>    
+
+                        </section> 
+
+                        <section class="about-autor">
+
+                        </section>
+     
+                    </div>                    
+                 
                 </div>
+
             </div>
         </div>
 

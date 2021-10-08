@@ -3,6 +3,13 @@ from django.shortcuts import render
 from django.db import connection
 from .models import *
 import os
+
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.express as px
+
+from django_plotly_dash import DjangoDash
 # Create your views here.
 
 # def index(request):
@@ -60,6 +67,20 @@ def select_gu(request):
 
 
 def selection(request):
+    app = DjangoDash('simple')
+    
+    df = px.data.iris()  # iris is a pandas DataFrame
+    fig = px.scatter(df, x="sepal_width", y="sepal_length")
+
+    app.layout = html.Div(
+    [
+       dcc.RadioItems(
+        id='dropdown-size',
+        options=[{'label': i, 'value': j} for i, j in [('L','large'), ('M','medium'), ('S','small')]],
+        value='medium'),
+        dcc.Graph(figure=fig)
+    ])
+    
     return render(request, 'test1/selection.html',{})
 
 def search(request):
