@@ -28,4 +28,6 @@ urlpatterns = [
     path('board_write/',board_write,name='Board_write'),
     path('board_view/',board_view,name='Board_view'),
     path('board_edit/',board_edit,name='Board_edit'),
+    
+    path('django_dash/', include('django_plotly_dash.urls')),
 ]

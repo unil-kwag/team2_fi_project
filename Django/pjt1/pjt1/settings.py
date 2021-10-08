@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig', #Django와 Dash연결을 위한 앱 참조 <pip install django_plotly_dash>
     'test1',
 ]
 
@@ -136,4 +137,4 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+X_FRAME_OPTIONS = 'SAMEORIGIN' # 만약 Django의 버전이 3.0이상일 경우 Plotly Dash를 위해 adding
