@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>[뉴스] 2조 Rainbow. 『신혼부부 임대주택 최적입지 선정 사이트』</title>
+        <title>2조 Rainbow. 『신혼부부 임대주택 최적입지 선정 사이트』</title>
         <meta name="description" content="GARO is a real-estate template">
         <meta name="author" content="Kimarotec">
         <meta name="keyword" content="html5, css, bootstrap, news, real-estate theme , bootstrap template">
@@ -35,6 +35,50 @@
         <link rel="stylesheet" href="/static/css/lightslider.min.css">
         <link rel="stylesheet" href="/static/css/style.css">
         <link rel="stylesheet" href="/static/css/responsive.css">
+
+        <!-- style 슬라이드 -->
+        <style>
+            * {margin:0;padding:0;}
+            .section input[id*="slide"] {display:none;}
+            .section .slidewrap {max-width:1200px;margin:0 auto;}
+            .section .slidelist {white-space:nowrap;font-size:0;overflow:hidden;position:relative;}
+            .section .slidelist > li {display:inline-block;vertical-align:middle;width:100%;transition:all .5s;}
+            .section .slidelist > li > a {display:block;position:relative;}
+            .section .slidelist > li > a img {width:100%;}
+            .section .slidelist label {position:absolute;z-index:10;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
+            .section .slidelist .textbox {position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%);line-height:1.6;text-align:center;}
+            .section .slidelist .textbox h3 {font-size:36px;color:#fff;;transform:translateY(30px);transition:all .5s;}
+            .section .slidelist .textbox p {font-size:16px;color:#fff;opacity:0;transform:translateY(30px);transition:all .5s;}
+            
+            /* input에 체크되면 슬라이드 효과 */
+            .section input[id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
+            .section input[id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
+            .section input[id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
+        
+            /* input에 체크되면 텍스트 효과 */
+            .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+            .section input[id="slide01"]:checked ~ .slidewrap li:nth-child(1) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+            .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+            .section input[id="slide02"]:checked ~ .slidewrap li:nth-child(2) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+            .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .textbox h3 {opacity:1;transform:translateY(0);transition-delay:.2s;}
+            .section input[id="slide03"]:checked ~ .slidewrap li:nth-child(3) .textbox p {opacity:1;transform:translateY(0);transition-delay:.4s;}
+        
+            /* 좌,우 슬라이드 버튼 */
+            .slide-control > div {display:none;}
+            .section .left {left:30px;background:url('./img/left.png') center center / 100% no-repeat;}
+            .section .right {right:30px;background:url('./img/right.png') center center / 100% no-repeat;}
+            .section input[id="slide01"]:checked ~ .slidewrap .slide-control > div:nth-child(1) {display:block;}
+            .section input[id="slide02"]:checked ~ .slidewrap .slide-control > div:nth-child(2) {display:block;}
+            .section input[id="slide03"]:checked ~ .slidewrap .slide-control > div:nth-child(3) {display:block;}
+        
+            /* 페이징 */
+            .slide-pagelist {text-align:center;padding:20px;}
+            .slide-pagelist > li {display:inline-block;vertical-align:middle;}
+            .slide-pagelist > li > label {display:block;padding:8px 30px;border-radius:30px;background:#ccc;margin:20px 10px;cursor:pointer;}
+            .section input[id="slide01"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(1) > label {background:#999;}
+            .section input[id="slide02"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(2) > label {background:#999;}
+            .section input[id="slide03"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(3) > label {background:#999;}
+            </style>
     </head>
     <body>
 
@@ -113,29 +157,12 @@
                                             <i class="fa fa-print"></i> 
                                         </a>
                                     </div> 
-                                    
-                                    <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                        <li data-thumb="/static/img/property-1/introduce_land_money1.png"> 
-                                            <img src="/static/img/property-1/introduce_land_money1.png" />
-                                        </li>
-                                        <li data-thumb="img/property-1/introduce_land_money2.png"> 
-                                            <img src="/static/img/property-1/introduce_land_money2.png" />
-                                        </li>
-                                        <li data-thumb="/static/img/property-1/introduce_land_money5.jpg"> 
-                                            <img src="/static/img/property-1/introduce_land_money5.jpg" />
-                                        </li>
-                                        <li data-thumb="/static/img/property-1/introduce_land_money4.png"> 
-                                            <img src="/static/img/property-1/introduce_land_money4.png" />
-                                        </li>                                         
-                                    </ul>
                                 </div>
                             </div>
                         </div>
                         <h1 style="color: black;"><b>서울 부동산 뉴스 검색</b></h1>
                         <p style="color: black;">
-                            <b>
-                          < 네이버 API 이용 검색 키워드 >
-                        </b>
+                            <b>< 네이버 API 이용 검색 키워드 ></b>
                         </p>
                                             <div class="form-group">
                                               <input
@@ -146,7 +173,8 @@
                                             </div>
                             <!-- .news-meta -->
 
-                            <div class="section">
+                            <div class="section
+                                ">
                                 <h4 class="s-news-title">뉴스 검색 결과 페이지</h4>
                                 <div class="s-news-content">
                                     <p>썸네일 1, 뉴스 1</p>
@@ -160,475 +188,133 @@
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Ads her  </h3>
+                                    <h2 class="panel-title"> < 정부 주택금융 정보 및 은행 대출 광고 ></h2>
                                 </div>
-                                <div class="panel-body recent-property-widget">
-                                    <img src="/static/img/ads.jpg">
+                            <div class="panel-body recent-property-widget">
+
+                                <div class="section">
+                                    <input type="radio" name="slide" id="slide01" checked>
+                                    <input type="radio" name="slide" id="slide02">
+                                    <input type="radio" name="slide" id="slide03">
+                                    <div class="slidewrap">
+                                        
+                                        <ul class="slidelist">
+                                            <!-- 슬라이드 영역 -->
+                                            <li class="slideitem">
+                                                <a>
+                                                    <div class="textbox">
+                                                        <h3>첫번째 슬라이드</h3>
+                                                        <p>첫번째 슬라이드 입니다.</p>
+                                                    </div>
+                                                    <img src="/static/img/property-1/introduce_land_money1.png">
+                                                </a>
+                                            </li>
+                                            <li class="slideitem">
+                                                <a>
+                                                    
+                                                    <div class="textbox">
+                                                        <h3>두번째 슬라이드</h3>
+                                                        <p>두번째 슬라이드 입니다.</p>
+                                                    </div>
+                                                    <img src="/static/img/property-1/introduce_land_money2.png">
+                                                </a>
+                                            </li>
+                                            <li class="slideitem">
+                                                <a>
+                                                    
+                                                    <div class="textbox">
+                                                        <h3>두번째 슬라이드</h3>
+                                                        <p>두번째 슬라이드 입니다.</p>
+                                                    </div>
+                                                    <img src="/static/img/property-1/introduce_land_money3.png">
+                                                </a>
+                                            </li class="slideitem">
+                                
+                                            <!-- 좌,우 슬라이드 버튼 -->
+                                            <div class="slide-control">
+                                                <div>
+                                                    <label for="slide03" class="left"></label>
+                                                    <label for="slide02" class="right"></label>
+                                                </div>
+                                                <div>
+                                                    <label for="slide01" class="left"></label>
+                                                    <label for="slide03" class="right"></label>
+                                                </div>
+                                                <div>
+                                                    <label for="slide02" class="left"></label>
+                                                    <label for="slide01" class="right"></label>
+                                                </div>
+                                            </div>
+                                
+                                        </ul>
+                                        <!-- 페이징 -->
+                                        <ul class="slide-pagelist">
+                                            <li><label for="slide01"></label></li>
+                                            <li><label for="slide02"></label></li>
+                                            <li><label for="slide03"></label></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="section additional-details">
-
-                                <h4 class="s-news-title">Additional Details</h4>
-
-                                <ul class="additional-details-list clearfix">
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
-                                    </li>
-
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Built In</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">2003</span>
-                                    </li>
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Parking</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">2 Or More Spaces,Covered Parking,Valet Parking</span>
-                                    </li>
-
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Yes</span>
-                                    </li>
-
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">View</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal View,Direct ew</span>
-                                    </li>
-
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Waterfront Description:</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Intracoastal Front,Ocean Access</span>
-                                    </li> 
-
-                                </ul>
-                            </div>  
+ 
                             <!-- End additional-details area  -->
 
-                            <div class="section news-features">      
-
-                                <h4 class="s-news-title">Features</h4>                            
-                                <ul>
-                                    <li><a href="properties.html">Swimming Pool</a></li>   
-                                    <li><a href="properties.html">3 Stories</a></li>
-                                    <li><a href="properties.html">Central Cooling</a></li>
-                                    <li><a href="properties.html">Jog Path 2</a></li>
-                                    <li><a href="properties.html">2 Lawn</a></li>
-                                    <li><a href="properties.html">Bike Path</a></li>
-                                </ul>
-
-                            </div>
                             <!-- End features area  -->
 
-                            <div class="section news-video"> 
-                                <h4 class="s-news-title">news Video</h4> 
-                                <div class="video-thumb">
-                                    <a class="video-popup" href="yout" title="Virtual Tour">
-                                        <img src="/static/img/news-video.jpg" class="img-responsive wp-post-image" alt="Exterior">            
-                                    </a>
-                                </div>
-                            </div>
                             <!-- End video area  -->
                         </div>
                     </div>
 
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-news blog-asside-right">
-                            <div class="dealer-widget">
-                                <div class="dealer-content">
-                                    <div class="inner-wrapper">
-
-                                        <div class="clear">
-                                            <div class="col-xs-8 col-sm-8 ">
-                                                <h3 class="dealer-name">
-                                                    <a href="">네이버 검색 키워드</a>
-                                                    <span>단추 아이콘</span>        
-                                                </h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
                             <div class="panel panel-default sidebar-menu similar-news-wdg wow fadeInRight animated">
                                 <div class="panel-heading">
                                     <h2 class="panel-title">TOP4 실시간 뉴스 </h2>
+                                        <ul>
+                                            <li>
+                                                <div class="col-md-15 col-sm-15 col-xs-15 blg-entry">
+                                                    <!-- <h5><a href="single.html">서울 부동산 집값 매년 2% 성장 </a></h5> -->
+                                                </div>
+                                            </li>
+                                        </ul>
                                 </div>
                                 <div class="panel-body recent-news-widget">
                                     <ul>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="/static/img/demo/small-news-2.jpg"></a>
-                                                <span class="news-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">API 뉴스 제목 </a></h6>
-                                                <span class="news-price">API 뉴스 링크 1</span>
-                                            </div>
                                         </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="/static/img/demo/small-news-1.jpg"></a>
-                                                <span class="news-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">API 뉴스 제목 추출 </a></h6>
-                                                <span class="news-price">3000000$</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="/static/img/demo/small-news-3.jpg"></a>
-                                                <span class="news-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="news-price">3000000$</span>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="/static/img/demo/small-news-2.jpg"></a>
-                                                <span class="news-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="news-price">3000000$</span>
-                                            </div>
-                                        </li>
-
                                     </ul>
                                 </div>
-                            </div>
-
-
-
-                            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Ads her  </h3>
-                                </div>
-                                <div class="panel-body recent-news-widget">
-                                    <img src="/static/img/ads.jpg">
-                                </div>
-                            </div>
-
-                            <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Smart search</h3>
-                                </div>
-                                <div class="panel-body search-widget">
-                                    <form action="" class=" form-inline"> 
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <input type="text" class="form-control" placeholder="Key word">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-xs-6">
-
-                                                    <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Select Your City">
-
-                                                        <option>New york, CA</option>
-                                                        <option>Paris</option>
-                                                        <option>Casablanca</option>
-                                                        <option>Tokyo</option>
-                                                        <option>Marraekch</option>
-                                                        <option>kyoto , shibua</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xs-6">
-
-                                                    <select id="basic" class="selectpicker show-tick form-control">
-                                                        <option> -Status- </option>
-                                                        <option>Rent </option>
-                                                        <option>Boy</option>
-                                                        <option>used</option>  
-
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <label for="price-range">Price range ($):</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[0,450]" id="price-range" ><br />
-                                                    <b class="pull-left color">2000$</b> 
-                                                    <b class="pull-right color">100000$</b>                                                
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <label for="news-geo">news geo (m2) :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[50,450]" id="news-geo" ><br />
-                                                    <b class="pull-left color">40m</b> 
-                                                    <b class="pull-right color">12000m</b>                                                
-                                                </div>                                            
-                                            </div>
-                                        </fieldset>                                
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <label for="price-range">Min baths :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[250,450]" id="min-baths" ><br />
-                                                    <b class="pull-left color">1</b> 
-                                                    <b class="pull-right color">120</b>                                                
-                                                </div>
-
-                                                <div class="col-xs-6">
-                                                    <label for="news-geo">Min bed :</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="600" data-slider-step="5" 
-                                                           data-slider-value="[250,450]" id="min-bed" ><br />
-                                                    <b class="pull-left color">1</b> 
-                                                    <b class="pull-right color">120</b>
-
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Fire Place</label>
-                                                    </div> 
-                                                </div>
-
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox"> Dual Sinks</label>
-                                                    </div>
-                                                </div>                                            
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6"> 
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Swimming Pool</label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col-xs-6"> 
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> 2 Stories </label>
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6"> 
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox"> Laundry Room </label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col-xs-6"> 
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox"> Emergency Exit</label>
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6"> 
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox" checked> Jog Path </label>
-                                                    </div>
-                                                </div>  
-                                                <div class="col-xs-6"> 
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox"> 26' Ceilings </label>
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-12"> 
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox"> Hurricane Shutters </label>
-                                                    </div>
-                                                </div>  
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset >
-                                            <div class="row">
-                                                <div class="col-xs-12">  
-                                                    <input class="button btn largesearch-btn" value="Search" type="submit">
-                                                </div>  
-                                            </div>
-                                        </fieldset>                                     
-                                    </form>
-                                </div>
-                            </div>
-
-
+                            </div>                                                                                       
                         </aside>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <!-- Footer area-->
         <div class="footer-area">
-
-            <div class=" footer">
-                <div class="container">
-                    <div class="row">
-
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>About us </h4>
-                                <div class="footer-title-line"></div>
-
-                                <img src="/static/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
-                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>Quick links </h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-menu">
-                                    <li><a href="properties.html">Properties</a>  </li> 
-                                    <li><a href="#">Services</a>  </li> 
-                                    <li><a href="submit-news.html">Submit news </a></li> 
-                                    <li><a href="contact.html">Contact us</a></li> 
-                                    <li><a href="faq.html">fqa</a>  </li> 
-                                    <li><a href="faq.html">Terms </a>  </li> 
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>Last News</h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-blog">
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="/static/img/demo/small-proerty-2.jpg">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6> 
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li> 
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="/static/img/demo/small-proerty-2.jpg">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6> 
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li> 
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                                            <a href="single.html">
-                                                <img src="/static/img/demo/small-proerty-2.jpg">
-                                            </a>
-                                            <span class="blg-date">12-12-2016</span>
-
-                                        </div>
-                                        <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
-                                            <h6> <a href="single.html">Add news functions </a></h6> 
-                                            <p style="line-height: 17px; padding: 8px 2px;">Lorem ipsum dolor sit amet, nulla ...</p>
-                                        </div>
-                                    </li> 
-
-
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer news-letter">
-                                <h4>Stay in touch</h4>
-                                <div class="footer-title-line"></div>
-                                <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
-
-                                <form>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form> 
-
-                                <div class="social pull-right"> 
-                                    <ul>
-                                        <li><a class="wow fadeInUp animated" href="https://twitter.com/kimarotec"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://www.facebook.com/kimarotec" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://plus.google.com/kimarotec" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="https://instagram.com/kimarotec" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul> 
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+            <div class="footer">
+              <div class="container">
+                <div class="row">
+                    <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
+                    <p>
+                      Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim myeong-jin, Pyeon do-jun』
+                    </p>
                 </div>
+              </div>
             </div>
+          </div>
+        
 
             <div class="footer-copy text-center">
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) <a href="http://www.KimaroTec.com">KimaroTheme</a> , All rights reserved 2016  </span> 
+                            <span>Korea-HRD:Rainbow, All rights reserved 2021  </span> 
                         </div> 
                         <div class="bottom-menu pull-right"> 
                             <ul> 
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">news</a></li>
+                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Property</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s">Faq</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
                             </ul> 
@@ -636,10 +322,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <script src="/static/js/vendor/modernizr-2.6.2.min.js"></script>
+      <script src="/static/js/modernizr-2.6.2.min.js"></script>
         <script src="/static/js/jquery-1.10.2.min.js"></script>
         <script src="/static/bootstrap/js/bootstrap.min.js"></script>
         <script src="/static/js/bootstrap-select.min.js"></script>
@@ -650,26 +335,24 @@
         <script src="/static/js/wow.js"></script>
         <script src="/static/js/icheck.min.js"></script>
         <script src="/static/js/price-range.js"></script>
-        <script type="text/javascript" src="/static/js/lightslider.min.js"></script>
         <script src="/static/js/main.js"></script>
 
         <script>
-                            $(document).ready(function () {
+            $(document).ready(function () {
 
-                                $('#image-gallery').lightSlider({
-                                    gallery: true,
-                                    item: 1,
-                                    thumbItem: 9,
-                                    slideMargin: 0,
-                                    speed: 500,
-                                    auto: true,
-                                    loop: true,
-                                    onSliderLoad: function () {
-                                        $('#image-gallery').removeClass('cS-hidden');
-                                    }
-                                });
-                            });
-        </script>
-
+                $('#image-gallery').lightSlider({
+                    gallery: true,
+                    item: 1,
+                    thumbItem: 9,
+                    slideMargin: 0,
+                    speed: 500,
+                    auto: true,
+                    loop: true,
+                    onSliderLoad: function () {
+                        $('#image-gallery').removeClass('cS-hidden');
+                    }
+                });
+            });
+</script>
     </body>
 </html>
