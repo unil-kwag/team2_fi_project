@@ -140,64 +140,86 @@
             </b>
             </p>
             <div class="search-form wow pulse" data-wow-delay="0.8s">
-              <form action="" class="col-sm-1" style="padding: 5px;">
+              <form nameaction="" class="col-sm-1" style="padding: 5px;">
                 <button class="btn toggle-btn" type="button" href="/search/">
                   <i class="fa fa-bars"></i>
                 </button>
               </form>
 <!-------------------------------------------- 지역구 선택------------------------------------->
-              <form action="" method="GET" class="col-sm-3" style="padding: 5px;"> 
-                <div class="form-group">
+              <form name="selectForm" action="/" method="GET" class="col-sm-10" style="padding: 2px; "> 
+                <div class="form-group" style="float: left; width: 33%;">
                   <select
                     id="lunchBegins"
-                    class="selectpicker"
+                    class="selectpicker show-tick form-control"
                     data-live-search="true"
                     data-live-search-style="begins"
                     title="지역구 선택"
                     name="select_gu"
                   >
                   {% for list in search_result1 %}
+                  {% if list.gu == select_gu %}
+                    <option selected="true" value="{{list.gu}}">{{list.gu}}</option>
+                  {% else %}
                     <option value="{{list.gu}}">{{list.gu}}</option>
+                   {% endif %}
                   {%endfor%}
                   </select>
 
                 </div>
-              </form>
+              <!-- </form> -->
 <!-------------------------------------------- 임대 선택------------------------------------->
-              <form action="" class="col-sm-3" style="padding: 5px;">
-                <div class="form-group">
+              <!-- <form name="kindForm" action="/" method="GET" class="col-sm-3" style="padding: 5px;"> -->
+                <div class="form-group" style="float: left; width: 33%;">
                   <select
                     id="basic"
                     class="selectpicker show-tick form-control"
-                    title= '전월세 임대주택'
+                    title= '임대유형'
+                    name="select_kind"
                   >
                   {% for list in housing_kind %}
-                    <option>{{list.kind}}</option>
+                  {% if list.kind == select_kind %}
+                    <option selected='true' value="{{list.kind}}">{{list.kind}}</option>
+                  {% else %}
+                    <option value="{{list.kind}}">{{list.kind}}</option>
+                  {% endif %}
                   {%endfor%}
                   </select>
                 </div>
-              </form>
-              <form action="" class="col-sm-4" style="padding: 5px;">
-                <div class="form-group">
-                  <input
+              <!-- </form> -->
+<!-------------------------------------------- 아파트 선택------------------------------------->              
+              <!-- <form action="" class="col-sm-4" style="padding: 5px;"> -->
+                <div class="form-group" style="float: left; width: 33%;">
+                  <!-- <input
                     type="text"
                     class="form-control"
                     placeholder="신혼부부 임대주택 검색"
-                  />
-                </div>
+                  /> -->
+                  <select
+                  id="basic2"
+                  class="selectpicker show-tick form-control"
+                  title= '아파트'
+                  name="select_name"
+                >
+                {% for list in housing_name %}
+                {% if list.name == select_name %}
+                  <option selected='true' value="{{list.name}}">{{list.name}}</option>
+                {% else %}
+                <option value="{{list.name}}">{{list.name}}</option>
+                {% endif %}
+                {%endfor%}
+                </select>
+              </div>
               </form>
-              <form action="" class="col-sm-1"></form>
+              <!-- <form action="" class="col-sm-1"> -->
                 <button class="btn search-btn" type="button" onclick="location.href='/search/'">
                   <i class="fa fa-search"></i>
                 </button>
-              </form>
-
                 <div style="display: none; overflow:inherit" class="search-toggle">
                   <div class="search-row">
-                    <div class="form-group mar-r-20">
-                      <label for="property-geo">임대주택 면적(m²)</label>
-                      <input
-                        type="text"
+                    <div id="selectM" class="form-group mar-r-20">
+                      <label for="property-geo">임대주택 면적(m²)</label><br/>
+                      <!-- <input
+                        type="checkbox"
                         class="span2"
                         value=""
                         data-slider-min="0"
@@ -205,9 +227,15 @@
                         data-slider-step="10"
                         data-slider-value="[10,30]"
                         id="property-geo"
-                      /><br />
-                      <b class="pull-left color">0m²</b>
-                      <b class="pull-right color">100m²</b>
+                      /> -->
+                      {% for list in square_M %}
+                      <label >
+                      <input type="checkbox" name='selectM' value="{{list.squareM}}">
+                        {{list.squareM}}</label>
+                      {% endfor %}
+                      <br />
+                      <!-- <b class="pull-left color">0m²</b>
+                      <b class="pull-right color">100m²</b> -->
                     </div>
                     <!-- End of  -->
                   </div>
@@ -229,7 +257,6 @@
                       <b class="pull-right color">3000세대</b>
                     </div>
                     <!-- End of  -->
-
                   </div>
                     <br />
                     <hr />
@@ -368,6 +395,19 @@
     <script src="/static/js/price-range.js"></script>
 
     <script src="/static/js/main.js"></script>
+    <script>
+      console.log($('#lunchBegins').val());
+      $('#lunchBegins').on('change', function() {
+          document.selectForm.submit();
+      });
+      $('#basic').on('change', function() {
+          document.selectForm.submit();
+      });
+      $('#basic2').on('change', function() {
+        document.selectForm.submit();
+    });
+    </script>
   </body>
+
 </html>
 <!--test-->

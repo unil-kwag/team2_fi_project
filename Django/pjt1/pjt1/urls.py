@@ -22,7 +22,6 @@ import test1.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='main'),
-    path('<str:select_gu>',views.select_gu,name='main'),
     path('selection/',selection,name='Location_Selection'),
     path('search/',search,name='Search'),
     path('news/',news,name='News'),
