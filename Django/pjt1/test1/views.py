@@ -63,7 +63,7 @@ def index(request):
         
     if kind != None and kind != '':
         cursor = connection.cursor()
-        strSql = f'SELECT land_name FROM seoul WHERE address_gu = "{gu}" and supply_type = "{kind}"'
+        strSql = f'SELECT DISTINCT land_name FROM seoul WHERE address_gu = "{gu}" and supply_type = "{kind}"'
         result = cursor.execute(strSql)
         search_result = cursor.fetchall()
         connection.commit()
@@ -74,21 +74,7 @@ def index(request):
             data.append(row)
         context['select_kind'] = kind
         context['housing_name'] = data
-
-    if name != None and name != '':
-        cursor = connection.cursor()
-        strSql = f'SELECT DISTINCT square_m FROM seoul WHERE address_gu = "{gu}" and supply_type = "{kind}" and land_name = "{name}"'
-        result = cursor.execute(strSql)
-        search_result = cursor.fetchall()
-        connection.commit()
-        connection.close()
-        data = []
-        for i in search_result:
-            row = {'squareM' : i[0]}
-            data.append(row)
         context['select_name'] = name
-        context['square_M'] = data
-
     return render(request, 'test1/index.html', context)
 
 
@@ -130,7 +116,14 @@ def selection(request):
     return render(request, 'test1/selection.html',{})
 
 def search(request):
-    return render(request, 'test1/search.html',{})
+    gu = request.GET.get('select_gu')
+    kind = request.GET.get('select_kind')
+    name = request.GET.get('select_name')
+    context = {}
+    context['select_gu'] = gu
+    context['select_kind'] = kind
+    context['select_name'] = name
+    return render(request, 'test1/search.html',context)
 
 def news(request):
     return render(request, 'test1/news.html',{})

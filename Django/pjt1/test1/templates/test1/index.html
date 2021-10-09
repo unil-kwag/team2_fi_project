@@ -139,15 +139,11 @@
               < 서울 기존 신혼부부 임대주택, 서울 입지분석 결과 최적 선정지 검색 >
             </b>
             </p>
-            <div class="search-form wow pulse" data-wow-delay="0.8s">
-              <form nameaction="" class="col-sm-1" style="padding: 5px;">
-                <button class="btn toggle-btn" type="button" href="/search/">
-                  <i class="fa fa-bars"></i>
-                </button>
-              </form>
+            <div class="search-form wow pulse" data-wow-delay="0.8s" style="height: 80px;">
+
 <!-------------------------------------------- 지역구 선택------------------------------------->
-              <form name="selectForm" action="/" method="GET" class="col-sm-10" style="padding: 2px; "> 
-                <div class="form-group" style="float: left; width: 33%;">
+              <form name="selectForm" action="/" method="GET" class="col-sm-11" style="padding: 2px; " onsubmit="fn_search();"> 
+                <div class="form-group" style="float: left; width: 30%;">
                   <select
                     id="lunchBegins"
                     class="selectpicker show-tick form-control"
@@ -169,7 +165,7 @@
               <!-- </form> -->
 <!-------------------------------------------- 임대 선택------------------------------------->
               <!-- <form name="kindForm" action="/" method="GET" class="col-sm-3" style="padding: 5px;"> -->
-                <div class="form-group" style="float: left; width: 33%;">
+                <div class="form-group" style="float: left; width: 30%;">
                   <select
                     id="basic"
                     class="selectpicker show-tick form-control"
@@ -188,7 +184,7 @@
               <!-- </form> -->
 <!-------------------------------------------- 아파트 선택------------------------------------->              
               <!-- <form action="" class="col-sm-4" style="padding: 5px;"> -->
-                <div class="form-group" style="float: left; width: 33%;">
+                <div class="form-group" style="float: left; width: 30%;">
                   <!-- <input
                     type="text"
                     class="form-control"
@@ -209,65 +205,11 @@
                 {%endfor%}
                 </select>
               </div>
-              </form>
+                
+              <button class="btn search-btn" type="submit" >
+                <i class="fa fa-search"></i>
+              </button>
               <!-- <form action="" class="col-sm-1"> -->
-                <button class="btn search-btn" type="button" onclick="location.href='/search/'">
-                  <i class="fa fa-search"></i>
-                </button>
-                <div style="display: none; overflow:inherit" class="search-toggle">
-                  <div class="search-row">
-                    <div id="selectM" class="form-group mar-r-20">
-                      <label for="property-geo">임대주택 면적(m²)</label><br/>
-                      <!-- <input
-                        type="checkbox"
-                        class="span2"
-                        value=""
-                        data-slider-min="0"
-                        data-slider-max="100"
-                        data-slider-step="10"
-                        data-slider-value="[10,30]"
-                        id="property-geo"
-                      /> -->
-                      {% for list in square_M %}
-                      <label >
-                      <input type="checkbox" name='selectM' value="{{list.squareM}}">
-                        {{list.squareM}}</label>
-                      {% endfor %}
-                      <br />
-                      <!-- <b class="pull-left color">0m²</b>
-                      <b class="pull-right color">100m²</b> -->
-                    </div>
-                    <!-- End of  -->
-                  </div>
-
-                  <div class="search-row">
-                    <div class="form-group mar-r-20">
-                      <label for="price-range">세대수</label>
-                      <input
-                        type="text"
-                        class="span2"
-                        value=""
-                        data-slider-min="0"
-                        data-slider-max="3000"
-                        data-slider-step="100"
-                        data-slider-value="[300,1000]"
-                        id="min-baths"
-                      /><br />
-                      <b class="pull-left color">0세대</b>
-                      <b class="pull-right color">3000세대</b>
-                    </div>
-                    <!-- End of  -->
-                  </div>
-                    <br />
-                    <hr />
-                  </div>
-                  <button
-                    class="btn search-btn prop-btm-sheaerch"
-                    type="submit"
-                  >
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
               </form>
             </div>
           </div>
@@ -405,7 +347,13 @@
       });
       $('#basic2').on('change', function() {
         document.selectForm.submit();
-    });
+      });
+
+      function fn_search() {
+        document.selectForm.action = "search/";
+        document.selectForm.submit();
+        return true;
+      }
     </script>
   </body>
 
