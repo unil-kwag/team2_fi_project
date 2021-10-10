@@ -1,10 +1,10 @@
-from decimal import Context
+
 from django.shortcuts import render
 from django.db import connection
 from .models import *
 import os
 
-import dash
+
 import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
@@ -93,27 +93,29 @@ def index(request):
 #     return render(request, 'test1/index.html', context)
 
 
-
-
-
-
+##====================================================================================================================
+##====================================================================================================================
+## 도준 ===============================================================================================================
+from .forms import Form
 
 def selection(request):
-    app = DjangoDash('simple')
-    
-    df = px.data.iris()  # iris is a pandas DataFrame
-    fig = px.scatter(df, x="sepal_width", y="sepal_length")
+    app = DjangoDash('folium')    
 
     app.layout = html.Div(
     [
-       dcc.RadioItems(
-        id='dropdown-size',
-        options=[{'label': i, 'value': j} for i, j in [('L','large'), ('M','medium'), ('S','small')]],
-        value='medium'),
-        dcc.Graph(figure=fig)
+        html.Iframe(id='map',srcDoc=open('test1/ML/서울군집_지도/songpa_result.html','r').read(), width='100%', height='600')
     ])
-    
-    return render(request, 'test1/selection.html',{})
+
+    test = request.POST.get('test')
+    # test = request.GET.values
+    return render(request, 'test1/selection.html',{'request':test})
+def seoul(request):
+    return render(request, 'test1/map/seoul.html',{})
+def map(request):
+    return render(request, 'test1/map/songpa_result.html',{})
+##====================================================================================================================
+##====================================================================================================================
+##=================================================================================================================도준
 
 def search(request):
     gu = request.GET.get('select_gu')

@@ -22,7 +22,12 @@ import test1.views as views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='main'),
+    
+
     path('selection/',selection,name='Location_Selection'),
+    path('map/',map,name='map'),
+    path('seoul/',seoul,name='seoul'),
+
     path('search/',search,name='Search'),
     path('news/',news,name='News'),
     path('board_main/',board_main,name='Board_main'),
