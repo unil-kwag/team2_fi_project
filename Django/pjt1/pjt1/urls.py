@@ -28,6 +28,7 @@ urlpatterns = [
     path('map/',map,name='map'),
     path('seoul/',seoul,name='seoul'),
 
+
     path('search/',search,name='Search'),
     path('news/',news,name='News'),
     path('board_main/',board_main,name='Board_main'),

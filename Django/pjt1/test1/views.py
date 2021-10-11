@@ -1,8 +1,11 @@
-
 from django.shortcuts import render
 from django.db import connection
 from .models import *
 import os
+ 
+import pandas as pd
+import json
+
 
 import dash_core_components as dcc
 import dash_html_components as html
@@ -98,16 +101,9 @@ def index(request):
 from .forms import Form
 
 def selection(request):
-    app = DjangoDash('folium')    
+    test = request.GET.get('name')
+    return render(request, 'test1/selection.html',{'test':test})
 
-    app.layout = html.Div(
-    [
-        html.Iframe(id='map',srcDoc=open('test1/ML/서울군집_지도/songpa_result.html','r').read(), width='100%', height='600')
-    ])
-
-    test = request.POST.get('test')
-    # test = request.GET.values
-    return render(request, 'test1/selection.html',{'request':test})
 def seoul(request):
     return render(request, 'test1/map/seoul.html',{})
 def map(request):
