@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,9 +7,11 @@
 <html class="no-js">
   <!--<![endif]-->
   <head>
+    <link rel="stylesheet" href="../../static/css/css.css" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>2조 Rainbow. 『신혼부부 임대주택 최적입지 선정 사이트』</title>
+
     <meta name="description" content="GARO is a real-estate template" />
     <meta name="author" content="Kimarotec" />
     <meta
@@ -25,12 +28,13 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link
-      rel="shortcut icon"
+      rel="hosrtcut icon"
       href="/static/img/icon/favi.ico"
       type="image/x-icon"
     />
     <link rel="icon" href="/static/img/icon/favi.ico" type="image/x-icon" />
 
+    <!-- <link rel="stylesheet" href="/staticcss/normalize.css"> -->
     <link rel="stylesheet" href="/static/css/normalize.css" />
     <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/static/css/fontello.css" />
@@ -49,8 +53,6 @@
     <link rel="stylesheet" href="/static/css/owl.transitions.css" />
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/responsive.css" />
-    <link rel="stylesheet" href="/static/css/board_style.css" />
-    <link rel="stylesheet" href="/static/css/media.css" />
   </head>
   <body>
     <div id="preloader">
@@ -104,7 +106,7 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="property.html">게시판</a>
+              <a class="" href="/home/">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
               <a href="contact.html">연락망</a>
@@ -116,46 +118,75 @@
       <!-- /.container-fluid -->
     </nav>
     <!-- End of nav bar -->
-    <body>
-      <div class="test" style="padding: 70px">
-        <div class="board_title">
-          <strong>게시판</strong>
-          <p>인생이란 무엇인가</p>
-        </div>
-      <div class="board_list_wrap">
-        <div class="board_list">
-          <div class="top">
-            <div class="num">번호</div>
-            <div class="title">제목</div>
-            <div class="writer">글쓴이</div>
-            <div class="date">작성일</div>
-            <div class="count">조회</div>
+    {% comment %} create url로 보내기 {% endcomment %}
+    <!-- <form action="{% url 'create' %}">
+      {% csrf_token %}
+
+      <h4>제목:</h4>
+      <input type="text" name="title" />
+      <br />
+
+      <h4>글쓴이:</h4>
+      <input type="text" name="writer" />
+      <br />
+
+      <h4>본문:</h4>
+      <textarea cols="40" rows="10" name="body"></textarea>
+      <br />
+
+      <input class="btn btn-dark" type="submit" value="제출하기" />
+    </form> -->
+
+    <form action="{% url 'create' %}">
+      {% csrf_token %}
+      <div class="board_wrap">
+        <!-- <div class="board_title">
+          <strong>공지사항</strong>
+          <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
+        </div> -->
+        <div class="board_write_wrap">
+          <div class="board_write">
+            <div class="title">
+              <dl>
+                <dt>제목</dt>
+                <dd>
+                  <input
+                    type="text"
+                    placeholder="제목 입력"
+                    type="text"
+                    name="title"
+                  />
+                </dd>
+              </dl>
+            </div>
+            <div class="info">
+              <dl>
+                <dt>글쓴이</dt>
+                <dd>
+                  <input
+                    type="text"
+                    placeholder="글쓴이 입력"
+                    type="text"
+                    name="writer"
+                  />
+                </dd>
+              </dl>
+              <dl>
+                <dt>비밀번호</dt>
+                <dd><input type="pwd" placeholder="비밀번호 입력" /></dd>
+              </dl>
+            </div>
+            <div class="cont">
+              <textarea placeholder="내용 입력" name="body"></textarea>
+            </div>
           </div>
-          <div>
-            <div class="num">1</div>
-            <div class="title"><a href="view.html">글 제목</a></div>
-            <div class="writer">작성자</div>
-            <div class="date">2021.10.06</div>
-            <div class="count">1</div>
+          <div class="bt_wrap">
+            <input class="btn btn-dark" type="submit" value="제출하기" />
           </div>
-        </div>
-        <div class="board_page">
-          <a href="#" class="bt first"><<</a>
-          <a href="#" class="bt prev"><</a>
-          <a href="#" class="num on">1</a>
-          <a href="#" class="num">2</a>
-          <a href="#" class="num">3</a>
-          <a href="#" class="num">4</a>
-          <a href="#" class="num">5</a>
-          <a href="#" class="bt next">></a>
-          <a href="#" class="bt last">>></a>
-        </div>
-        <div class="bt_wrap">
-          <a href="write.html" class="on">등록</a>
-          <!--<a href="#">수정</a>-->
         </div>
       </div>
-    </div>
+    </form>
+
     <!-- Main area-->
     <div class="body-area">
       <div class="footer" style="padding: 70px">

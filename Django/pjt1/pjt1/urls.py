@@ -21,7 +21,7 @@ import test1.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index,name='main'),
+    path('',index,name='main'),
     
 
     path('selection/',selection,name='Location_Selection'),
@@ -37,4 +37,11 @@ urlpatterns = [
     path('board_edit/',board_edit,name='Board_edit'),
     
     path('django_dash/', include('django_plotly_dash.urls')),
+    path('blog/', home, name='home'),
+    path('blog/<int:blog_id>', detail, name="detail"),
+    path('blog/new', new, name="new"),
+    path('blog/create', create, name='create'),
+    path('blog/edit/<int:blog_id>',edit, name="edit"),
+    path('blog/update/<int:blog_id>', update, name="update"),
+    path('blog/delete/<int:blog_id>', delete, name="delete"),
 ]

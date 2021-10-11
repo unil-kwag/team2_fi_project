@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db import connection
 from .models import *
+from django.utils import timezone
+
 import os
  
 import pandas as pd
@@ -136,3 +138,47 @@ def board_view(request):
 
 def board_edit(request):
     return render(request, 'test1/board_edit.html',{})    
+
+def home(request):
+    blogs = Blog.objects.all().order_by('-id')
+    return render(request, 'test1/home.html', {'blogs':blogs})
+    # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고 
+    # 이 때, blogs 객체도 함께 넘겨주도록 하겠다.
+
+def detail(request, blog_id): 
+    blog_detail = get_object_or_404(Blog, pk= blog_id) # 특정 객체 가져오기(없으면 404 에러)
+    return render(request, 'test1/detail.html', {'blog':blog_detail})
+    # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고 
+    # 이 때, blog 객체도 함께 넘겨주도록 하겠다.
+
+def new(request):
+    return render(request, 'test1/new.html')
+
+def create(request):
+    blog = Blog() # 객체 틀 하나 가져오기
+    blog.title = request.GET['title']
+    blog.writer = request.GET['writer']  # 내용 채우기
+    blog.body = request.GET['body'] # 내용 채우기
+    blog.pub_date = timezone.datetime.now() # 내용 채우기
+    blog.save() # 객체 저장하기
+    # 새로운 글 url 주소로 이동
+    return redirect('/blog/' + str(blog.id))
+
+def edit(request,blog_id):
+    blog= get_object_or_404(Blog, pk= blog_id) # 특정 객체 가져오기(없으면 404 에러)
+    return render(request, 'test1/edit.html', {'blog':blog})
+
+def delete(request, blog_id):
+    blog= get_object_or_404(Blog, pk= blog_id) # 특정 객체 가져오기(없으면 404 에러)
+    blog.delete()
+    return redirect('home') # home 이름의 url 로
+
+# U - update(기존 글 객체 가져와서 수정하기)
+def update(request,blog_id):
+    blog= get_object_or_404(Blog, pk= blog_id) # 특정 객체 가져오기(없으면 404 에러)
+    blog.title = request.GET['title']
+    # blog.writer = request.GET['writer']
+    blog.body = request.GET['body'] # 내용 채우기
+    blog.pub_date = timezone.datetime.now() # 내용 채우기
+    blog.save() # 저장하기
+    return redirect('/blog/' + str(blog.id))
