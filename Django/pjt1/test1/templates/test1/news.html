@@ -108,7 +108,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="/static/img/rainbow.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img src="/static/img/lovehouse.jpg" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -120,7 +120,7 @@
                     <ul class="main-nav nav navbar-nav navbar-right">                      
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/selection/">입지선정</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/">뉴스</a></li>
-                        <li class="dropdown yamm-fw" data-wow-delay="0.1s"><a class="" href="/board_main/">게시판</a></li>
+                        <li class="dropdown yamm-fw" data-wow-delay="0.1s"><a class="" href="/blog/">게시판</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">연락망</a></li>
                     </ul>
                     </ul>
@@ -152,11 +152,11 @@
                                 <h2 class="panel-title">뉴스 페이지 설명</h2>
                             </div>
                             <div class="panel-body text-widget">
-                                <p>1. 네이버 API 사용, 검색 시 오른쪽 영역에 뉴스 검색 결과 도출(진자2 문법 사용 필요)<br><br>
-                                    2. 현재 뉴스 API를 Django에 적용하는 것과 검색 결과 화면에 나타내는 방법 필요.<br><br>
-                                    3. 추천 부동산 뉴스 Section에 웹에서 뉴스를 끌어오는 기능 및 헤드라인, 내용 요약 표시 개발필요<br><br>
-                                    4. Tag 부분, 클릭시 키워드 검색 기능 or 새로운 웹페이지 생성하여 검색창 띄우기<br><br>
-                                    5. 신문기사 본문내용 표시: 끌어오는 방법 문의, 현재 표시된 것은 html문 사용 본 기사 작성하였음.
+                                <p>1. 네이버 API 사용, 검색 시 오른쪽 영역에 뉴스 검색 결과 도출<br><br>
+                                    2. 뉴스 API Django에 적용하는 것과 Search Result 화면 출력<br><br>
+                                    3. 추천 부동산 뉴스 Section에 웹에서 뉴스를 끌어오는 기능 및 헤드라인, 내용 요약 표시<br><br>
+                                    4. Tag 부분, 클릭시 새로운 관련 홈페이지 출력<br><br>
+                                    5. 신문기사 본문내용 표시: 기사 요약, 출처, 발행일, 신문사
 
                                 </p>
                             </div>
@@ -268,8 +268,7 @@
                                     </div>
                                     <div class="col-sm-6 right" >
                                         <p class="date-comments">
-                                            <a href="single.html"><i class="fa fa-calendar-o"></i> 2021년 10월 08일</a>
-                                            <a href="single.html"><i class="fa fa-comment-o"></i> 댓글 수</a>
+                                            <a href="single.html"><i class="fa fa-calendar-o"></i> {{news.pubDate}}</a>
                                         </p>
                                     </div>
                                 </div>
@@ -280,7 +279,10 @@
 
                             <div id="post-content" class="post-body single wow fadeInLeft animated">
                                 <p>
-                                    {{news.description}}
+                                    {{news.description}} <br>
+                                    {{news.title}}<br>
+                                    <strong>자세한 뉴스: </strong>
+                                    <A href = "{{news.link}}" target = "self" > {{news.link}} </A>
                                 </p>
                             </div>
                         
@@ -315,7 +317,7 @@
                 <div class="row">
                     <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
                     <p>
-                      Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim myeong-jin, Pyeon do-jun』
+                      Korea HRD. Sejong Big-Data. 『Kwag Unil, Kim do-young, Sim myeong-jin, Pyeon do-jun』
                     </p>
                 </div>
               </div>
