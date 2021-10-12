@@ -148,7 +148,7 @@
                     
                     <div class="blog-asside-right col-md-3">
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
-                            <div class="panel-heading">
+                            <!-- <div class="panel-heading">
                                 <h2 class="panel-title">뉴스 페이지 설명</h2>
                             </div>
                             <div class="panel-body text-widget">
@@ -159,7 +159,7 @@
                                     5. 신문기사 본문내용 표시: 기사 요약, 출처, 발행일, 신문사
 
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="panel panel-default sidebar-menu wow  fadeInRight animated">
@@ -252,7 +252,7 @@
                         <section id="id-100" class="post single">
                             
                                     
-                            {% for news in result.items %}
+                            {% for news in result %}
 
                             <div class="post-header single">
                                 <div class="">
@@ -268,13 +268,13 @@
                                     </div>
                                     <div class="col-sm-6 right" >
                                         <p class="date-comments">
-                                            <a href="single.html"><i class="fa fa-calendar-o"></i> {{news.pubDate}}</a>
+                                            <a href="#"><i class="fa fa-calendar-o"></i> {{news.pubDate}}</a>
                                         </p>
                                     </div>
                                 </div>
-                                <div class="image wow fadeInRight animated"> 
+                                <!-- <div class="image wow fadeInRight animated"> 
                                     <img src="#" class="img-responsive" alt="신문기사 그림 표현 1">
-                                </div>
+                                </div> -->
                             </div> 
 
                             <div id="post-content" class="post-body single wow fadeInLeft animated">

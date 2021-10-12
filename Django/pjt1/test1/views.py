@@ -12,8 +12,8 @@ import re
 import pandas as pd
 import folium
 import json
-from sklearn.ensemble import RandomForestClassifier #RandomForest 모델
-from sklearn.model_selection import GridSearchCV #파라미터 최적화를 위한 GridSearchCV
+from sklearn.ensemble import RandomForestClassifier  # RandomForest 모델
+from sklearn.model_selection import GridSearchCV  # 파라미터 최적화를 위한 GridSearchCV
 
 
 import dash_core_components as dcc
@@ -112,55 +112,67 @@ def selection(request):
     test = request.GET.get('name')
     return render(request, 'test1/selection.html', {'test': test})
 
+
 def test(request):
     geo_path = './test1/templates/test1/map/seoul_municipalities_geo.json'
     seoul = json.load(open(geo_path, encoding='utf-8'))
-    kmeans_final_score = pd.read_csv('./test1/templates/test1/map/군집결과_입지점수계산.csv',encoding='cp949') ## 모델학습용 파일
-    X = kmeans_final_score.iloc[:,1:-1] # 독립변수 X 분리
-    y = kmeans_final_score.iloc[:,[-1]] # 종속변수 Y 분리
-    songpa = pd.read_csv('./test1/templates/test1/map/송파구_거리계산결과.csv', encoding='cp949') ## 송파 군집 csv 파일 불러오기 송파구 입지선정용
-    
-    Model = RandomForestClassifier(random_state=40) #RandomForest 객체 생성
-    params = {'max_depth' : [4],'n_estimators':[30]}
-    grid_dt = GridSearchCV(Model, # estimator 객체,
-                       param_grid = params, 
-                       cv = 5) #교차횟수 5회
-    grid_dt.fit(X,y)  ## 모델 학습
-    songpa_predict=grid_dt.predict(songpa.iloc[:,3:]) ## 모델 예측 
-    songpa_result=pd.concat([songpa.iloc[:,:3],pd.DataFrame(songpa_predict,columns=['입지점수'])],axis=1) ## 송파구 데이터프레임의 입지점수 concat
+    kmeans_final_score = pd.read_csv(
+        './test1/templates/test1/map/군집결과_입지점수계산.csv', encoding='cp949')  # 모델학습용 파일
+    X = kmeans_final_score.iloc[:, 1:-1]  # 독립변수 X 분리
+    y = kmeans_final_score.iloc[:, [-1]]  # 종속변수 Y 분리
+    songpa = pd.read_csv('./test1/templates/test1/map/송파구_거리계산결과.csv',
+                         encoding='cp949')  # 송파 군집 csv 파일 불러오기 송파구 입지선정용
 
+    Model = RandomForestClassifier(random_state=40)  # RandomForest 객체 생성
+    params = {'max_depth': [4], 'n_estimators': [30]}
+    grid_dt = GridSearchCV(Model,  # estimator 객체,
+                           param_grid=params,
+                           cv=5)  # 교차횟수 5회
+    grid_dt.fit(X, y)  # 모델 학습
+    songpa_predict = grid_dt.predict(songpa.iloc[:, 3:])  # 모델 예측
+    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(
+        songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
 
     lat = 37.508182
     lon = 127.110053
     map = folium.Map(location=[lat, lon], zoom_start=14)
     for i in range(len(songpa_result)):
-        lat = songpa_result.loc[i,'위도']
-        lng = songpa_result.loc[i,'경도']
-    
-        if songpa_result.loc[i,'입지점수'] == 1: ## 입지점수가 1이면 초록으로 마커 지정
-            folium.Marker([lat,lng], icon=(folium.Icon(icon='home', prefix='fa', color='green')),).add_to(map)
-        elif songpa_result.loc[i,'입지점수'] == 2: ## 입지점수가 2이면 빨강으로 마커 지정
-            folium.Marker([lat,lng], icon=(folium.Icon(icon='home', prefix='fa', color='red')),).add_to(map)
-        elif songpa_result.loc[i,'입지점수'] == 3: ## 입지점수가 3이면 보라로 마커 지정
-            folium.Marker([lat,lng], icon=(folium.Icon(icon='home', prefix='fa', color='purple')),).add_to(map)
-        elif songpa_result.loc[i,'입지점수'] == 4: ## 입지점수가 2이면 빨강으로 마커 지정
-            folium.Marker([lat,lng], icon=(folium.Icon(icon='home', prefix='fa', color='orange')),).add_to(map)
-        elif songpa_result.loc[i,'입지점수'] == 0: ## 입지점수가 2이면 빨강으로 마커 지정
-            folium.Marker([lat,lng], icon=(folium.Icon(icon='home', prefix='fa', color='blue')),).add_to(map)
-        else :
+        lat = songpa_result.loc[i, '위도']
+        lng = songpa_result.loc[i, '경도']
+
+        if songpa_result.loc[i, '입지점수'] == 1:  # 입지점수가 1이면 초록으로 마커 지정
+            folium.Marker([lat, lng], icon=(folium.Icon(
+                icon='home', prefix='fa', color='green')),).add_to(map)
+        elif songpa_result.loc[i, '입지점수'] == 2:  # 입지점수가 2이면 빨강으로 마커 지정
+            folium.Marker([lat, lng], icon=(folium.Icon(
+                icon='home', prefix='fa', color='red')),).add_to(map)
+        elif songpa_result.loc[i, '입지점수'] == 3:  # 입지점수가 3이면 보라로 마커 지정
+            folium.Marker([lat, lng], icon=(folium.Icon(
+                icon='home', prefix='fa', color='purple')),).add_to(map)
+        elif songpa_result.loc[i, '입지점수'] == 4:  # 입지점수가 2이면 빨강으로 마커 지정
+            folium.Marker([lat, lng], icon=(folium.Icon(
+                icon='home', prefix='fa', color='orange')),).add_to(map)
+        elif songpa_result.loc[i, '입지점수'] == 0:  # 입지점수가 2이면 빨강으로 마커 지정
+            folium.Marker([lat, lng], icon=(folium.Icon(
+                icon='home', prefix='fa', color='blue')),).add_to(map)
+        else:
             continue
 
-    if request.GET.get('name') == 'dojun' :
-        folium.Marker([lat,lon],icon=(folium.Icon(icon='home', prefix='fa', color='black')),).add_to(map)
+    if request.GET.get('name') == 'dojun':
+        folium.Marker([lat, lon], icon=(folium.Icon(
+            icon='home', prefix='fa', color='black')),).add_to(map)
 
-    map.choropleth(geo_data=seoul,fill_color='white')
-    map=map._repr_html_()
+    map.choropleth(geo_data=seoul, fill_color='white')
+    map = map._repr_html_()
     # test = request.GET.get('name')
 
-    return render(request,'test1/test.html',{'test':songpa_result, 'test2':map })
+    return render(request, 'test1/test.html', {'test': songpa_result, 'test2': map})
+
 
 def seoul(request):
     return render(request, 'test1/map/seoul.html', {})
+
+
 def map(request):
     return render(request, 'test1/map/songpa_result.html', {})
 # ====================================================================================================================
@@ -251,6 +263,12 @@ def update(request, blog_id):
     return redirect('/blog/' + str(blog.id))
 
 
+def clean_html(x):
+    x = re.sub("\&\w*\;", "", x)
+    x = re.sub("<.*?>", "", x)
+    return x
+
+
 def news(request):
     search = request.GET.get('search')
     page = request.GET.get('page')
@@ -272,4 +290,12 @@ def news(request):
 
     # HTTP요청 보내기
     r = requests.get(url, headers=headers)
-    return render(request, 'test1/news.html', {'result': r.json()})
+    result = []
+    for i in r.json()['items']:
+        tmp_dic = {'title': clean_html(i['title']),
+                   'originallink': i['originallink'],
+                   'link': i['link'],
+                   'description': clean_html(i['description']),
+                   'pubDate': i['pubDate']}
+        result.append(tmp_dic)
+    return render(request, 'test1/news.html', {'result': result})
