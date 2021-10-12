@@ -37,7 +37,7 @@
         <link rel="stylesheet" href="/static/css/responsive.css">
     </head>
     <body>
-
+        <label><input type="checkbox" name="test" value="test">Hello</label>
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -81,9 +81,9 @@
                     <div class="page-head-content">
                         <h1 class="page-title">최적 입지 선정</h1>
                         <button id='test_button' onclick="fn_search();">BUTTON</button>
-                        <h1>{{test}}</h1>
-                        <div id='test_map'></div>
-                        
+
+                        <iframe id='map2' style="width: 100%; height:100px"  ></iframe>
+
                                    
                     </div>
                 </div>
@@ -96,6 +96,7 @@
         <div class="properties-area recent-property" style="background-color: #FFF;">
             <div class="container">  
                 <div class="row">
+
                     <div class="col-md-3 p0 padding-top-40">
                       <div class="blog-asside-right pr0">
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -104,6 +105,7 @@
                             </div>
                             <div class="panel-body search-widget">
                                 <form action="" id='search_form' name='search_form' method="post" class=" form-inline"> 
+                                     
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -201,9 +203,9 @@
                             </div>
                             <div class="panel-body search-widget">
                                 <form action="" class=" form-inline"> 
-                                    <fieldset>
+                                    <!-- <fieldset>
                                         <div class="row">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-12">
                                                 <span>1순위</span>
                                                 <select id="lunchBegins" class="selectpicker" title="1순위 희망">
                                                     <option>편의점</option>
@@ -222,7 +224,7 @@
 
                                     <fieldset>
                                         <div class="row">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-12">
                                                 <span>2순위</span>
                                                 <select id="lunchBegins" class="selectpicker" title="2순위 희망">
                                                     <option>편의점</option>
@@ -241,7 +243,7 @@
 
                                     <fieldset>
                                         <div class="row">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-12">
                                                 <span>3순위</span>
                                                 <select id="lunchBegins" class="selectpicker"  title="3순위 희망">
                                                     <option>편의점</option>
@@ -256,7 +258,21 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </fieldset>                 
+                                    </fieldset>                  -->
+                                    <fieldset class="padding-5">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox"  value="yyy">HELLO</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox"  value="yyy">HELLO</label>
+                                                </div>
+                                            </div>     
+                                        </div>
+                                    </fieldset>
                                     
                                     <fieldset >
                                         <div class="row">
@@ -264,7 +280,7 @@
                                                 <input class="button btn largesearch-btn" value="검색" type="submit">
                                             </div>  
                                         </div>
-                                    </fieldset>                                     
+                                    </fieldset>   
                                 </form>
                             </div>
                         </div>
@@ -290,14 +306,17 @@
                                             </div>
                                         </li>
                                     </ul>
+                                </div>
                             </div>
                         </div>
 
+
                     </div>
-                </div>
-
-<!-----------------------------------------Property main--------------------------------------------------------------------------------------------------------------------->
-
+                    
+                    <!-----------------------------------------Property main--------------------------------------------------------------------------------------------------------------------->
+                    
+                    
+                    
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
                     <div class="col-md-12 clear"> 
                         <div class="col-xs-10 page-subheader sorting pl0">
@@ -305,11 +324,9 @@
                                 <li class="active">
                                     <h4 class="s-property-title">입지 선정 결과</h4>
                                 </li>
-                            </ul><!--/ .sort-by-list-->
-
-                            
+                            </ul><!--/ .sort-by-list-->                            
                         </div>
-
+                        
                         <div class="col-xs-2 layout-switcher">
                             <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
                             <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>                          
@@ -320,31 +337,29 @@
                         <div id="list-type" class="proerty-th">
                             <div class="item-thumb">
                                 <iframe id='map' style="width: 100%; height: 600px" src='/seoul/' ></iframe>
-                            </div>
-                            
-                            <div class="col-sm-6 col-md-4 p0">
-                                <div class="box-two proerty-item">
-                                    <div class="item-thumb">
-                                        <a href="property-1.html" ><img src="/static/img/demo/property-3.jpg"></a>
-                                    </div>
-
-                                    <div class="item-entry overflow">
-                                        <h5><a href="property-1.html"> 두 번째 줄 </a></h5>
-                                        <div class="dot-hr"></div>
-                                        <span class="pull-left"><b> Area :</b> 120m </span>
-                                        <span class="proerty-price pull-right"> $ 300,000</span>
-                                        <p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
-                                        <div class="property-icon">
-                                            <img src="/static/img/icon/bed.png">(5)|
-                                            <img src="/static/img/icon/shawer.png">(2)|
-                                            <img src="/static/img/icon/cars.png">(1)  
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>                                                    
+                            </div>                                                   
                         </div>
                     </div>
+
+                    <div class='blog-lst col-md-12'>
+                        <section class="post">
+                            <div class = "text-center padding-b-50">
+                                <h2 class="wow fadeInLeft animated">TEST Header</h2>
+                                <div class="title-line wow fadeInRight animated"></div>
+                            </div>
                     
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="author-category">Test Hello</p>
+                                </div>
+                                <div class="col-sm-6 right">
+                                    <p class="date-comments">Test Date</p>
+                                </div>
+                            </div>
+                    
+                            <div id="fuck2" style="margin-bottom: 10px; width: 100%; height: 1%; background-image: url('https://image.msscdn.net/images/prd_img/20200313/1349588/detail_1349588_1_500.jpg'); border : 2px dotted black" class="image wow fadeInLeft animated"></div>
+                        </section>
+                    </div>
                     
                 </div>
 
@@ -386,7 +401,7 @@
             </div>
 
         </div>
-      
+        
         <!-- =============================================================================================================== -->
       <script src="/static/js/modernizr-2.6.2.min.js"></script>
         <script src="/static/js/jquery-1.10.2.min.js">
@@ -407,34 +422,29 @@
              function fn_search() {
                 $.ajax({
                      type: "GET",
-                     url: "/seoul/",
+                     url: "/test/",
                      data : {'name':'dojun'},
-                     datatype : 'html',
+                     datatype : 'json',
                      success : function(result){
-                         $('#test_map').html(result)
-                         console.log(data)
+                         $('#map2').attr('src',/test/)
+                         $('#fuck2').html(result)
+
+                         console.log(result)
                      }
                  })
              }
 
-           
-
-         
 
             function open_in_frame() {
                 gu = document.getElementById('seoul_select').value;
-
                 try{
                     if (gu == '강남구'){
                         $('#map').attr('src','/map/')
                     }
                 } catch(eeor) {
                     $('map').attr('src','/map/')
-                }
-            
+                }          
             }
-
-                
         </script>
     </body>
 </html>
