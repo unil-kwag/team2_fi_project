@@ -6,6 +6,12 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js"> <!--<![endif]-->
     <head>
+        <style>
+            #for1 {
+                border: 10px black dotted;
+                display: inline-block;
+            }
+        </style>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>2조 Rainbow. 『신혼부부 임대주택 최적입지 선정 사이트』</title>
@@ -37,13 +43,10 @@
         <link rel="stylesheet" href="/static/css/responsive.css">
     </head>
     <body>
-        <label><input type="checkbox" name="test" value="test">Hello</label>
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
         <!-- Body content -->
-    
-
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -80,11 +83,7 @@
                 <div class="row">
                     <div class="page-head-content">
                         <h1 class="page-title">최적 입지 선정</h1>
-                        <button id='test_button' onclick="fn_search();">BUTTON</button>
-
-                        <iframe id='map2' style="width: 100%; height:100px"  ></iframe>
-
-                                   
+                        <button id='test_button' onclick="fn_search();">BUTTON</button>                                 
                     </div>
                 </div>
             </div>
@@ -93,358 +92,331 @@
         <!-- End page header -->
         <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
         <!-- property area -->
-        <div class="properties-area recent-property" style="background-color: #FFF;">
-            <div class="container">  
-                <div class="row">
+        <div class="properties-area recent-property" style="background-color:#FFF;">
+          <div class="container">
+            <div class="row">
 
-                    <div class="col-md-3 p0 padding-top-40">
-                      <div class="blog-asside-right pr0">
-                        <div class="panel panel-default sidebar-menu wow fadeInRight animated">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">서울구 검색</h3>
-                            </div>
-                            <div class="panel-body search-widget">
-                                <form action="" id='search_form' name='search_form' method="post" class=" form-inline"> 
-                                     
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <select id="seoul_select" class="selectpicker"  title="지역 선택">
-                                                    <option>강남구</option>
-                                                    <option>강북구</option>
-                                                    <option>송파구</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>                 
-                                    <fieldset >
-                                        <div class="row">
-                                            <div class="col-xs-12">  
-                                                <input class="button btn largesearch-btn" value="검색" type="button" onclick="open_in_frame();">
-                                            </div>  
-                                        </div>
-                                    </fieldset>                                     
-                                </form>
-                                
-                                <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <img style="height: 40px;" src="/static/img/demo/매우좋음.png">
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6>매우좋음</h6>
-                                   
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <img style="height: 40px;" src="/static/img/demo/좋음.png">
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6>좋음</h6>
-                                                
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <img style="height: 40px;" src="/static/img/demo/보통.png">
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6>보통</h6>
-                                                
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <img style="height: 40px;" src="/static/img/demo/미흡.png">
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6>미흡</h6>
-                                              
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <img style="height: 40px;" src="/static/img/demo/부적합.png">
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6>부적합</h6>
-                                             
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+              <div class="col-md-3 p0 padding-top-40">  
+                <div class="blog-asside-right pr0">
 
-                            </div>
-                        </div>
-                        <br><br><br><br>
-                        
-
-                        <div class="panel panel-default sidebar-menu wow fadeInRight animated"  >
-                            <div class="panel-heading"  >
-                                <h3 class="panel-title">입지검색</h3>
-                            </div>
-                            <div class="panel-body search-widget">
-                                <form action="" class=" form-inline"> 
-                                    <!-- <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span>1순위</span>
-                                                <select id="lunchBegins" class="selectpicker" title="1순위 희망">
-                                                    <option>편의점</option>
-                                                    <option>유치원</option>
-                                                    <option>소방서</option>
-                                                    <option>중학교</option>
-                                                    <option>초등학교</option>
-                                                    <option>어린이집</option>
-                                                    <option>지하철</option>
-                                                    <option>전통시장</option>
-                                                    <option>우체국</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>  
-
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span>2순위</span>
-                                                <select id="lunchBegins" class="selectpicker" title="2순위 희망">
-                                                    <option>편의점</option>
-                                                    <option>유치원</option>
-                                                    <option>소방서</option>
-                                                    <option>중학교</option>
-                                                    <option>초등학교</option>
-                                                    <option>어린이집</option>
-                                                    <option>지하철</option>
-                                                    <option>전통시장</option>
-                                                    <option>우체국</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>  
-
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <span>3순위</span>
-                                                <select id="lunchBegins" class="selectpicker"  title="3순위 희망">
-                                                    <option>편의점</option>
-                                                    <option>유치원</option>
-                                                    <option>소방서</option>
-                                                    <option>중학교</option>
-                                                    <option>초등학교</option>
-                                                    <option>어린이집</option>
-                                                    <option>지하철</option>
-                                                    <option>전통시장</option>
-                                                    <option>우체국</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </fieldset>                  -->
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"  value="yyy">HELLO</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"  value="yyy">HELLO</label>
-                                                </div>
-                                            </div>     
-                                        </div>
-                                    </fieldset>
-                                    
-                                    <fieldset >
-                                        <div class="row">
-                                            <div class="col-xs-12">  
-                                                <input class="button btn largesearch-btn" value="검색" type="submit">
-                                            </div>  
-                                        </div>
-                                    </fieldset>   
-                                </form>
-                            </div>
-                        </div>
-                        
-<!-----------------------------------------------------Recommended--------------------------------------------------------------------------------------------------------->
-                        <div class="panel panel-default sidebar-menu wow fadeInRight animated">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Recommended</h3>
-                            </div>
-                            <div class="panel-body recent-property-widget">
-                                    <ul>
-                                        <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="/static/img/demo/small-property-2.jpg"></a>
-                                                <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6> <a href="single.html">Super nice villa </a></h6>
-                                                <span class="property-price">3000000$</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-
+                  <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">서울구 검색</h3>
                     </div>
-                    
-                    <!-----------------------------------------Property main--------------------------------------------------------------------------------------------------------------------->
-                    
-                    
-                    
-                <div class="col-md-9  pr0 padding-top-40 properties-page">
-                    <div class="col-md-12 clear"> 
-                        <div class="col-xs-10 page-subheader sorting pl0">
-                            <ul class="sort-by-list">
-                                <li class="active">
-                                    <h4 class="s-property-title">입지 선정 결과</h4>
-                                </li>
-                            </ul><!--/ .sort-by-list-->                            
-                        </div>
-                        
-                        <div class="col-xs-2 layout-switcher">
-                            <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                            <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>                          
-                        </div><!--/ .layout-switcher-->
+                    <div class="panel-body search-widget">
+                      <form action="" id='search_form' name='search_form' method='post' class="form-inline">
+                        <fieldset>
+                          <div class="row">
+                              <div class="col-xs-12">
+                                  <select id="seoul_select" class="selectpicker"  title="지역 선택">
+                                      <option>강남구</option>
+                                      <option>강동구</option>
+                                      <option>강북구</option>
+                                      <option>강서구</option>
+                                      <option>관악구</option>
+                                      <option>광진구</option>
+                                      <option>구로구</option>
+                                      <option>금천구</option>
+                                      <option>노원구</option>
+                                      <option>도봉구</option>
+                                      <option>동대문구</option>
+                                      <option>동작구</option>
+                                      <option>마포구</option>
+                                      <option>서대문구</option>
+                                      <option>서초구</option>
+                                      <option>성동구</option>
+                                      <option>성북구</option>
+                                      <option>송파구</option>
+                                      <option>양천구</option>
+                                      <option>영등포구</option>
+                                      <option>용산구</option>
+                                      <option>은평구</option>
+                                      <option>종로구</option>
+                                      <option>중구구</option>
+                                      <option>중랑구</option>
+                                  </select>
+                              </div>
+                          </div>
+                        </fieldset>                 
+                        <fieldset >
+                          <div class="row">
+                              <div class="col-xs-12">  
+                                  <input class="button btn largesearch-btn" value="검색" type="button" onclick="open_in_frame();">
+                              </div>  
+                          </div>
+                        </fieldset>
+                      </form>
+                      <div class="panel-body recent-property-widget">
+                        <ul>
+                            <li>
+                              <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                <img style="height: 40px;" src="/static/img/demo/매우좋음.png">
+                              </div>
+                              <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                <h6>매우좋음</h6>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                <img style="height: 40px;" src="/static/img/demo/좋음.png">
+                              </div>
+                              <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                <h6>좋음</h6>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                <img style="height: 40px;" src="/static/img/demo/보통.png">
+                              </div>
+                              <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                <h6>보통</h6>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                <img style="height: 40px;" src="/static/img/demo/부적합.png">
+                              </div>
+                              <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                <h6>부적합</h6>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                <img style="height: 40px;" src="/static/img/demo/미흡.png">
+                              </div>
+                              <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                <h6>미흡</h6>
+                              </div>
+                            </li>
+                        </ul>
+                      </div>
                     </div>
+                  </div>
+                  
+                  <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">추천 입지요인</h3>
+                    </div>
+                    <div class="panel-body recent-property-widget">
+                      <ul>
+                        <li>
+                          <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                            <img src="/static/img/demo/bus.png">
+                          </div>
+                          <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                            <h6>버스 정류장</h6>
+                            <span >p-v : 0.0182</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                            <img src="/static/img/demo/subway.png">
+                          </div>
+                          <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                            <h6>지하철</h6>
+                            <span >30000000$</span>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                            <img src="/static/img/demo/gs.png">
+                          </div>
+                          <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                            <h6>편의점</h6>
+                            <span >30000000$</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
-                    <div class="col-md-12 clear"> 
-                        <div id="list-type" class="proerty-th">
-                            <div class="item-thumb">
-                                <iframe id='map' style="width: 100%; height: 600px" src='/seoul/' ></iframe>
-                            </div>                                                   
-                        </div>
+                  <div class="panel panel-default sidebar-menu wow fadeInLeft animated">
+                    <div class="panel-heading" style="border-top: 2px dotted #fdc600; padding-top: 40px;" >
+                      <h3 class="panel-title">입지검색</h3>
                     </div>
+                    <div class="panel-body search-widget">
+                      <form action="GET" class="form-inline">
+                        <fieldset>
+                          <div class="row">
+                            <div class="col-xs-12">
+                                <span>1순위</span>
+                                    <select id="location_features" name="location_features" class="selectpicker" title="1순위 희망">
+                                      <option>편의점</option>
+                                      <option>유치원</option>
+                                      <option>소방서</option>
+                                      <option>중학교</option>
+                                      <option>초등학교</option>
+                                      <option>어린이집</option>
+                                      <option>지하철</option>
+                                      <option>전통시장</option>
+                                      <option>우체국</option>
+                                  </select>
+                            </div>
+                            <div class="col-xs-12">
+                                <span>2순위</span>
+                                    <select id="location_features" name="location_features" class="selectpicker" title="2순위 희망">
+                                        <option>편의점</option>
+                                        <option>유치원</option>
+                                        <option>소방서</option>
+                                        <option>중학교</option>
+                                        <option>초등학교</option>
+                                        <option>어린이집</option>
+                                        <option>지하철</option>
+                                        <option>전통시장</option>
+                                        <option>우체국</option>
+                                    </select>
+                            </div>
+                            <div class="col-xs-12">
+                                <span>3순위</span>
+                                    <select id="location_features" name="location_features" class="selectpicker" title="3순위 희망">
+                                        <option>편의점</option>
+                                        <option>유치원</option>
+                                        <option>소방서</option>
+                                        <option>중학교</option>
+                                        <option>초등학교</option>
+                                        <option>어린이집</option>
+                                        <option>지하철</option>
+                                        <option>전통시장</option>
+                                        <option>우체국</option>
+                                    </select>
+                            </div>
+                          </div>
+                        </fieldset>  
+                      </form>
+                    </div>
+                  </div>
 
-                    <div class='blog-lst col-md-12'>
-                        <section class="post">
-                            <div class = "text-center padding-b-50">
-                                <h2 class="wow fadeInLeft animated">TEST Header</h2>
-                                <div class="title-line wow fadeInRight animated"></div>
-                            </div>
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <p class="author-category">Test Hello</p>
-                                </div>
-                                <div class="col-sm-6 right">
-                                    <p class="date-comments">Test Date</p>
-                                </div>
-                            </div>
-                    
-                            <div id="fuck2" style="margin-bottom: 10px; width: 100%; height: 1%; background-image: url('https://image.msscdn.net/images/prd_img/20200313/1349588/detail_1349588_1_500.jpg'); border : 2px dotted black" class="image wow fadeInLeft animated"></div>
-                        </section>
-                    </div>
-                    
                 </div>
+              </div>
 
-                </div>              
+              <div class="col-md-9 pr0 padding-top-40 properties-page">
+                <div class="col-md-12 clear" style="padding-top: 10px;">      
+
+                  <div class='blog-lst col-md-12'>
+                    <section>
+                      <div class='col-xs-10 page-subheader sorting pl0'>
+                        <div class='title-line wow fadeInRight animated'>
+                          <h5 class="s-property-title">입지 선정 결과</h5>   
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <p style="color: #000000;" class='author-category' id='map_name'>강남구</p>
+                        </div>
+                        <div class='col-sm-6 right'>
+                          <p style="color: #000000;" class='date-comments' id='current_date' value='2021'></p>
+                        </div>
+                      </div>
+
+                      <iframe  id='map' style='border: 2px dotted #ffa500; width:100%; height:500px' src='/seoul/'></iframe>
+                    </section>
+                  </div>
+
+                  <div class="blog-lst col-md-12">
+                    <section class="post">
+                      <div class="text-center padding-b-50">
+                        <h2 class="wow fadeInLeft animated"> Test Header</h2>
+                        
+                      </div>
+
+                      <div clas="row">
+                        <div class="col-sm-6">
+                          <p class="author-category">Test Hello</p>
+                        </div>
+                        <div class="col-sm-6 right">
+                          <p class='date-comments'>Test Date</p>
+                        </div>
+                      </div>
+
+                      <div id='fuck2' class="image wow fadeInLeft animated" style='margin-bottom:10px; width:100%; border:2px dotted black;'></div>
+                    </section>
+                  </div>
+                </div>
+              </div>
+
             </div>
-
+          </div>
         </div>
 
-          <!-- Footer area-->
-
-          <div class="footer-area">
-            <div class="footer">
-              <div class="container">
-                <div class="row">
-                    <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
-                    <p>
-                      Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim myeong-jin, Pyeon do-jun』
-                    </p>
-                    
-                </div>
+        <div class="footer-area">
+          <div class="footer">
+            <div class="container">
+              <div class="row">
+                <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
+                <p>Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim myeong-jin, Pyeon do-jun』</p>
               </div>
             </div>
           </div>
-        
+        </div>
 
-            <div class="footer-copy text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="pull-left">
-                            <span>Korea-HRD:Rainbow, All rights reserved 2021  </span>
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">위로가기</a></li>
-                            </ul> 
-                        </div>
-                    </div>
-                </div>
+        <div class='footer-copy text-center'>
+          <div class="container">
+            <div class="row">
+              <div class="pull-left">
+                <span>Korea-HRD:Rainbow, All rights reserved 2021  </span>
+              </div>
+
+              <div class="bottom-menu pull-right">
+                <ul>
+                  <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">위로가기</a></li>
+                </ul>
+              </div>
             </div>
-
+          </div> 
         </div>
         
+         
         <!-- =============================================================================================================== -->
       <script src="/static/js/modernizr-2.6.2.min.js"></script>
-        <script src="/static/js/jquery-1.10.2.min.js">
+      <script src="/static/js/jquery-1.10.2.min.js"></script>
+      <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+      <script src="/static/js/bootstrap-select.min.js"></script>
+      <script src="/static/js/bootstrap-hover-dropdown.js"></script>
+      <script src="/static/js/easypiechart.min.js"></script>
+      <script src="/static/js/jquery.easypiechart.min.js"></script>
+      <script src="/static/js/owl.carousel.min.js"></script>
+      <script src="/static/js/wow.js"></script>
+      <script src="/static/js/icheck.min.js"></script>
+      <script src="/static/js/price-range.js"></script>
+      <script src="/static/js/main.js"></script>
+
+      <script >
+        //$("input").removeAttr("javascript");
+        var d = new Date(); 
+        var localeDate  =  d.toLocaleDateString(); 
+        var localeTime  =  d.toLocaleTimeString(); 
+        document.getElementById ( 'current_date' ).innerHTML = localeDate  +  "  "  +  localeTime; 
+
+        function fn_search() {
+  
+           $.ajax({
+                type: "GET",
+                url: "/test/",
+                async:false,
+                data : {'name':name},
+                datatype : 'json',
+                success : function(result){
+                    $('#map2').attr('src',/test/)
+                    $('#fuck2').html(result)
+
+                    console.log(result)
+                }
+            })
             
-        </script>
-        <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/static/js/bootstrap-select.min.js"></script>
-        <script src="/static/js/bootstrap-hover-dropdown.js"></script>
-        <script src="/static/js/easypiechart.min.js"></script>
-        <script src="/static/js/jquery.easypiechart.min.js"></script>
-        <script src="/static/js/owl.carousel.min.js"></script>
-        <script src="/static/js/wow.js"></script>
-        <script src="/static/js/icheck.min.js"></script>
-        <script src="/static/js/price-range.js"></script>
-        <script src="/static/js/main.js"></script>
+        }   
 
-        <script >
-             function fn_search() {
-                $.ajax({
-                     type: "GET",
-                     url: "/test/",
-                     data : {'name':'dojun'},
-                     datatype : 'json',
-                     success : function(result){
-                         $('#map2').attr('src',/test/)
-                         $('#fuck2').html(result)
-
-                         console.log(result)
-                     }
-                 })
-             }
-
-
-            function open_in_frame() {
-                gu = document.getElementById('seoul_select').value;
-                try{
-                    if (gu == '강남구'){
-                        $('#map').attr('src','/map/')
-                    }
-                } catch(eeor) {
-                    $('map').attr('src','/map/')
-                }          
-            }
-        </script>
+        function open_in_frame() {
+           gu = document.getElementById('seoul_select').value;
+           try{
+               if (gu == '송파구'){
+                   $('#map').attr('src','/songpa/')
+                   $('#map_name').text("송파구")
+               }
+           } catch(eeor) {
+               $('#map').attr('src','/seoul/')
+           }          
+        }
+      </script>
     </body>
 </html>
