@@ -328,12 +328,19 @@ def selection(request):
 
 
 def test(request):
+    feature1 = request.GET.get('feature1')+' 평균거리'
+    feature2 = request.GET.get('feature2')+' 평균거리'
+    feature3 = request.GET.get('feature3')+' 평균거리'
+    
+
     geo_path = './test1/templates/test1/map/seoul_municipalities_geo.json'
     seoul = json.load(open(geo_path, encoding='utf-8'))
     kmeans_final_score = pd.read_csv(
         './test1/templates/test1/map/군집결과_입지점수계산.csv', encoding='cp949')  # 모델학습용 파일
-    X = kmeans_final_score.iloc[:, 1:-1]  # 독립변수 X 분리
+    ##X = kmeans_final_score.iloc[:, 1:-1]  # 독립변수 X 분리
+    X2 = kmeans_final_score.loc[:,[feature1,feature2,feature3]]
     y = kmeans_final_score.iloc[:, [-1]]  # 종속변수 Y 분리
+
     songpa = pd.read_csv('./test1/templates/test1/map/송파구_거리계산결과.csv',
                          encoding='cp949')  # 송파 군집 csv 파일 불러오기 송파구 입지선정용
 
@@ -342,10 +349,9 @@ def test(request):
     grid_dt = GridSearchCV(Model,  # estimator 객체,
                            param_grid=params,
                            cv=5)  # 교차횟수 5회
-    grid_dt.fit(X, y)  # 모델 학습
-    songpa_predict = grid_dt.predict(songpa.iloc[:, 3:])  # 모델 예측
-    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(
-        songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
+    grid_dt.fit(X2, y)  # 모델 학습
+    songpa_predict = grid_dt.predict(songpa.loc[:,[feature1,feature2,feature3]])  # 모델 예측
+    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
 
     lat = 37.508182
     lon = 127.110053
@@ -353,7 +359,6 @@ def test(request):
     for i in range(len(songpa_result)):
         lat = songpa_result.loc[i, '위도']
         lng = songpa_result.loc[i, '경도']
-
         if songpa_result.loc[i, '입지점수'] == 1:  # 입지점수가 1이면 초록으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='green')),).add_to(map)
@@ -378,9 +383,8 @@ def test(request):
 
     map.choropleth(geo_data=seoul, fill_color='white')
     map = map._repr_html_()
-    # test = request.GET.get('name')
-
-    return render(request, 'test1/test.html', {'test': songpa_result, 'test2': map})
+    
+    return render(request, 'test1/test.html', {'map': map, 'feature1':feature1, 'feature2':feature2, 'feature3':feature3})
 
 
 def seoul(request):

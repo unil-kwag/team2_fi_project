@@ -78,8 +78,7 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">최적 입지 선정</h1>
-                        <button id='test_button' onclick="fn_search();">BUTTON</button>                                 
+                        <h1 class="page-title">최적 입지 선정</h1>                            
                     </div>
                 </div>
             </div>
@@ -201,7 +200,7 @@
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                             <h6>버스 정류장</h6>
-                            <span >p-v : 0.0182</span>
+                            <span >p-value : 0.0236</span>
                           </div>
                         </li>
                         <li>
@@ -210,7 +209,7 @@
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                             <h6>지하철</h6>
-                            <span >30000000$</span>
+                            <span >p-value : 0.0182</span>
                           </div>
                         </li>
                         <li>
@@ -219,7 +218,7 @@
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                             <h6>편의점</h6>
-                            <span >30000000$</span>
+                            <span >p-value : 0.0001</span>
                           </div>
                         </li>
                       </ul>
@@ -231,49 +230,49 @@
                       <h3 class="panel-title">입지검색</h3>
                     </div>
                     <div class="panel-body search-widget">
-                      <form action="GET" class="form-inline">
+                      <form action="/test/" method='POST' class="form-inline">
                         <fieldset>
                           <div class="row">
                             <div class="col-xs-12">
                                 <span>1순위</span>
-                                    <select id="location_features" name="location_features" class="selectpicker" title="1순위 희망">
-                                      <option>편의점</option>
-                                      <option>유치원</option>
-                                      <option>소방서</option>
-                                      <option>중학교</option>
-                                      <option>초등학교</option>
-                                      <option>어린이집</option>
-                                      <option>지하철</option>
-                                      <option>전통시장</option>
-                                      <option>우체국</option>
+                                    <select id="location_features1" name="location_features" class="selectpicker" title="1순위 희망">
+                                      <option value='편의점'>편의점</option>
+                                      <option value='유치원'>유치원</option>
+                                      <option value='소방서'>소방서</option>
+                                      <option value='중학교'>중학교</option>
+                                      <option value='초등학교'>초등학교</option>
+                                      <option value='어린이집'>어린이집</option>
+                                      <option value='지하철'>지하철</option>
+                                      <option value='전통시장'>전통시장</option>
+                                      <option value='우체국'>우체국</option>
                                   </select>
                             </div>
                             <div class="col-xs-12">
                                 <span>2순위</span>
-                                    <select id="location_features" name="location_features" class="selectpicker" title="2순위 희망">
-                                        <option>편의점</option>
-                                        <option>유치원</option>
-                                        <option>소방서</option>
-                                        <option>중학교</option>
-                                        <option>초등학교</option>
-                                        <option>어린이집</option>
-                                        <option>지하철</option>
-                                        <option>전통시장</option>
-                                        <option>우체국</option>
+                                    <select id="location_features2" name="location_features" class="selectpicker" title="2순위 희망">
+                                      <option value='편의점'>편의점</option>
+                                      <option value='유치원'>유치원</option>
+                                      <option value='소방서'>소방서</option>
+                                      <option value='중학교'>중학교</option>
+                                      <option value='초등학교'>초등학교</option>
+                                      <option value='어린이집'>어린이집</option>
+                                      <option value='지하철'>지하철</option>
+                                      <option value='전통시장'>전통시장</option>
+                                      <option value='우체국'>우체국</option>
                                     </select>
                             </div>
                             <div class="col-xs-12">
                                 <span>3순위</span>
-                                    <select id="location_features" name="location_features" class="selectpicker" title="3순위 희망">
-                                        <option>편의점</option>
-                                        <option>유치원</option>
-                                        <option>소방서</option>
-                                        <option>중학교</option>
-                                        <option>초등학교</option>
-                                        <option>어린이집</option>
-                                        <option>지하철</option>
-                                        <option>전통시장</option>
-                                        <option>우체국</option>
+                                    <select id="location_features3" name="location_features" class="selectpicker" title="3순위 희망">
+                                      <option value='편의점'>편의점</option>
+                                      <option value='유치원'>유치원</option>
+                                      <option value='소방서'>소방서</option>
+                                      <option value='중학교'>중학교</option>
+                                      <option value='초등학교'>초등학교</option>
+                                      <option value='어린이집'>어린이집</option>
+                                      <option value='지하철'>지하철</option>
+                                      <option value='전통시장'>전통시장</option>
+                                      <option value='우체국'>우체국</option>
                                     </select>
                             </div>
                           </div>
@@ -281,8 +280,7 @@
                         <fieldset >
                           <div class="row">
                               <div class="col-xs-12">  
-                                  <input class="button btn largesearch-btn" value="검색" type="button" onclick="open_in_frame();">
-                                  <input class="button btn largesearch-btn" value="검색2" type="submit">
+                                  <input class="button btn largesearch-btn" value="검색" type="button" onclick="fn_search();" >
                               </div>  
                           </div>
                         </fieldset>
@@ -306,7 +304,7 @@
 
                       <div class="row">
                         <div class="col-sm-6">
-                          <p style="color: #000000;" class='author-category' id='map_name'>지역명</p>
+                          <p style="color: #000000;" class='author-category' id='ml_map_name'>지역명</p>
                         </div>
                         <div class='col-sm-6 right'>
                           <p style="color: #000000;" class='date-comments' id='current_date' value='2021'></p>
@@ -316,26 +314,28 @@
                       <iframe  id='map' style='border: 2px dotted #ffa500; width:100%; height:500px' src='/seoul/'></iframe>
                     </section>
                   </div>
-
-                  <div class="blog-lst col-md-12">
-                    <section class="post">
-                      <div class="text-center padding-b-50">
-                        <h2 class="wow fadeInLeft animated"> Test Header</h2>
-                        
+                  <div class='blog-lst col-md-12'>
+                    <br><br>
+                    <section>
+                      <div class='col-xs-10 page-subheader sorting pl0'>
+                        <div class='title-line wow fadeInRight animated'>
+                          <h5 class="s-property-title">입지요인 조건검색 결과</h5>   
+                        </div>
                       </div>
 
-                      <div clas="row">
+                      <div class="row">
                         <div class="col-sm-6">
-                          <p class="author-category">Test Hello</p>
+                          <p style="color: #000000;" class='author-category' id='map_name'>입지요인</p>
                         </div>
-                        <div class="col-sm-6 right">
-                          <p class='date-comments'>Test Date</p>
+                        <div class='col-sm-6 right'>
+                          <p style="color: #000000;" class='date-comments' id='current_date2' value='2021'></p>
                         </div>
                       </div>
 
-                      <div id='fuck2' class="image wow fadeInLeft animated" style='margin-bottom:10px; width:100%; border:2px dotted black;'></div>
+                      <div id='fuck2' style='background-repeat: no-repeat; background-image: url("/static/img/demo/fuck2.png"); margin-bottom:10px; width:100%; height: 395px; border:2px dotted #ffa500; '></div>
                     </section>
                   </div>
+                  
                 </div>
               </div>
 
@@ -391,23 +391,32 @@
         var localeDate  =  d.toLocaleDateString(); 
         var localeTime  =  d.toLocaleTimeString(); 
         document.getElementById ( 'current_date' ).innerHTML = localeDate  +  "  "  +  localeTime; 
+        document.getElementById ( 'current_date2' ).innerHTML = localeDate  +  "  "  +  localeTime;
 
-        function fn_search() {
-  
-           $.ajax({
+        function fn_search() {          
+          var feature1 = document.getElementById('location_features1').value
+          var feature2 = document.getElementById('location_features2').value
+          var feature3 = document.getElementById('location_features3').value
+
+          try{
+            if((feature1.length>0) & (feature2.length>0) & (feature3.length>0)){
+              $.ajax({
                 type: "GET",
                 url: "/test/",
                 async:false,
-                data : {'name':name},
+                data : {'feature1':feature1, 'feature2':feature2, 'feature3':feature3},
                 datatype : 'json',
                 success : function(result){
-                    $('#map2').attr('src',/test/)
                     $('#fuck2').html(result)
-
-                    console.log(result)
                 }
             })
-            
+            }
+            else{
+              alert("입지 요인을 모두 선택해주세요.")
+            }
+          } catch(e){
+              alert('error');
+          }
         }   
 
         function open_in_frame() {
