@@ -1,10 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-[if lt IE 7]      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> [endif]
-[if IE 7]         <html class="no-js lt-ie9 lt-ie8"> [endif]
-[if IE 8]      <html class="no-js lt-ie9"> [endif]
-[if gt IE 8] 
-<html class="no-js"> [endif]
+<html class="no-js"> 
     <head>
         <style>
             #for1 {
@@ -282,6 +278,14 @@
                             </div>
                           </div>
                         </fieldset>  
+                        <fieldset >
+                          <div class="row">
+                              <div class="col-xs-12">  
+                                  <input class="button btn largesearch-btn" value="검색" type="button" onclick="open_in_frame();">
+                                  <input class="button btn largesearch-btn" value="검색2" type="submit">
+                              </div>  
+                          </div>
+                        </fieldset>
                       </form>
                     </div>
                   </div>
