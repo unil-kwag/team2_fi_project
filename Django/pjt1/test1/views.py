@@ -540,33 +540,4 @@ def news1(request):
     return render(request, 'test1/index.html', {'result': result})
 
 
-def news(request):
-    search = '서울 부동산'
-    page = request.GET.get('page')
 
-    client_id = "6HlcFx6Fi1uXNPCW7pmG"
-    client_secret = "6Hx6DIiFP_"
-
-    encode_type = 'json'  # 출력 방식 json 또는 xml
-    max_display = 2  # 출력 뉴스 수
-    sort = 'date'  # 결과값의 정렬기준 시간순 date, 관련도 순 sim
-    start = 1  # 출력 위치
-
-    url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search}&display={str(int(max_display))}&start={str(int(start))}&sort={sort}"
-
-    # 헤더에 아이디와 키 정보 넣기
-    headers = {'X-Naver-Client-Id': client_id,
-               'X-Naver-Client-Secret': client_secret
-               }
-
-    # HTTP요청 보내기
-    r = requests.get(url, headers=headers)
-    result = []
-    for i in r.json()['items']:
-        tmp_dic = {'title': clean_html(i['title']),
-                   'originallink': i['originallink'],
-                   'link': i['link'],
-                   'description': clean_html(i['description']),
-                   'pubDate': i['pubDate']}
-        result.append(tmp_dic)
-    return render(request, 'test1/index.html', {'result': result})

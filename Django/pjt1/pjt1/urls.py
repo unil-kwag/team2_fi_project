@@ -21,9 +21,7 @@ import test1.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', news1, name='main'),
-    path('index/', news1, name='main'),
-
+    path('', index, name='main'),
 
 
     path('selection/', selection, name='Location_Selection'),
