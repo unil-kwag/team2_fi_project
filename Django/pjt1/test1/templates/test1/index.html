@@ -237,53 +237,22 @@
             <div class="col-md-4 col-sm-6 wow fadeInRight animated">
               <div class="single-footer">
                 <h2>뉴스</h2>
+                {% for news in result %}
                 <div class="footer-title-line"></div>
                 <ul class="footer-blog">
                   <li>
                     <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
+                      <span class="blg-date">{{news.pubDate}}</span>
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
+                      <h6><a href="{{news.link}}" target = "self">{{news.title}} </a></h6>
                       <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
+                        {{news.description}}
                       </p>
                     </div>
                   </li>
                 </ul>
+                {%endfor%}
               </div>
             </div>
             <div class="col-md-4 col-sm-6 wow fadeInRight animated">
