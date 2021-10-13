@@ -1,10 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> 
-<html class="no-js"> <!--<![endif]-->
+[if lt IE 7]      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> [endif]
+[if IE 7]         <html class="no-js lt-ie9 lt-ie8"> [endif]
+[if IE 8]      <html class="no-js lt-ie9"> [endif]
+[if gt IE 8] 
+<html class="no-js"> [endif]
     <head>
         <style>
             #for1 {
@@ -70,7 +70,7 @@
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/selection/">입지선정</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/">뉴스</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">게시판</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/blog/">게시판</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">연락망</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -302,7 +302,7 @@
 
                       <div class="row">
                         <div class="col-sm-6">
-                          <p style="color: #000000;" class='author-category' id='map_name'>강남구</p>
+                          <p style="color: #000000;" class='author-category' id='map_name'>지역명</p>
                         </div>
                         <div class='col-sm-6 right'>
                           <p style="color: #000000;" class='date-comments' id='current_date' value='2021'></p>
