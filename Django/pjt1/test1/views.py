@@ -17,28 +17,20 @@ import dash_html_components as html
 import plotly.express as px
 
 from django_plotly_dash import DjangoDash
+
+import pandas as pd
+import numpy as np
+import folium
+import folium.plugins as plugins
+import json
+from haversine import haversine
+
 # Create your views here.
 
-# def index(request):
-#     # seoul_d = Seoul.objects.all() # ClusterData 테이블의 모든 객체 불러옴
-#     # seoul_gu = seoul_d.values_list('address_gu', flat=True).distinct().order_by('-address_gu')
-#     return render(request, 'test1/index.html', {'seoul_d':seoul_d})
-
-# def index(request):
-#     cursor = connection.cursor()
-#     strSql = f'SELECT DISTINCT  address_gu FROM seoul'
-#     result = cursor.execute(strSql)
-#     search_result = cursor.fetchall()
-#     connection.commit()
-#     connection.close()
-#     data = []
-#     for i in search_result:
-#         row = {'gu':i[0]}
-#         data.append(row)
-#     context = {'search_result1': data}
-#     return render(request, 'test1/index.html', context)
 
 
+# ====================================================================================================================
+# 도영 ===============================================================================================================
 def index(request):
     gu = request.GET.get('select_gu')
     kind = request.GET.get('select_kind')
@@ -85,20 +77,238 @@ def index(request):
         context['select_name'] = name
     return render(request, 'test1/index.html', context)
 
+def search(request):
+    gu = request.GET.get('select_gu')
+    print(gu)
+    kind = request.GET.get('select_kind')
+    name = request.GET.get('select_name')
+    context = {}
+    context['select_gu'] = gu
+    context['select_kind'] = kind
+    context['select_name'] = name
+# 아파트 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, land_name, longitude, latitude FROM cluster_data WHERE land_name = "{name}"'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'apt_name' : i[1], 'apt_lon' : i[2], 'apt_lat' : i[3]}
+        data.append(row)
+    context['select_apt'] = data
+    apt_df = pd.DataFrame(context['select_apt'])
+# 버스 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM bus'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'bus_name' : i[1], 'bus_lon' : i[2], 'bus_lat' : i[3]}
+        data.append(row)
+    context['all_bus'] = data
+    bus_df = pd.DataFrame(context['all_bus'])
+# 어린이집 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM care'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'care_name' : i[1], 'care_lon' : i[2], 'care_lat' : i[3]}
+        data.append(row)
+    context['all_care'] = data
+    care_df = pd.DataFrame(context['all_care'])
+# 편의점 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM convenience'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'convenience_name' : i[0], 'convenience_lon' : i[1], 'convenience_lat' : i[2]}
+        data.append(row)
+    context['all_convenience'] = data
+    convenience_df = pd.DataFrame(context['all_convenience'])
+# 백화점 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM depart'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'depart_name' : i[0], 'depart_lon' : i[1], 'depart_lat' : i[2]}
+        data.append(row)
+    context['all_depart'] = data
+    depart_df = pd.DataFrame(context['all_depart'])
+# 소방서 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, name, longitude, latitude FROM fire'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'fire_name' : i[1], 'fire_lon' : i[2], 'fire_lat' : i[3]}
+        data.append(row)
+    context['all_fire'] = data
+    fire_df = pd.DataFrame(context['all_fire'])
+# 병원 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM hospital'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'hospital_name' : i[1], 'hospital_lon' : i[2], 'hospital_lat' : i[3]}
+        data.append(row)
+    context['all_hospital'] = data
+    hospital_df = pd.DataFrame(context['all_hospital'])
+# 유치원 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, edu_name, longitude, latitude FROM kinder'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'kinder_name' : i[1], 'kinder_lon' : i[2], 'kinder_lat' : i[3]}
+        data.append(row)
+    context['all_kinder'] = data
+    kinder_df = pd.DataFrame(context['all_kinder'])
+# 주차장 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM parking'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'parking_name' : i[0], 'parking_lon' : i[1], 'parking_lat' : i[2]}
+        data.append(row)
+    context['all_parking'] = data
+    parking_df = pd.DataFrame(context['all_parking'])    
+# 약국 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, name, longitude, latitude FROM pharmacy'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'pharmacy_name' : i[1], 'pharmacy_lon' : i[2], 'pharmacy_lat' : i[3]}
+        data.append(row)
+    context['all_pharmacy'] = data
+    pharmacy_df = pd.DataFrame(context['all_pharmacy'])    
+# 경찰서 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, police_station, longitude, latitude FROM police'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'police_name' : i[1], 'police_lon' : i[2], 'police_lat' : i[3]}
+        data.append(row)
+    context['all_police'] = data
+    police_df = pd.DataFrame(context['all_police'])    
+# 우체국 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM post'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'post_name' : i[0], 'post_lon' : i[1], 'post_lat' : i[2]}
+        data.append(row)
+    context['all_post'] = data
+    post_df = pd.DataFrame(context['all_post'])    
+# 학교 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM school'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'school_name' : i[1], 'school_lon' : i[2], 'school_lat' : i[3]}
+        data.append(row)
+    context['all_school'] = data
+    school_df = pd.DataFrame(context['all_school'])    
+# 상점 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, small_category, longitude, latitude FROM store'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'store_name' : i[1], 'store_lon' : i[2], 'store_lat' : i[3]}
+        data.append(row)
+    context['all_store'] = data
+    store_df = pd.DataFrame(context['all_store'])        
+# 지하철 데이터 불러오기---------------------------------------
+    cursor = connection.cursor()
+    strSql = f'SELECT  DISTINCT id, station_num, longitude, latitude FROM subway'
+    result = cursor.execute(strSql)
+    search_result = cursor.fetchall()
+    connection.commit()
+    connection.close()
+    data = []
+    for i in search_result:
+        row = {'subway_name' : i[1], 'subway_lon' : i[2], 'subway_lat' : i[3]}
+        data.append(row)
+    context['all_subway'] = data
+    subway_df = pd.DataFrame(context['all_subway'])        
+# 아파트-버스 1km 필터---------------------------------------
+    make_distance = pd.DataFrame()
+    for i in range(len(bus_df)):
+        distance = haversine( tuple(apt_df.iloc[0, 1:]), tuple(bus_df.iloc[:, 1:].values[i]), unit = 'km')
+        if distance <= 1:
+            one_k = {
+                'apt_name' : apt_df.iloc[0, 0],
+                'bus_name' : bus_df.iloc[:, 0].values[i],
+                'bus_lon' : bus_df.iloc[:, 1].values[i],
+                'bus_lat' : bus_df.iloc[:, 2].values[i]
+            }
+            make_distance = make_distance.append(one_k, ignore_index=True)
+    lat = apt_df.iloc[0, 2]
+    lon = apt_df.iloc[0, 1]
+    name = apt_df.iloc[0, 0]
+    map = folium.Map(location = [lat, lon], zoom_start=14)
+    folium.Marker( [lat, lon],
+                  icon = (folium.Icon(icon='home', prefix='fa', color='green')),
+                  tooltip = name
+    ).add_to(map)
+    folium.Circle( [lat, lon],
+                    radius = 1000, popup = '편의시설 범위'
+    ).add_to(map)
+    maps=map._repr_html_()
+    return render(request, 'test1/search.html',{'map' : maps})
 
-# def select_gu(request):
-#     gu = request.GET.get('select_gu')
-#     data = []
-#     if gu != None:
-#         row = {'kind': "11"}
-#         data.append(row)
-#         context = {'housing_kind': data}
-#     else:
-#         row = {'kind': "22"}
-#         data.append(row)
-#         context = {'housing_kind': data}
-#     return render(request, 'test1/index.html', context)
-
+# ====================================================================================================================
+# ====================================================================================================================
 # ====================================================================================================================
 # ====================================================================================================================
 # 도준 ===============================================================================================================
@@ -118,17 +328,6 @@ def map(request):
 # ====================================================================================================================
 # ====================================================================================================================
 # =================================================================================================================도준
-
-
-def search(request):
-    gu = request.GET.get('select_gu')
-    kind = request.GET.get('select_kind')
-    name = request.GET.get('select_name')
-    context = {}
-    context['select_gu'] = gu
-    context['select_kind'] = kind
-    context['select_name'] = name
-    return render(request, 'test1/search.html', context)
 
 
 def news(request):
