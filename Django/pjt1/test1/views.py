@@ -78,6 +78,37 @@ def index(request):
         context['select_kind'] = kind
         context['housing_name'] = data
         context['select_name'] = name
+    print("context:", context)
+    search = '서울 부동산'
+    page = request.GET.get('page')
+
+    client_id = "6HlcFx6Fi1uXNPCW7pmG"
+    client_secret = "6Hx6DIiFP_"
+
+    encode_type = 'json'  # 출력 방식 json 또는 xml
+    max_display = 2  # 출력 뉴스 수
+    sort = 'date'  # 결과값의 정렬기준 시간순 date, 관련도 순 sim
+    start = 1  # 출력 위치
+
+    url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search}&display={str(int(max_display))}&start={str(int(start))}&sort={sort}"
+
+    # 헤더에 아이디와 키 정보 넣기
+    headers = {'X-Naver-Client-Id': client_id,
+               'X-Naver-Client-Secret': client_secret
+               }
+
+    # HTTP요청 보내기
+    r = requests.get(url, headers=headers)
+    result = []
+    for i in r.json()['items']:
+        tmp_dic = {'title': clean_html(i['title']),
+                   'originallink': i['originallink'],
+                   'link': i['link'],
+                   'description': clean_html(i['description']),
+                   'pubDate': i['pubDate']}
+        result.append(tmp_dic)
+
+    context['result'] = result
     return render(request, 'test1/index.html', context)
 
 
@@ -331,14 +362,13 @@ def test(request):
     feature1 = request.GET.get('feature1')+' 평균거리'
     feature2 = request.GET.get('feature2')+' 평균거리'
     feature3 = request.GET.get('feature3')+' 평균거리'
-    
 
     geo_path = './test1/templates/test1/map/seoul_municipalities_geo.json'
     seoul = json.load(open(geo_path, encoding='utf-8'))
     kmeans_final_score = pd.read_csv(
         './test1/templates/test1/map/군집결과_입지점수계산.csv', encoding='cp949')  # 모델학습용 파일
-    ##X = kmeans_final_score.iloc[:, 1:-1]  # 독립변수 X 분리
-    X2 = kmeans_final_score.loc[:,[feature1,feature2,feature3]]
+    # X = kmeans_final_score.iloc[:, 1:-1]  # 독립변수 X 분리
+    X2 = kmeans_final_score.loc[:, [feature1, feature2, feature3]]
     y = kmeans_final_score.iloc[:, [-1]]  # 종속변수 Y 분리
 
     songpa = pd.read_csv('./test1/templates/test1/map/송파구_거리계산결과.csv',
@@ -350,8 +380,10 @@ def test(request):
                            param_grid=params,
                            cv=5)  # 교차횟수 5회
     grid_dt.fit(X2, y)  # 모델 학습
-    songpa_predict = grid_dt.predict(songpa.loc[:,[feature1,feature2,feature3]])  # 모델 예측
-    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
+    songpa_predict = grid_dt.predict(
+        songpa.loc[:, [feature1, feature2, feature3]])  # 모델 예측
+    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(
+        songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
 
     lat = 37.508182
     lon = 127.110053
@@ -383,8 +415,8 @@ def test(request):
 
     map.choropleth(geo_data=seoul, fill_color='white')
     map = map._repr_html_()
-    
-    return render(request, 'test1/test.html', {'map': map, 'feature1':feature1, 'feature2':feature2, 'feature3':feature3})
+
+    return render(request, 'test1/test.html', {'map': map, 'feature1': feature1, 'feature2': feature2, 'feature3': feature3})
 
 
 def seoul(request):
@@ -538,6 +570,3 @@ def news1(request):
                    'pubDate': i['pubDate']}
         result.append(tmp_dic)
     return render(request, 'test1/index.html', {'result': result})
-
-
-
