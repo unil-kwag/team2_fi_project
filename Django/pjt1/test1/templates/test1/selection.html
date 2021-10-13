@@ -384,6 +384,7 @@
       <script src="/static/js/icheck.min.js"></script>
       <script src="/static/js/price-range.js"></script>
       <script src="/static/js/main.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
       <script >
         //$("input").removeAttr("javascript");
@@ -412,7 +413,7 @@
             })
             }
             else{
-              alert("입지 요인을 모두 선택해주세요.")
+              swal("경고!","입지요인을 모두 선택해주세요.");
             }
           } catch(e){
               alert('error');
