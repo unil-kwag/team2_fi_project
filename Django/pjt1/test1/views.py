@@ -4,6 +4,8 @@ from django.db import connection
 from .models import *
 from django.utils import timezone
 from django.views.generic import TemplateView
+from plotly.offline import plot
+import plotly.graph_objects as go
 
 
 import os
@@ -137,9 +139,8 @@ def index(request):
     context['result'] = result
     context['jemok'] = jemok
     context['notice'] = notice
-    # return render(request, 'test1/index.html', {'context' : context, 'jemok' : jemok})
-    
     return render(request, 'test1/index.html', context)
+
 
 
 
@@ -485,6 +486,21 @@ def search(request):
                         tooltip = subway_distance.loc[i, 'subway_name']).add_to(g14)                        
     maps = map._repr_html_()
     context['map'] = maps
+# 막대그래프 만들기
+    fig = go.Figure(go.Bar(
+            x=[20, 14, 23],
+            y=['giraffes', 'orangutans', 'monkeys'],
+            orientation='h'))
+    layout = {
+    'title': 'Title of the figure',
+    'xaxis_title': 'X',
+    'yaxis_title': 'Y',
+    'height': 420,
+    'width': 560,
+    }
+    bar_chart = plot({'data' : fig, 'layout' : layout}, output_type='div')
+    context['bar_chart'] = bar_chart
+# 레이더차트 그리기
     return render(request, 'test1/search.html', context)
 
 # ====================================================================================================================
@@ -718,7 +734,6 @@ def news1(request):
                    'pubDate': i['pubDate']}
         result.append(tmp_dic)
     return render(request, 'test1/index.html', {'result': result})
-
 
 def notice(request, notice_id):
     notice_pk = get_object_or_404(NoticeBlog, pk=notice_id)  # 특정 객체 가져오기(없으면 404 에러)
