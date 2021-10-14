@@ -107,9 +107,14 @@ def index(request):
                    'description': clean_html(i['description']),
                    'pubDate': i['pubDate']}
         result.append(tmp_dic)
-
+    # 게시판 제목을 index.html에 주기
+    jemok = Blog.objects.all().order_by('-id')
     context['result'] = result
+    context['jemok'] = jemok
+    # return render(request, 'test1/index.html', {'context' : context, 'jemok' : jemok})
+
     return render(request, 'test1/index.html', context)
+
 
 
 def search(request):

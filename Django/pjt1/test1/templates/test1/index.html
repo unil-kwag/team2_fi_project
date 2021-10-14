@@ -260,12 +260,12 @@
                 <h2>게시판</h2>
                 <div class="footer-title-line"></div>
                 <ul class="footer-menu">
-                  <li><a href="properties.html">Properties</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="submit-property.html">Submit property </a></li>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="faq.html">fqa</a></li>
-                  <li><a href="faq.html">Terms </a></li>
+                  {% for haha in jemok.all %}
+                  <li><a href="{%url 'detail' haha.id%}">{{haha.title}}</a></li>
+                  {% if forloop.counter == 5 %}
+                    
+                  {% endif %}
+                  {% endfor %}
                 </ul>
               </div>
             </div>
@@ -273,7 +273,8 @@
         </div>
       </div>
     </div>
-
+    <!-- {% for blog in blogs.all %}
+    {% endfor %} -->
     <div class="footer-area">
       <div class="footer">
         <div class="container">
