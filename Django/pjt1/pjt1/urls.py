@@ -48,4 +48,6 @@ urlpatterns = [
 
     # 네이버 API 가져오기
     path('accounts/', include('allauth.urls')),
+
+    path('notice/<int:notice_id>', notice, name="notice"),
 ]

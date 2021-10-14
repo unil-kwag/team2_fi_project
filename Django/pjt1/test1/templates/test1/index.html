@@ -223,16 +223,15 @@
             <div class="col-md-4 col-sm-6 wow fadeInRight animated">
               <div class="single-footer">
                 <h2>공지사항</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-menu">
-                  <li><a href="properties.html">Properties</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="submit-property.html">Submit property </a></li>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="faq.html">fqa</a></li>
-                  <li><a href="faq.html">Terms </a></li>
-                </ul>
-              </div>
+                  <div class="footer-title-line"></div>
+                  <ul class="footer-menu">
+                    {% for notice_all in notice.all %}
+                    {% if forloop.counter < 6 %}
+                    <li><a href="{%url 'notice' notice_all.id%}">{{notice_all.title}}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
             </div>
             <div class="col-md-4 col-sm-6 wow fadeInRight animated">
               <div class="single-footer">
@@ -261,9 +260,8 @@
                 <div class="footer-title-line"></div>
                 <ul class="footer-menu">
                   {% for haha in jemok.all %}
+                  {% if forloop.counter < 6 %}
                   <li><a href="{%url 'detail' haha.id%}">{{haha.title}}</a></li>
-                  {% if forloop.counter == 5 %}
-                    
                   {% endif %}
                   {% endfor %}
                 </ul>

@@ -133,10 +133,12 @@ def index(request):
         result.append(tmp_dic)
     # 게시판 제목을 index.html에 주기
     jemok = Blog.objects.all().order_by('-id')
+    notice = NoticeBlog.objects.all().order_by('-id')
     context['result'] = result
     context['jemok'] = jemok
+    context['notice'] = notice
     # return render(request, 'test1/index.html', {'context' : context, 'jemok' : jemok})
-
+    
     return render(request, 'test1/index.html', context)
 
 
@@ -716,3 +718,8 @@ def news1(request):
                    'pubDate': i['pubDate']}
         result.append(tmp_dic)
     return render(request, 'test1/index.html', {'result': result})
+
+
+def notice(request, notice_id):
+    notice_pk = get_object_or_404(NoticeBlog, pk=notice_id)  # 특정 객체 가져오기(없으면 404 에러)
+    return render(request, 'test1/notice.html', {'notice_pk': notice_pk})
