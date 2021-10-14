@@ -576,12 +576,59 @@ def test(request):
     return render(request, 'test1/test.html', {'map': map, 'feature1': feature1, 'feature2': feature2, 'feature3': feature3})
 
 
+
 def seoul(request):
     return render(request, 'test1/map/seoul.html', {})
-
-
+def dobong(request):
+    return render(request,'test1/map/dobong_result.html')
 def songpa(request):
     return render(request, 'test1/map/songpa_result.html', {})
+def dongdaemoon(request):
+    return render(request,'test1/map/dongdaemoon_result.html')    
+def dongjak(request):
+    return render(request,'test1/map/dongjak_result.html')
+def eunpyeong(request):
+    return render(request,'test1/map/eunpyeong_result.html')
+def gangbook(request):
+    return render(request,'test1/map/gangbook_result.html')
+def gangdong(request):
+    return render(request,'test1/map/gangdong_result.html')
+def gangnam(request):
+    return render(request,'test1/map/gangnam_result.html')
+def gangseo(request):
+    return render(request,'test1/map/gangseo_result.html')
+def geumcheon(request):
+    return render(request,'test1/map/geumcheon_result.html')
+def guro(request):
+    return render(request,'test1/map/guro_result.html')
+def gwanak(request):
+    return render(request,'test1/map/gwanak_result.html')
+def gwangjin(request):
+    return render(request,'test1/map/gwangjin_result.html')
+def jongro(request):
+    return render(request,'test1/map/jongro_result.html')
+def joong(request):
+    return render(request,'test1/map/joong_result.html')
+def joongrang(request):
+    return render(request,'test1/map/joongrang_result.html')
+def mapo(request):
+    return render(request,'test1/map/mapo_result.html')
+def noone(request):
+    return render(request,'test1/map/noone_result.html')
+def seocho(request):
+    return render(request,'test1/map/seocho_result.html')
+def seodaemoon(request):
+    return render(request,'test1/map/seodaemoon_result.html')
+def seongbook(request):
+    return render(request,'test1/map/seongbook_result.html')
+def seongdong(request):
+    return render(request,'test1/map/seongdong_result.html')
+def yangcheon(request):
+    return render(request,'test1/map/yangcheon_result.html')
+def yeongdeung(request):
+    return render(request,'test1/map/yeongdeung_result.html')
+def yongsan(request):
+    return render(request,'test1/map/yongsan_result.html')
 # ====================================================================================================================
 # ====================================================================================================================
 # =================================================================================================================도준

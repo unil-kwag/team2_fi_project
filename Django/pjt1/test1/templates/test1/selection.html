@@ -429,9 +429,83 @@
         function open_in_frame() {
            gu = document.getElementById('seoul_select').value;
            try{
-               if (gu == '송파구'){
-                   $('#map').attr('src','/songpa/')
-                   $('#map_name').text("송파구")
+            if (gu == '송파구'){
+                  $('#map').attr('src','/songpa/')
+                  $('#map_name').text("송파구")
+               }
+               else if(gu == '도봉구'){
+                  $('#map').attr('src','/dobong/')
+                  $('#map_name').text("도봉구")
+               }
+               else if(gu == '동대문구'){
+                  $('#map').attr('src','/dongdaemoon/')
+                  $('#map_name').text("동대문구")
+               }else if(gu == '동작구'){
+                  $('#map').attr('src','/dongjak/')
+                  $('#map_name').text("동작구")
+               }else if(gu == '은평구'){
+                  $('#map').attr('src','/eunpyeong/')
+                  $('#map_name').text("은평구")
+               }else if(gu == '강북구'){
+                  $('#map').attr('src','/gangbook/')
+                  $('#map_name').text("강북구")
+               }else if(gu == '강동구'){
+                  $('#map').attr('src','/gangdong/')
+                  $('#map_name').text("강동구")
+               }else if(gu == '강남구'){
+                  $('#map').attr('src','/gangnam/')
+                  $('#map_name').text("강남구")
+               }else if(gu == '강서구'){
+                  $('#map').attr('src','/gangseo/')
+                  $('#map_name').text("강서구")
+               }else if(gu == '금천구'){
+                  $('#map').attr('src','/geumcheon/')
+                  $('#map_name').text("금천구")
+               }else if(gu == '구로구'){
+                  $('#map').attr('src','/guro/')
+                  $('#map_name').text("구로구")
+               }else if(gu == '관악구'){
+                  $('#map').attr('src','/gwanak/')
+                  $('#map_name').text("관악구")
+               }else if(gu == '광진구'){
+                  $('#map').attr('src','/gwangjin/')
+                  $('#map_name').text("광진구")
+               }else if(gu == '종로구'){
+                  $('#map').attr('src','/jongro/')
+                  $('#map_name').text("종로구")
+               }else if(gu == '중구'){
+                  $('#map').attr('src','/joong/')
+                  $('#map_name').text("중구")
+               }else if(gu == '중랑구'){
+                  $('#map').attr('src','/joongrang/')
+                  $('#map_name').text("중랑구")
+               }else if(gu == '마포구'){
+                  $('#map').attr('src','/mapo/')
+                  $('#map_name').text("마포구")
+               }else if(gu == '노원구'){
+                  $('#map').attr('src','/noone/')
+                  $('#map_name').text("노원구")
+               }else if(gu == '서초구'){
+                  $('#map').attr('src','/seocho/')
+                  $('#map_name').text("서초구")
+               }else if(gu == '서대문구'){
+                  $('#map').attr('src','/seodaemoon/')
+                  $('#map_name').text("서대문구")
+               }else if(gu == '성북구'){
+                  $('#map').attr('src','/seongbook/')
+                  $('#map_name').text("성북구")
+               }else if(gu == '성동구'){
+                  $('#map').attr('src','/seongdong/')
+                  $('#map_name').text("성동구")
+               }else if(gu == '양천구'){
+                  $('#map').attr('src','/yangcheon/')
+                  $('#map_name').text("양천구")
+               }else if(gu == '영등포구'){
+                  $('#map').attr('src','/yeongdeung/')
+                  $('#map_name').text("영등포구")
+               }else if(gu == '용산구'){
+                  $('#map').attr('src','/yongsan/')
+                  $('#map_name').text("용산구")
                }
            } catch(eeor) {
                $('#map').attr('src','/seoul/')
