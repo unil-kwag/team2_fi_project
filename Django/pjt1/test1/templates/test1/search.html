@@ -60,7 +60,13 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('register.html')" data-wow-delay="0.4s">로그인</button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"  data-wow-delay="0.4s"><li class="nav-item">
+                            {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+                            <a href="{% url 'account_logout' %}" class="nav-link">로그아웃</a>
+                            {% else %}
+                            <a href="{% url 'account_login' %}" class="nav-link">로그인</a>
+                            {% endif %}
+                     </li></button>
                         <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')" data-wow-delay="0.5s">회원가입</button>
                     </div>
 
