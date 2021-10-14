@@ -137,13 +137,16 @@
 
           <div>
             {% for blog in blogs.all %}
+            # 5개씩 만 나오게함 사실 더있음
+            {% if forloop.counter < 6 %}
             <div class="num"><td>{{blog.id}}</td></div>
             <div class="title" style =" text-align: center;">
               <td><a href="{%url 'detail' blog.id%}">{{blog.title}}</a></td>
             </div>
             <div class="date" style="font-size: 12px;"><td>{{blog.pub_date}}</td></div>
             <div class="writer"><td>{{blog.writer}}</td></div>
-            <div class="count">{{blog.update_counter}}</div>
+            <div class="count">{{blog.hit}}</div>
+            {% endif %}
             {% endfor %}
           </div>
         </div>
