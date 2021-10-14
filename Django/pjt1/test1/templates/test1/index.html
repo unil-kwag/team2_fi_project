@@ -227,7 +227,7 @@
                   <ul class="footer-menu">
                     {% for notice_all in notice.all %}
                     {% if forloop.counter < 6 %}
-                    <li><a href="{%url 'notice' notice_all.id%}">{{notice_all.title}}</a></li>
+                    <li><a href="{%url 'notice' notice_all.id%}">[공지사항] {{notice_all.title}}</a></li>
                     {% endif %}
                     {% endfor %}
                   </ul>
