@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/responsive.css" />
   </head>
+
   <body>
     <div id="preloader">
       <div id="status">&nbsp;</div>
@@ -117,101 +118,13 @@
       </div>
       <!-- /.container-fluid -->
     </nav>
-    <!-- End of nav bar -->
-    <!-- Main area-->
-    <!-- <div class="body-area">
-      <div class="footer" style="padding: 70px">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
-              <div class="single-footer">
-                <h2>공지사항</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-menu">
-                  <li><a href="properties.html">Properties</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="submit-property.html">Submit property </a></li>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="faq.html">fqa</a></li>
-                  <li><a href="faq.html">Terms </a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
-              <div class="single-footer">
-                <h2>뉴스</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-blog">
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
-              <div class="single-footer">
-                <h2>게시판</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-menu">
-                  <li><a href="properties.html">Properties</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="submit-property.html">Submit property </a></li>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="faq.html">fqa</a></li>
-                  <li><a href="faq.html">Terms </a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+    
     <div class="board_wrap">
       <div class="board_title">
         <strong>게시판</strong>
-        <p>인생이란 무엇인가</p>
+        <p style="padding-top: 10px;">신혼부부를 위한 의견을 남겨주세요.</p>
       </div>
+
       <div class="board_list_wrap">
         <div class="board_list">
           <div class="top">
@@ -220,41 +133,50 @@
             <div class="writer">작성일</div>
             <div class="date">글쓴이</div>
             <div class="count">조회</div>
-            
           </div>
+
           <div>
             {% for blog in blogs.all %}
             <div class="num"><td>{{blog.id}}</td></div>
             <div class="title" style =" text-align: center;">
               <td><a href="{%url 'detail' blog.id%}">{{blog.title}}</a></td>
             </div>
-            <div class="date"><td>{{blog.pub_date}}</td></div>
+            <div class="date" style="font-size: 12px;"><td>{{blog.pub_date}}</td></div>
             <div class="writer"><td>{{blog.writer}}</td></div>
-            <div class="count">db없음</div>
+            <div class="count">{{blog.update_counter}}</div>
             {% endfor %}
           </div>
         </div>
-        <!-- <div class="board_page">
-          <a href="#" class="bt first"><<</a>
-          <a href="#" class="bt prev"><</a>
-          <a href="#" class="num on">1</a>
-          <a href="#" class="num">2</a>
-          <a href="#" class="num">3</a>
-          <a href="#" class="num">4</a>
-          <a href="#" class="num">5</a>
-          <a href="#" class="bt next">></a>
-          <a href="#" class="bt last">>></a>
-      </div> -->
       </div>
-        <div class="bt_wrap">
-          <a href="{% url 'new' %}" class="on">등록</a>
+      <div class="bt_wrap">
+        <a href="{% url 'new' %}" class="on">등록</a>
+      </div>
+    </div>
 
-
-
-
-
-
-
+    <!-- <div class="footer-area">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
+            <p>Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim myeong-jin, Pyeon do-jun』</p>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class='footer-copy text-center'>
+      <div class="container">
+        <div class="row">
+           <div class="pull-left">
+             <span>Korea-HRD:Rainbow, All rights reserved 2021  </span>
+          </div>
+          <div class="bottom-menu pull-right">
+            <ul>
+              <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">위로가기</a></li>
+             </ul>
+           </div>
+         </div>
+      </div> 
+    </div> -->
     <div class="footer-area">
       <div class="footer">
         <div class="container">
@@ -268,9 +190,6 @@
         </div>
       </div>
     </div>
-
-
-
 
     <script src="/static/js/modernizr-2.6.2.min.js"></script>
 
@@ -291,4 +210,3 @@
     <script src="/static/js/main.js"></script>
   </body>
 </html>
-<!--test-->

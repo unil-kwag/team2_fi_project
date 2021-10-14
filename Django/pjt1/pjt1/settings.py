@@ -38,20 +38,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig', #Django와 Dash연결을 위한 앱 참조 <pip install django_plotly_dash>
+    # Django와 Dash연결을 위한 앱 참조 <pip install django_plotly_dash>
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'test1',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',  # 가입한 계정 관리
+    'allauth.socialaccount',  # 소셜 계정으로 가입한 계정 관리
+    'allauth.socialaccount.providers.naver',  # 어떤 소셜 서비스를 사용하는지 추가
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',/
+    # 'django.middleware.csrf.CsrfViewMiddleware',/
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_plotly_dash.middleware.BaseMiddleware', #Django와 Dash 연결을 위한 Middleware
-    
+    'django_plotly_dash.middleware.BaseMiddleware',  # Django와 Dash 연결을 위한 Middleware
+
 ]
 
 ROOT_URLCONF = 'pjt1.urls'
@@ -59,7 +65,7 @@ ROOT_URLCONF = 'pjt1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,12 +88,12 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE':'django.db.backends.mysql',
-        'NAME':'rainbow_db',
-        'USER':'root',
-        'PASSWORD':'1234',
-        'HOST':'163.152.216.248',
-        'PORT':'52123'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rainbow_db',
+        'USER': 'root',
+        'PASSWORD': '1234',
+        'HOST': '163.152.216.248',
+        'PORT': '52123'
     }
 }
 
@@ -131,7 +137,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-) 
+)
 # STATRIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
@@ -139,4 +145,13 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-X_FRAME_OPTIONS = 'SAMEORIGIN' # 만약 Django의 버전이 3.0이상일 경우 Plotly Dash를 위해 adding
+X_FRAME_OPTIONS = 'SAMEORIGIN'  # 만약 Django의 버전이 3.0이상일 경우 Plotly Dash를 위해 adding
+
+
+# 네이버 로그인 API
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
