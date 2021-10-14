@@ -459,6 +459,13 @@ def home(request):
 
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
+    pk = blog_id
+    cursor = connection.cursor()
+    strsql = "UPDATE Blog SET hit = hit+1 WHERE id="+str(pk)
+    result = cursor.execute(strsql)
+    blog = cursor.fetchall()
+    connection.commit()
+    connection.close()
     return render(request, 'test1/detail.html', {'blog': blog_detail})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blog 객체도 함께 넘겨주도록 하겠다.

@@ -5,20 +5,20 @@ from django.db import models
 #========================================================================
 #========================================================================
 #========================================================================
-class Blog(models.Model): # Blog 라는 이름의 객체 틀(Model) 생성
-    id = models.AutoField(primary_key=True) 
-    title = models.CharField(max_length=200) # title 라는 최대 200 글자의 문자 데이터 저장
-    pub_date = models.DateField(blank=True, null=True) # pub_date 라는 날짜 시간 데이터 저장
-    body = models.TextField() # body 라는 줄글 문자 저장
-    pwd = models.IntegerField()
-    writer = models.CharField(max_length=20)
+class Blog(models.Model):
+    title = models.CharField(max_length=50, blank=True, null=True)
+    body = models.TextField(blank=True, null=True)
+    pub_date = models.DateField(blank=True, null=True)
+    pwd = models.IntegerField(blank=True, null=True)
+    writer = models.CharField(max_length=20, blank=True, null=True)
+    notice = models.IntegerField(blank=True, null=True)
+    hit = models.IntegerField(blank=True, null=True)
 
-    # 이 객체를 가르키는 말을 title로 정하겠다
     class Meta:
         managed = False
         db_table = 'Blog'
 
-
+        
 
 class Bus(models.Model):
     id = models.IntegerField(primary_key=True)

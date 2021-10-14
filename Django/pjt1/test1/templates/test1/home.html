@@ -143,7 +143,7 @@
             </div>
             <div class="date" style="font-size: 12px;"><td>{{blog.pub_date}}</td></div>
             <div class="writer"><td>{{blog.writer}}</td></div>
-            <div class="count">db없음</div>
+            <div class="count">{{blog.hit}}</div>
             {% endfor %}
           </div>
         </div>
@@ -153,7 +153,7 @@
       </div>
     </div>
 
-    <div class="footer-area">
+    <!-- <div class="footer-area">
       <div class="footer">
         <div class="container">
           <div class="row">
@@ -176,10 +176,20 @@
            </div>
          </div>
       </div> 
+    </div> -->
+    <div class="footer-area">
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
+            <p>
+              Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim
+              myeong-jin, Pyeon do-jun』
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-
-
-
 
     <script src="/static/js/modernizr-2.6.2.min.js"></script>
 
@@ -200,4 +210,3 @@
     <script src="/static/js/main.js"></script>
   </body>
 </html>
-<!--test-->
