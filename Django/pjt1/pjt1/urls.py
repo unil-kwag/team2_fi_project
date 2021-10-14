@@ -45,4 +45,7 @@ urlpatterns = [
     path('blog/edit/<int:blog_id>', edit, name="edit"),
     path('blog/update/<int:blog_id>', update, name="update"),
     path('blog/delete/<int:blog_id>', delete, name="delete"),
+
+    # 네이버 API 가져오기
+    path('accounts/', include('allauth.urls')),
 ]
