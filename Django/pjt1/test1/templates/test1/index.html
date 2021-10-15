@@ -232,7 +232,7 @@
                   <ul class="footer-menu">
                     {% for notice_all in notice.all %}
                     {% if forloop.counter < 6 %}
-                    <li><a href="{%url 'notice' notice_all.id%}">[공지사항] {{notice_all.title}}</a></li>
+                    <li><a href="{%url 'notice' notice_all.id%}"><span style="color:#fdc600;">[공지사항]</span> {{notice_all.title}}</a></li>
                     {% endif %}
                     {% endfor %}
                   </ul>
@@ -250,7 +250,7 @@
                     </div>
                     <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                       <h6><a href="{{news.link}}" target = "self">{{news.title}} </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
+                      <p style="line-height: 17px; ">
                         {{news.description}}
                       </p>
                     </div>

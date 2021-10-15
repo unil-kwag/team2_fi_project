@@ -104,7 +104,7 @@ def index(request):
         context['select_kind'] = kind
         context['housing_name'] = data
         context['select_name'] = name
-    print("context:", context)
+
     search = '서울 부동산'
     page = request.GET.get('page')
 
@@ -537,10 +537,8 @@ def test(request):
                            param_grid=params,
                            cv=5)  # 교차횟수 5회
     grid_dt.fit(X2, y)  # 모델 학습
-    songpa_predict = grid_dt.predict(
-        songpa.loc[:, [feature1, feature2, feature3]])  # 모델 예측
-    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(
-        songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
+    songpa_predict = grid_dt.predict(songpa.loc[:, [feature1, feature2, feature3]])  # 모델 예측
+    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
 
     lat = 37.508182
     lon = 127.110053
@@ -560,7 +558,7 @@ def test(request):
         elif songpa_result.loc[i, '입지점수'] == 4:  # 입지점수가 2이면 빨강으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='orange')),).add_to(map)
-        elif songpa_result.loc[i, '입지점수'] == 0:  # 입지점수가 2이면 빨강으로 마커 지정
+        elif songpa_result.loc[i, '입지점수'] == 0:  # 입지점수가 2이면 파랑으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='blue')),).add_to(map)
         else:
