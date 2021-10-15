@@ -111,7 +111,7 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/blog/">게시판</a>
+              <a class="" href="/blog/5">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
               <a href="contact.html">연락망</a>
@@ -123,15 +123,7 @@
       <!-- /.container-fluid -->
     </nav>
     <!-- End of nav bar -->
-    <!-- <h1>제목:{{blog.title}}</h1>
-    <p>글쓴이:{{blog.writer}}</p>
-    <p>작성일:{{blog.pub_date}}</p>
-    <p>내용:{{blog.body}}</p>
-    <br /><br />
-
-    <a href="{%url 'home'%}">목록으로</a>
-    <a href="{%url 'edit' blog.id %}">수정</a>
-    <a href="{%url 'delete' blog.id %}">삭제</a> -->
+   
 
     <div class="board_wrap">
       <div class="board_view_wrap">
@@ -158,7 +150,7 @@
           <div class="cont">{{blog.body}}</div>
         </div>
         <div class="bt_wrap">
-          <a href="{%url 'home'%}">목록으로</a>
+          <a href="{%url 'blog' 5%}">목록으로</a>
           <a href="{%url 'edit' blog.id %}">수정</a>
           <a href="{%url 'delete' blog.id %}">삭제</a>
         </div>

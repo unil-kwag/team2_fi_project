@@ -652,9 +652,9 @@ def board_edit(request):
     return render(request, 'test1/board_edit.html', {})
 
 
-def home(request):
-    blogs = Blog.objects.all().order_by('-id')
-    return render(request, 'test1/home.html', {'blogs': blogs})
+def blog(request, count):
+    blogs = Blog.objects.all().order_by('-id')[count-5:count]
+    return render(request, 'test1/home.html', {'blogs': blogs,'count':count+5, 'prev':count-5})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blogs 객체도 함께 넘겨주도록 하겠다.
 

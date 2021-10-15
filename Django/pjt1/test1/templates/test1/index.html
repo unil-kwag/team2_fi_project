@@ -104,7 +104,7 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/blog/">게시판</a>
+              <a class="" href="/blog/5">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
               <a href="contact.html">연락망</a>
@@ -238,27 +238,30 @@
                   </ul>
                 </div>
             </div>
+
             <div class="col-md-4 col-sm-6 wow fadeInRight animated">
               <div class="single-footer">
                 <h2>뉴스</h2>
-                {% for news in result %}
                 <div class="footer-title-line"></div>
                 <ul class="footer-blog">
+                  {% for news in result %}
                   <li>
                     <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <span class="blg-date">{{news.pubDate}}</span>
+                        <a href="{{news.link}}"><img src="static/img/demo/small_news.jpg"></a>
+                        <p class="blg-date">{{news.pubDate}}</p>
                     </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="{{news.link}}" target = "self">{{news.title}} </a></h6>
-                      <p style="line-height: 17px; ">
-                        {{news.description}}
-                      </p>
+                    
+                    <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
+                      <h6><a href="{{news.link}}" target = "self">{{news.title|truncatewords:8}} </a></h6>
+                      <p style="line-height: 17px; padding: 8px 2px">{{news.description|truncatewords:6}}</p>
                     </div>
-                  </li>
+                  </li> 
+                  <p id='blank'></p>
+                  {% endfor%}
                 </ul>
-                {%endfor%}
               </div>
             </div>
+
             <div class="col-md-4 col-sm-6 wow fadeInRight animated">
               <div class="single-footer">
                 <h2>게시판</h2>
@@ -291,6 +294,22 @@
       </div>
     </div>
 
+    <div class='footer-copy text-center'>
+      <div class="container">
+        <div class="row">
+          <div class="pull-left">
+            <span>Korea-HRD:Rainbow, All rights reserved 2021  </span>
+          </div>
+
+          <div class="bottom-menu pull-right">
+            <ul>
+              <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">위로가기</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> 
+    </div>
+
     <script src="/static/js/modernizr-2.6.2.min.js"></script>
 
     <script src="/static/js/jquery-1.10.2.min.js"></script>
@@ -309,6 +328,9 @@
 
     <script src="/static/js/main.js"></script>
     <script>
+     
+
+
       console.log($('#lunchBegins').val());
       $('#lunchBegins').on('change', function() {
           document.selectForm.submit();

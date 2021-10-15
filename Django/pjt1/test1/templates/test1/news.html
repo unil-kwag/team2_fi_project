@@ -84,19 +84,7 @@
 
         <div id="preloader">
             <div id="status">&nbsp;</div>
-        </div>
-        <!-- Body content -->
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <div class="header-half header-call">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>            
-        <!--End top header -->
+        </div>   
 
         <nav class="navbar navbar-default ">
             <div class="container">
@@ -126,7 +114,7 @@
                     <ul class="main-nav nav navbar-nav navbar-right">                      
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/selection/">입지선정</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/">뉴스</a></li>
-                        <li class="dropdown yamm-fw" data-wow-delay="0.1s"><a class="" href="/blog/">게시판</a></li>
+                        <li class="dropdown yamm-fw" data-wow-delay="0.1s"><a class="" href="/blog/5">게시판</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">연락망</a></li>
                     </ul>
                     </ul>
@@ -216,7 +204,7 @@
                             </div>
                         </div>
                         
-                            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                        <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">추천 부동산 뉴스</h3>
                                 </div>
@@ -225,10 +213,6 @@
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="/static/img/news/newspaper2.jpg"></a>
-                                                <!-- <span class="property-seeker">
-                                                    <b class="b-1">신문사</b>
-                                                    <b class="b-2">게시날짜</b>
-                                                </span> -->
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html">[헤드라인]서울 집값 상승률 매년 3% 증가 </a></h6>
@@ -238,10 +222,6 @@
                                         <li>
                                             <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
                                                 <a href="single.html"><img src="/static/img/news/newspaper5.jpg"></a>
-                                                <!-- <span class="property-seeker">
-                                                    <b class="b-1">A</b>
-                                                    <b class="b-2">S</b>
-                                                </span> -->
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html">[헤드라인] 2021년 4분기 주택 공급 늘리나? </a></h6>
@@ -255,31 +235,24 @@
                     </div>   
                     
                     <div class="blog-lst col-md-9 p0">
-                        <section id="id-100" class="post single">
-                            
-                                    
+                        <section id="id-100" class="post single">                            
                             {% for news in result %}
-
+                            <div style="background-image: url('/static/img/demo/newspage.jpg');">
                             <div class="post-header single">
                                 <div class="">
-                                    <h2 class="wow fadeInLeft animated">{{news.title}}</h2>
-                                    <div class="title-line wow fadeInRight animated"></div>
+                                    <h2 class="wow ">{{news.title}}</h2>                              
                                 </div>
-                                <div class="row wow fadeInRight animated">
+                                <div class="wow">
                                     <div class="col-sm-6">
                                     </div>
                                     <div class="col-sm-6 right" >
                                         <p class="date-comments">
-                                            <a href="#"><i class="fa fa-calendar-o"></i> {{news.pubDate}}</a>
+                                            <i class="fa fa-calendar-o"></i> {{news.pubDate}}
                                         </p>
                                     </div>
                                 </div>
-                                <!-- <div class="image wow fadeInRight animated"> 
-                                    <img src="#" class="img-responsive" alt="신문기사 그림 표현 1">
-                                </div> -->
                             </div> 
-
-                            <div id="post-content" class="post-body single wow fadeInLeft animated">
+                            <div id="post-content" class="post-body single wow ">
                                 <p>
                                     {{news.description}} <br>
                                     {{news.title}}<br>
@@ -287,9 +260,8 @@
                                     <A href = "{{news.link}}" target = "self" > {{news.link}} </A>
                                 </p>
                             </div>
-
-                            </h1>
-                         {%endfor%}
+                            </div>
+                            {%endfor%}
 
                             <!-- 페이지 이동 부분, 구현 힘들다면 상위 5개 기사만 뜨게 만들기 -->
                             <div class="post-footer single wow fadeInBottum animated">
@@ -300,15 +272,9 @@
                             </div>    
 
                         </section> 
-
-                        <section class="about-autor">
-
-                        </section>
      
                     </div>                    
-                 
                 </div>
-
             </div>
         </div>
 
