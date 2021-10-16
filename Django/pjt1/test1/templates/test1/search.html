@@ -67,16 +67,18 @@
                             <a href="/loginregister/" class="nav-link">로그인</a>
                             {% endif %}
                      </li></button>
-                        <button class="navbar-btn nav-button wow fadeInRight" data-wow-delay="0.5s"><li class="nav-item">
-                            {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
-                            <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
-                            {% else %}
-                            <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
-                            {% endif %}
-                     </li></button>
                     </div>
 
                     <ul class="main-nav nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+                        <li class="wow fadeInDown" data-wow-delay="0.5s">
+                          <a>{{user.username}}님 안녕하세요</a>
+                        </li>
+                        {% else %}
+                        <li class="wow fadeInDown" data-wow-delay="0.5s">
+                          <a></a>
+                        </li>
+                        {% endif %}
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/selection/">입지선정</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/">뉴스</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/blog/10">게시판</a></li>

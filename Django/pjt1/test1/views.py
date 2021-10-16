@@ -706,7 +706,7 @@ def edit(request, blog_id):
     return render(request, 'test1/edit.html', {'blog': blog})
 
 
-def delete(request, blog_id):
+def delete(request, blog_id, commet_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
     blog.delete()
     return redirect('home')  # home 이름의 url 로
