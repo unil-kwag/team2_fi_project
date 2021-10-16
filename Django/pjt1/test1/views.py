@@ -711,7 +711,8 @@ def edit(request, blog_id):
 
 def delete(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
-    comment = Commet.objects.get(blog_id=blog_id)
+    comment = Commet.objects.filter(blog_id=blog_id)
+    print("TEST:",comment)
     comment.delete()
     blog.delete()
     return redirect('/blog/10')  # home 이름의 url 로
