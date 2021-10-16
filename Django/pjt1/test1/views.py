@@ -796,3 +796,6 @@ def news1(request):
 def notice(request, notice_id):
     notice_pk = get_object_or_404(NoticeBlog, pk=notice_id)  # 특정 객체 가져오기(없으면 404 에러)
     return render(request, 'test1/notice.html', {'notice_pk': notice_pk})
+
+def loginregister(request):
+    return render(request,'test1/loginregister.html',{})
