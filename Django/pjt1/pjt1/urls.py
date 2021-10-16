@@ -13,11 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from django.urls.conf import re_path
 
 from test1.views import *
-import test1.views as views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -64,7 +66,9 @@ urlpatterns = [
     path('board_edit/', board_edit, name='Board_edit'),
 
     path('django_dash/', include('django_plotly_dash.urls')),
-    path('blog/<int:count>', blog, name='blog'),
+    
+    re_path(r'^blog/(?P<count>[0-9]{1,3})/$',blog,name='blog'),
+    
     path('detail/<int:blog_id>', detail, name="detail"),
     path('blog/new', new, name="new"),
     path('blog/create', create, name='create'),

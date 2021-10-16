@@ -137,14 +137,13 @@
             class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12"
           >
             <h1 style="color: white;"><b>서울 신혼부부 공공주택 검색</b></h1>
-            <p style="color: white;">
-                <b>
-              < 서울 기존 신혼부부 임대주택, 서울 입지분석 결과 최적 선정지 검색 >
-            </b>
-            </p>
+            <p style="color: white;"><b>< 서울 기존 신혼부부 임대주택, 서울 입지분석 결과 최적 선정지 검색 ></b></p>
+            
             <div class="search-form wow pulse" data-wow-delay="0.8s" style="height: 80px;">
 
 <!-------------------------------------------- 지역구 선택------------------------------------->
+                         
+
               <form name="selectForm" action="/" method="GET" class="col-sm-11" style="padding: 2px; " onsubmit="fn_search();"> 
                 <div class="form-group" style="float: left; width: 30%;">
                   <select
@@ -269,7 +268,7 @@
                 <ul class="footer-menu">
                   {% for haha in jemok.all %}
                   {% if forloop.counter < 6 %}
-                  <li><a href="{%url 'detail' haha.id%}">{{haha.title}}</a></li>
+                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title}}{{haha.</a></li>
                   {% endif %}
                   {% endfor %}
                 </ul>

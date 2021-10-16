@@ -17,6 +17,15 @@ class Blog(models.Model):
         managed = False
         db_table = 'Blog'
 
+class Commet(models.Model):
+    body = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, blank=True, null=True)
+    date = models.DateField()
+    blog = models.ForeignKey(Blog, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'commet'
 
 class NoticeBlog(models.Model):
     title = models.CharField(max_length=50)

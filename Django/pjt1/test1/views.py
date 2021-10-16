@@ -61,6 +61,8 @@ def make_distance(apt_df, bus_df, bus_distance, name, lon, lat):
 #                         icon = (folium.Icon(icon=bus, prefix='fa', color='red')),
 #                         tooltip = bus_distance.loc[i, bus_name]).add_to(g1)
 def index(request):
+    seoul = Seoul.objects.all().values('address_gu','supply_type','land_name').distinct() ####################
+    
     gu = request.GET.get('select_gu')
     kind = request.GET.get('select_kind')
     name = request.GET.get('select_name')
@@ -139,6 +141,7 @@ def index(request):
     context['result'] = result
     context['jemok'] = jemok
     context['notice'] = notice
+    context['seoul'] = seoul#######################
     return render(request, 'test1/index.html', context)
 
 
@@ -653,6 +656,7 @@ def board_edit(request):
 
 
 def blog(request, count):
+    count = int(count)
     blogs = Blog.objects.all().order_by('-id')[count-5:count]
     return render(request, 'test1/home.html', {'blogs': blogs,'count':count+5, 'prev':count-5})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
@@ -661,6 +665,9 @@ def blog(request, count):
 
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
+    comment = get_object_or_404(Commet,blog_id=blog_id )
+    
+    ########################### 조회수 증가
     pk = blog_id
     cursor = connection.cursor()
     strsql = "UPDATE Blog SET hit = hit+1 WHERE id="+str(pk)
@@ -668,7 +675,7 @@ def detail(request, blog_id):
     blog = cursor.fetchall()
     connection.commit()
     connection.close()
-    return render(request, 'test1/detail.html', {'blog': blog_detail})
+    return render(request, 'test1/detail.html', {'blog': blog_detail,'comment':comment})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blog 객체도 함께 넘겨주도록 하겠다.
 
