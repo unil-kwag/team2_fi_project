@@ -285,7 +285,7 @@
                 <ul class="footer-menu">
                   {% for haha in jemok.all %}
                   {% if forloop.counter < 6 %}
-                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title}}{{haha.</a></li>
+                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title}}</a></li>
                   {% endif %}
                   {% endfor %}
                 </ul>

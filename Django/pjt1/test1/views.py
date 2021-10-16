@@ -656,9 +656,11 @@ def board_edit(request):
 
 
 def blog(request, count):
+    notice = NoticeBlog.objects.all().order_by('-id')[:5]
+
     count = int(count)
     blogs = Blog.objects.all().order_by('-id')[count-10:count]
-    return render(request, 'test1/home.html', {'blogs': blogs,'count':count+10, 'prev':count-10})
+    return render(request, 'test1/home.html', {'blogs': blogs,'count':count+10, 'prev':count-10,'notices':notice})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blogs 객체도 함께 넘겨주도록 하겠다.
 
@@ -703,13 +705,16 @@ def create(request):
 
 def edit(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
+    
     return render(request, 'test1/edit.html', {'blog': blog})
 
 
-def delete(request, blog_id, commet_id):
+def delete(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
+    comment = Commet.objects.get(blog_id=blog_id)
+    comment.delete()
     blog.delete()
-    return redirect('home')  # home 이름의 url 로
+    return redirect('/blog/10')  # home 이름의 url 로
 
 # U - update(기존 글 객체 가져와서 수정하기)
 
@@ -717,11 +722,11 @@ def delete(request, blog_id, commet_id):
 def update(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
     blog.title = request.GET['title']
-    # blog.writer = request.GET['writer']
     blog.body = request.GET['body']  # 내용 채우기
     blog.pub_date = timezone.datetime.now()  # 내용 채우기
     blog.save()  # 저장하기
-    return redirect('/blog/' + str(blog.id))
+
+    return redirect('/blog/10')
 
 
 def clean_html(x):

@@ -124,25 +124,11 @@
       <!-- /.container-fluid -->
     </nav>
     <!-- End of nav bar -->
-    <!-- <form action="{% url 'update' blog.id %}">
-      {% csrf_token %}
-      <h4>제목:</h4>
-      <input type="text" name="title" value="{{blog.title}}" />
-      <br />
 
-      <h4>본문:</h4>
-      <textarea cols="40" rows="10" name="body">{{blog.body}}</textarea>
-      <br />
-
-      <input class="btn btn-dark" type="submit" value="제출하기" />
-    </form> -->
     <form action="{% url 'update' blog.id %}">
       {% csrf_token %}
       <div class="board_wrap">
-        <!-- <div class="board_title">
-          <strong>공지사항</strong>
-          <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
-        </div> -->
+
         <div class="board_write_wrap">
           <div class="board_write">
             <div class="title">
@@ -175,96 +161,7 @@
         </div>
       </div>
     </form>
-    <!-- Main area -->
-    <!-- <div class="body-area">
-      <div class="footer" style="padding: 70px">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
-              <div class="single-footer">
-                <h2>공지사항</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-menu">
-                  <li><a href="properties.html">Properties</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="submit-property.html">Submit property </a></li>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="faq.html">fqa</a></li>
-                  <li><a href="faq.html">Terms </a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
-              <div class="single-footer">
-                <h2>뉴스</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-blog">
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-
-                  <li>
-                    <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
-                      <a href="single.html">
-                        <img src="/static/img/demo/small-proerty-2.jpg" />
-                      </a>
-                      <span class="blg-date">12-12-2016</span>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                      <h6><a href="single.html">Add news functions </a></h6>
-                      <p style="line-height: 17px; padding: 8px 2px">
-                        Lorem ipsum dolor sit amet, nulla ...
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-md-4 col-sm-6 wow fadeInRight animated">
-              <div class="single-footer">
-                <h2>게시판</h2>
-                <div class="footer-title-line"></div>
-                <ul class="footer-menu">
-                  <li><a href="properties.html">Properties</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="submit-property.html">Submit property </a></li>
-                  <li><a href="contact.html">Contact us</a></li>
-                  <li><a href="faq.html">fqa</a></li>
-                  <li><a href="faq.html">Terms </a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
+    
     <div class="footer-area">
       <div class="footer">
         <div class="container">

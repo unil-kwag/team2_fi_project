@@ -95,17 +95,20 @@
               {% endif %}
        </li>
             </button>
+            <button
+              class="navbar-btn nav-button wow fadeInRight"
+              data-wow-delay="0.48s"
+            >
+            <li class="nav-item">
+              {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+              <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
+              {% endif %}
+       </li>
+            </button>
           </div>
           <ul class="main-nav nav navbar-nav navbar-right">
-            {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
-            <li class="wow fadeInDown" data-wow-delay="0.5s">
-              <a>{{user.username}}님 안녕하세요</a>
-            </li>
-            {% else %}
-            <li class="wow fadeInDown" data-wow-delay="0.5s">
-              <a></a>
-            </li>
-            {% endif %}
             <li class="wow fadeInDown" data-wow-delay="0.2s">
               <a class="" href="/selection/">입지선정</a>
             </li>
@@ -142,6 +145,16 @@
           </div>
 
           <div>
+            {% for notice in notices %}
+              <div class="num" style="background-color: rgba(250, 247, 214, 0.61);"><td>{{notice.id}}</td></div>
+              <div class="title" style =" text-align: center; background-color: rgba(250, 247, 214, 0.61);">
+                <td><a href="{%url 'detail' 56%}">{{notice.title}}</a></td>
+              </div>
+              <div class="date" style="font-size: 12px; background-color: rgba(250, 247, 214, 0.61);"><td>날짜없음</td></div>
+              <div class="writer" style="background-color: rgba(250, 247, 214, 0.61);"><td>{{notice.name}}</td></div>
+              <div class="count" style="background-color: rgba(250, 247, 214, 0.61);">미구현</div>
+            {% endfor %}
+            
             {% if blogs|default:"null" != 'null' %}
             {% for blog in blogs %}
             <div class="num"><td>{{blog.id}}</td></div>
@@ -165,7 +178,9 @@
       <div class="col-md-12">
         <div class="pull-right">
           <div class="bt_wrap">
-            <a href="{% url 'new' %}" class="on">등록</a>
+            {% if user.is_authenticated %}
+              <a href="{% url 'new' %}" class="on">등록</a>
+            {% endif %}
           </div>
         </div>
       </div>
