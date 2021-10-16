@@ -163,6 +163,7 @@
               {% csrf_token %}
               <div class="input-group">
                   <input class="form-control" name="comment_body" id="comment_body" type="text" placeholder="댓글내용">
+                  <input name="user_name" id="user_name" value={{user.username}} style="display: none;">
                   <span class="input-group-btn">
                       <input class="btn btn-primary subscribe" type="submit" value="댓글등록"></input>
                   </span>
@@ -171,9 +172,10 @@
             {% endif %}
           </div>
         </div>
+
         <div class="bt_wrap">
           <a href="{%url 'blog' 10%}">목록으로</a>
-          {% if blog.id == user.username%}
+          {% if blog.writer == user.username%}
             <a href="{%url 'edit' blog.id %}">수정</a>
             <a href="{%url 'delete' blog.id %}">삭제</a>
           {% endif %}

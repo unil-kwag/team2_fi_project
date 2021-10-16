@@ -634,27 +634,6 @@ def yongsan(request):
 # ====================================================================================================================
 # =================================================================================================================도준
 
-
-def news(request):
-    return render(request, 'test1/news.html', {})
-
-
-def board_main(request):
-    return render(request, 'test1/board_main.html', {})
-
-
-def board_write(request):
-    return render(request, 'test1/board_write.html', {})
-
-
-def board_view(request):
-    return render(request, 'test1/board_view.html', {})
-
-
-def board_edit(request):
-    return render(request, 'test1/board_edit.html', {})
-
-
 def blog(request, count):
     notice = NoticeBlog.objects.all().order_by('-id')[:5]
 
@@ -676,13 +655,14 @@ def detail(request, blog_id):
     blog = cursor.fetchall()
     connection.commit()
     connection.close()
+
     return render(request, 'test1/detail.html', {'blog': blog_detail,'comment':blog_comment})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blog 객체도 함께 넘겨주도록 하겠다.
 def comment_insert(request,blog_id):
     comment = Commet()
     comment.body = request.GET['comment_body']
-    comment.name = '관리자' ##id로 수정
+    comment.name = request.GET['user_name'] ##id로 수정
     comment.date = timezone.datetime.now() ##현재시간 등록
     comment.blog_id = blog_id
     comment.save()
