@@ -151,14 +151,14 @@
           <div class="cont" style="height: 200px;">{{blog.body}}</div>
 
           <div class="info" style="border-right: 1px black solid; border-left: 1px black solid;">
-            <p>댓글 :</p>
+            <p style="border-bottom: 1px dotted black;">댓글 :</p>
             {% for com in comment%}           
             <dl style="display: block; margin-bottom: 1%;">
               <dt>{{com.name}} : </dt>
               <dd>{{com.body}}</dd>
             </dl>
             {% endfor %}
-            
+            {% if user.is_authenticated %}
             <form action="{% url 'comment_insert' blog.id%}" method="get">
               {% csrf_token %}
               <div class="input-group">
@@ -168,6 +168,7 @@
                   </span>
               </div>
             </form> 
+            {% endif %}
           </div>
         </div>
         <div class="bt_wrap">
