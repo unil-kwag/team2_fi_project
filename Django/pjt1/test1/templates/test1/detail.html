@@ -148,8 +148,15 @@
             </dl>
           </div>
           <div class="cont">{{blog.body}}</div>
-          <div class="commet">
-            {{commet}}
+
+          <div class="info">
+            <p>댓글 :</p>
+            {% for com in comment%}           
+            <dl>
+              <dt>{{com.name}} : </dt>
+              <dd>{{com.body}}</dd>
+            </dl>
+            {% endfor %}
           </div>
         </div>
         <div class="bt_wrap">

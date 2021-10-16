@@ -665,8 +665,8 @@ def blog(request, count):
 
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
-    comment = get_object_or_404(Commet,blog_id=blog_id )
-    
+    blog_comment = Commet.objects.filter(blog_id=blog_id)
+    print(blog_comment)
     ########################### 조회수 증가
     pk = blog_id
     cursor = connection.cursor()
@@ -675,7 +675,7 @@ def detail(request, blog_id):
     blog = cursor.fetchall()
     connection.commit()
     connection.close()
-    return render(request, 'test1/detail.html', {'blog': blog_detail,'comment':comment})
+    return render(request, 'test1/detail.html', {'blog': blog_detail,'comment':blog_comment})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blog 객체도 함께 넘겨주도록 하겠다.
 
