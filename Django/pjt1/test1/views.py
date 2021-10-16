@@ -785,3 +785,6 @@ def notice(request, notice_id):
 
 def loginregister(request):
     return render(request,'test1/loginregister.html',{})
+
+def logout(request):
+    return render(request, 'test1/logout.html')
