@@ -97,10 +97,15 @@
             </button>
             <button
               class="navbar-btn nav-button wow fadeInRight"
-              onclick=" window.open('submit-property.html')"
               data-wow-delay="0.48s"
             >
-              회원가입
+            <li class="nav-item">
+              {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+              <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
+              {% endif %}
+       </li>
             </button>
           </div>
           <ul class="main-nav nav navbar-nav navbar-right">
@@ -192,7 +197,7 @@
           <div class="row">
             <h3>고려대학교 HRD 산학협력단 빅데이터 교육</h3>
             <p>
-              Korea HRD. Sejong Big-Data. 『Kwak Woon-il, Kim do-young, Sim
+              Korea HRD. Sejong Big-Data. 『Kwag Unil, Kim do-young, Sim
               myeong-jin, Pyeon do-jun』
             </p>
           </div>
