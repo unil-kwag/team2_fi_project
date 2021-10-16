@@ -657,8 +657,8 @@ def board_edit(request):
 
 def blog(request, count):
     count = int(count)
-    blogs = Blog.objects.all().order_by('-id')[count-5:count]
-    return render(request, 'test1/home.html', {'blogs': blogs,'count':count+5, 'prev':count-5})
+    blogs = Blog.objects.all().order_by('-id')[count-10:count]
+    return render(request, 'test1/home.html', {'blogs': blogs,'count':count+10, 'prev':count-10})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blogs 객체도 함께 넘겨주도록 하겠다.
 
@@ -666,7 +666,6 @@ def blog(request, count):
 def detail(request, blog_id):
     blog_detail = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
     blog_comment = Commet.objects.filter(blog_id=blog_id)
-    print(blog_comment)
     ########################### 조회수 증가
     pk = blog_id
     cursor = connection.cursor()
@@ -678,7 +677,14 @@ def detail(request, blog_id):
     return render(request, 'test1/detail.html', {'blog': blog_detail,'comment':blog_comment})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blog 객체도 함께 넘겨주도록 하겠다.
-
+def comment_insert(request,blog_id):
+    comment = Commet()
+    comment.body = request.GET['comment_body']
+    comment.name = '관리자' ##id로 수정
+    comment.date = timezone.datetime.now() ##현재시간 등록
+    comment.blog_id = blog_id
+    comment.save()
+    return redirect('/detail/'+str(blog_id))
 
 def new(request):
     return render(request, 'test1/new.html')
@@ -692,7 +698,7 @@ def create(request):
     blog.pub_date = timezone.datetime.now()  # 내용 채우기
     blog.save()  # 객체 저장하기
     # 새로운 글 url 주소로 이동
-    return redirect('/blog/' + str(blog.id))
+    return redirect('/blog/10')
 
 
 def edit(request, blog_id):

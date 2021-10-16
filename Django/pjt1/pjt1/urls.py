@@ -70,6 +70,7 @@ urlpatterns = [
     re_path(r'^blog/(?P<count>[0-9]{1,3})/$',blog,name='blog'),
     
     path('detail/<int:blog_id>', detail, name="detail"),
+    path('detail/comment_insert/<int:blog_id>',comment_insert,name='comment_insert'),
     path('blog/new', new, name="new"),
     path('blog/create', create, name='create'),
     path('blog/edit/<int:blog_id>', edit, name="edit"),

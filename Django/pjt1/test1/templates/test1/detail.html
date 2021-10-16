@@ -111,7 +111,7 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/blog/5">게시판</a>
+              <a class="" href="/blog/10">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
               <a href="contact.html">연락망</a>
@@ -147,16 +147,26 @@
               <dd>{{blog.hit}}</dd>
             </dl>
           </div>
-          <div class="cont">{{blog.body}}</div>
+          <div class="cont" style="height: 200px;">{{blog.body}}</div>
 
-          <div class="info">
+          <div class="info" style="border-right: 1px black solid; border-left: 1px black solid;">
             <p>댓글 :</p>
             {% for com in comment%}           
-            <dl>
+            <dl style="display: block; margin-bottom: 1%;">
               <dt>{{com.name}} : </dt>
               <dd>{{com.body}}</dd>
             </dl>
             {% endfor %}
+            
+            <form action="{% url 'comment_insert' blog.id%}" method="get">
+              {% csrf_token %}
+              <div class="input-group">
+                  <input class="form-control" name="comment_body" id="comment_body" type="text" placeholder="댓글내용">
+                  <span class="input-group-btn">
+                      <input class="btn btn-primary subscribe" type="submit" value="댓글등록"></input>
+                  </span>
+              </div>
+            </form> 
           </div>
         </div>
         <div class="bt_wrap">
@@ -197,24 +207,21 @@
         </div>
       </div> 
     </div>
-
     <script src="/static/js/modernizr-2.6.2.min.js"></script>
-
     <script src="/static/js/jquery-1.10.2.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/js/bootstrap-select.min.js"></script>
     <script src="/static/js/bootstrap-hover-dropdown.js"></script>
-
     <script src="/static/js/easypiechart.min.js"></script>
     <script src="/static/js/jquery.easypiechart.min.js"></script>
-
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/wow.js"></script>
-
     <script src="/static/js/icheck.min.js"></script>
     <script src="/static/js/price-range.js"></script>
-
     <script src="/static/js/main.js"></script>
+    <script>
+      
+    </script>
   </body>
 </html>
 <!--test-->
