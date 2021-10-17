@@ -174,8 +174,9 @@
         </div>
 
         <div class="bt_wrap">
+          <a href="/">홈으로</a>
           <a href="{%url 'blog' 10%}">목록으로</a>
-          {% if blog.writer == user.username%}
+          {% if blog.writer == user.username or user.is_staff == 1 %}
             <a href="{%url 'edit' blog.id %}">수정</a>
             <a href="{%url 'delete' blog.id %}">삭제</a>
           {% endif %}

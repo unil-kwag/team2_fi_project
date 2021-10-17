@@ -79,5 +79,8 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('notice/<int:notice_id>', notice, name="notice"),
+    path('notice_register/',notice_register, name='notice_register'),
+    path('notice_register/notice_create',notice_create, name='notice_create'),
+    path('notice/notice_delete/<int:notice_id>',notice_delete, name='notice_delete'),
     path('logout/', logout, name="logout")
 ]

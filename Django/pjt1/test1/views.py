@@ -682,6 +682,16 @@ def create(request):
     # 새로운 글 url 주소로 이동
     return redirect('/blog/10')
 
+def notice_create(request):
+    notice = NoticeBlog()
+    notice.title = request.GET['title']
+    notice.name = '관리자'
+    notice.body = request.GET['body']
+    notice.date = timezone.datetime.now()
+    notice.save()
+
+    return redirect('/blog/10')
+
 
 def edit(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
@@ -692,12 +702,14 @@ def edit(request, blog_id):
 def delete(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)  # 특정 객체 가져오기(없으면 404 에러)
     comment = Commet.objects.filter(blog_id=blog_id)
-    print("TEST:",comment)
     comment.delete()
     blog.delete()
     return redirect('/blog/10')  # home 이름의 url 로
 
-# U - update(기존 글 객체 가져와서 수정하기)
+def notice_delete(request, notice_id):
+    notice = get_object_or_404(NoticeBlog, pk=notice_id)
+    notice.delete()
+    return redirect('/blog/10')
 
 
 def update(request, blog_id):
@@ -781,7 +793,15 @@ def news1(request):
 
 def notice(request, notice_id):
     notice_pk = get_object_or_404(NoticeBlog, pk=notice_id)  # 특정 객체 가져오기(없으면 404 에러)
+    notice_hit = NoticeBlog.objects.get(id=notice_id)
+    notice_hit.hit = notice_hit.hit + 1
+    notice_hit.save()
+
     return render(request, 'test1/notice.html', {'notice_pk': notice_pk})
+
+def notice_register(request):
+
+    return render(request, 'test1/notice_register.html',{})
 
 def loginregister(request):
     return render(request,'test1/loginregister.html',{})

@@ -248,7 +248,7 @@
                   <ul class="footer-menu">
                     {% for notice_all in notice.all %}
                     {% if forloop.counter < 6 %}
-                    <li><a href="{%url 'notice' notice_all.id%}"><span style="color:#fdc600;">[공지사항]</span> {{notice_all.title}}</a></li>
+                    <li><a href="{%url 'notice' notice_all.id%}"><span style="color:#fdc600;">[공지사항]</span> {{notice_all.title|truncatewords:6}}</a></li>
                     {% endif %}
                     {% endfor %}
                   </ul>
@@ -285,7 +285,7 @@
                 <ul class="footer-menu">
                   {% for haha in jemok.all %}
                   {% if forloop.counter < 6 %}
-                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title}}</a></li>
+                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title|truncatewords:6}}</a></li>
                   {% endif %}
                   {% endfor %}
                 </ul>

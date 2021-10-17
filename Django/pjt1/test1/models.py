@@ -31,10 +31,13 @@ class NoticeBlog(models.Model):
     title = models.CharField(max_length=50)
     body = models.CharField(max_length=100)
     name = models.CharField(max_length=10)
+    date = models.DateField(blank=True, null=True)
+    hit = models.IntegerField(blank=True, null=False, default=0)
 
     class Meta:
         managed = False
-        db_table = 'notice_blog'        
+        db_table = 'notice_blog'
+       
 
 class Bus(models.Model):
     id = models.IntegerField(primary_key=True)
