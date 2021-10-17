@@ -98,7 +98,11 @@
           <ul class="main-nav nav navbar-nav navbar-right">
             {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
-              <a>{{user.username}}님 안녕하세요</a>
+              {% if user.is_staff == 1 %}
+                <a><span style="color:#fdc600;">[관리자] </span> {{user.username}}님 안녕하세요</a>
+              {% else %}
+                <a>{{user.username}}님 안녕하세요</a>
+              {% endif %}
             </li>
             {% else %}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
@@ -154,7 +158,11 @@
             <p style="border-bottom: 1px dotted black;">댓글 :</p>
             {% for com in comment%}           
             <dl style="display: block; margin-bottom: 1%;">
-              <dt>{{com.name}} : </dt>
+              {% if com.name == "관리자"%}
+                <dt style="color:#fdc600 ;">{{com.name}} : </dt>
+              {% else %}
+                <dt>{{com.name}} : </dt>
+              {% endif %}
               <dd>{{com.body}}</dd>
             </dl>
             {% endfor %}
@@ -163,7 +171,11 @@
               {% csrf_token %}
               <div class="input-group">
                   <input class="form-control" name="comment_body" id="comment_body" type="text" placeholder="댓글내용">
-                  <input name="user_name" id="user_name" value={{user.username}} style="display: none;">
+                  {% if user.is_staff == 1 %}
+                    <input name="user_name" id="user_name" value='관리자' style="display: none;">
+                  {% else %}
+                    <input name="user_name" id="user_name" value={{user.username}} style="display: none;">
+                  {% endif %}
                   <span class="input-group-btn">
                       <input class="btn btn-primary subscribe" type="submit" value="댓글등록"></input>
                   </span>

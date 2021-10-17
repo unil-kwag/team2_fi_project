@@ -98,7 +98,11 @@
           <ul class="main-nav nav navbar-nav navbar-right">
             {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
+              {% if user.is_staff == 1 %}
+                <a><span style="color:#fdc600;">[관리자] </span> {{user.username}}님 안녕하세요</a>
+              {% else %}
               <a>{{user.username}}님 안녕하세요</a>
+              {% endif %}
             </li>
             {% else %}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
@@ -155,7 +159,7 @@
             {% for blog in blogs %}
             <div class="num"><td>{{blog.id}}</td></div>
             <div class="title" style =" text-align: center;">
-              <td><a href="{%url 'detail' blog.id%}">{{blog.title}}</a></td>
+              <td><a style="color:#cfcfcf;" href="{%url 'detail' blog.id%}">{{blog.title}}</a></td>
             </div>
             <div class="date" style="font-size: 12px;"><td>{{blog.pub_date}}</td></div>
             <div class="writer"><td>{{blog.writer}}</td></div>

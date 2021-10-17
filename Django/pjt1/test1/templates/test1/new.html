@@ -99,7 +99,11 @@
           <ul class="main-nav nav navbar-nav navbar-right">
             {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
-              <a>{{user.username}}님 안녕하세요</a>
+              {% if user.is_staff == 1 %}
+                <a><span style="color:#fdc600;">[관리자] </span> {{user.username}}님 안녕하세요</a>
+              {% else %}
+                <a>{{user.username}}님 안녕하세요</a>
+              {% endif %}
             </li>
             {% else %}
             <li class="wow fadeInDown" data-wow-delay="0.5s">

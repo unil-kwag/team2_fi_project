@@ -106,7 +106,11 @@
           <ul class="main-nav nav navbar-nav navbar-right">
             {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
+              {% if user.is_staff == 1 %}
+                <a><span style="color:#fdc600;">[관리자] </span> {{user.username}}님 안녕하세요</a>
+              {% else %}
               <a>{{user.username}}님 안녕하세요</a>
+              {% endif %}
             </li>
             {% else %}
             <li class="wow fadeInDown" data-wow-delay="0.5s">
@@ -285,7 +289,7 @@
                 <ul class="footer-menu">
                   {% for haha in jemok.all %}
                   {% if forloop.counter < 6 %}
-                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title|truncatewords:6}}</a></li>
+                  <li style="display: inline-block; width: 100%; text-align: justify;"><span style="color: #B3B3B3;">[{{haha.id}}] </span><a href="{%url 'detail' haha.id%}">{{haha.title|truncatewords:4}}</a></li>
                   {% endif %}
                   {% endfor %}
                 </ul>
