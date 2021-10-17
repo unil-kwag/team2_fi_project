@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>GARO ESTATE | Register page</title>
+        <title>2조 Rainbow. 『신혼부부 임대주택 최적입지 선정 사이트』</title>
         <meta name="description" content="GARO is a real-estate template">
         <meta name="author" content="Kimarotec">
         <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
@@ -67,7 +67,7 @@
                   >
                   <li class="nav-item">
                     {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
-                    <a href="{% url 'account_logout' %}" class="nav-link">로그아웃</a>
+                    <a href="/logout/" class="nav-link">로그아웃</a>
                     {% else %}
                     <a href="/loginregister/" class="nav-link">로그인</a>
                     {% endif %}
