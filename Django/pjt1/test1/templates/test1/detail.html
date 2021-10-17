@@ -116,10 +116,10 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/blog/10">게시판</a>
+              <a class="" href="/blog/">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
-              <a href="/contact/">연락망</a>
+              <a href="contact.html">연락망</a>
             </li>
           </ul>
         </div>
@@ -187,7 +187,7 @@
 
         <div class="bt_wrap">
           <a href="/">홈으로</a>
-          <a href="{%url 'blog' 10%}">목록으로</a>
+          <a href="{%url 'blog' %}">목록으로</a>
           {% if blog.writer == user.username or user.is_staff == 1 %}
             <a href="{%url 'edit' blog.id %}">수정</a>
             <a href="{%url 'delete' blog.id %}">삭제</a>

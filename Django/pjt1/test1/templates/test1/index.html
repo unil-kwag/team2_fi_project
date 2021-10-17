@@ -76,15 +76,31 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse yamm" id="navigation">
           <div class="button navbar-right">
-            <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.45s">
-              <li class="nav-item">
-                {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
-                <a href="/logout/" class="nav-link">로그아웃</a>
-                {% else %}
-                <a href="/loginregister/" class="nav-link">로그인</a>
-                {% endif %}
-              </li>
-            </button>
+            <button
+              class="navbar-btn nav-button wow bounceInRight login"
+              data-wow-delay="0.45s"
+            >
+            <li class="nav-item">
+              {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+              <a href="/logout/" class="nav-link">로그아웃</a>
+              {% else %}
+              <a href="/loginregister/" class="nav-link">로그인</a>
+              {% endif %}
+              
+       </li>
+            <!-- </button>
+            <button
+              class="navbar-btn nav-button wow fadeInRight"
+              data-wow-delay="0.48s"
+            >
+            <li class="nav-item">
+              {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+              <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}" class="nav-link">회원가입</a>
+              {% endif %}
+       </li>
+            </button> -->
           </div>
           
           <ul class="main-nav nav navbar-nav navbar-right">
@@ -108,15 +124,18 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/blog/10">게시판</a>
+              <a class="" href="/blog/">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
-              <a href="/contact/">연락망</a>
+              <a href="contact.html">연락망</a>
             </li>
           </ul>
         </div>
+        <!-- /.navbar-collapse -->
       </div>
+      <!-- /.container-fluid -->
     </nav>
+    <!-- End of nav bar -->
 
     <div class="slider-area">
       <div class="slider">
@@ -233,7 +252,7 @@
                   <ul class="footer-menu">
                     {% for notice_all in notice.all %}
                     {% if forloop.counter < 6 %}
-                    <li><a href="{%url 'notice' notice_all.id%}"><span style="color:#fdc600;">[공지사항]</span> {{notice_all.title|truncatewords:6}}</a></li>
+                    <li><a href="{%url 'notice' notice_all.id%}"><span style="color:#fdc600;">[공지사항]</span> {{notice_all.title|truncatewords:5}}</a></li>
                     {% endif %}
                     {% endfor %}
                   </ul>

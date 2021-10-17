@@ -117,7 +117,7 @@
               <a class="" href="/news/">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/blog/10">게시판</a>
+              <a class="" href="/blog/">게시판</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.5s">
               <a href="/contact/">연락망</a>
@@ -154,7 +154,7 @@
         </div>
         <div class="bt_wrap">
           <a href="/">홈으로</a>
-          <a href="/blog/10/">목록으로</a>
+          <a href="/blog/">목록으로</a>
           {% if user.is_staff == 1 %}
             <a href="{%url 'notice_delete' notice_pk.id %}">삭제</a>
           {% endif %}

@@ -64,7 +64,7 @@ urlpatterns = [
 
     path('django_dash/', include('django_plotly_dash.urls')),
     
-    re_path(r'^blog/(?P<count>[0-9]{1,3})/$',blog,name='blog'),
+    path('blog/',blog,name='blog'),
     
     path('detail/<int:blog_id>', detail, name="detail"),
     path('detail/comment_insert/<int:blog_id>',comment_insert,name='comment_insert'),
@@ -83,5 +83,5 @@ urlpatterns = [
     path('notice_register/notice_create',notice_create, name='notice_create'),
     path('notice/notice_delete/<int:notice_id>',notice_delete, name='notice_delete'),
     path('logout/', logout, name="logout"),
-    path('contact/', contact, name="contact"),
+    
 ]

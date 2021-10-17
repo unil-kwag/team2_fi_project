@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 from plotly.offline import plot
 import plotly.graph_objects as go
-
+from django.core.paginator import Paginator
 
 import os
 
@@ -27,7 +27,6 @@ import plotly.express as px
 from django_plotly_dash import DjangoDash
 
 import pandas as pd
-import numpy as np
 import folium
 import folium.plugins as plugins
 import json
@@ -634,12 +633,15 @@ def yongsan(request):
 # ====================================================================================================================
 # =================================================================================================================도준
 
-def blog(request, count):
+def blog(request):
     notice = NoticeBlog.objects.all().order_by('-id')[:5]
 
-    count = int(count)
-    blogs = Blog.objects.all().order_by('-id')[count-10:count]
-    return render(request, 'test1/home.html', {'blogs': blogs,'count':count+10, 'prev':count-10,'notices':notice})
+    all_blog = Blog.objects.all().order_by('-id')
+    paginator = Paginator(all_blog,10)
+    page = int(request.GET.get('page',1))
+    blog_list = paginator.get_page(page)
+
+    return render(request, 'test1/home.html', {'blog_list':blog_list,'notices':notice})
     # render라는 함수를 통해 페이지를 띄워줄 건데, home.html 파일을 띄워줄 것이고
     # 이 때, blogs 객체도 함께 넘겨주도록 하겠다.
 
@@ -680,7 +682,7 @@ def create(request):
     blog.pub_date = timezone.datetime.now()  # 내용 채우기
     blog.save()  # 객체 저장하기
     # 새로운 글 url 주소로 이동
-    return redirect('/blog/10')
+    return redirect('/blog/')
 
 def notice_create(request):
     notice = NoticeBlog()
@@ -690,7 +692,7 @@ def notice_create(request):
     notice.date = timezone.datetime.now()
     notice.save()
 
-    return redirect('/blog/10')
+    return redirect('/blog/')
 
 
 def edit(request, blog_id):
@@ -704,12 +706,12 @@ def delete(request, blog_id):
     comment = Commet.objects.filter(blog_id=blog_id)
     comment.delete()
     blog.delete()
-    return redirect('/blog/10')  # home 이름의 url 로
+    return redirect('/blog/')  # home 이름의 url 로
 
 def notice_delete(request, notice_id):
     notice = get_object_or_404(NoticeBlog, pk=notice_id)
     notice.delete()
-    return redirect('/blog/10')
+    return redirect('/blog/')
 
 
 def update(request, blog_id):
@@ -719,7 +721,7 @@ def update(request, blog_id):
     blog.pub_date = timezone.datetime.now()  # 내용 채우기
     blog.save()  # 저장하기
 
-    return redirect('/blog/10')
+    return redirect('/blog/')
 
 
 def clean_html(x):
@@ -808,6 +810,3 @@ def loginregister(request):
 
 def logout(request):
     return render(request, 'test1/logout.html')
-
-def contact(request):
-    return render(request, 'test1/contact.html')
