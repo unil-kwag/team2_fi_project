@@ -808,3 +808,6 @@ def loginregister(request):
 
 def logout(request):
     return render(request, 'test1/logout.html')
+
+def contact(request):
+    return render(request, 'test1/contact.html')
