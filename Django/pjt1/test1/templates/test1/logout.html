@@ -14,9 +14,9 @@
 
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-        <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="hosrtcut icon" href="/static/img/icon/favi.ico" type="image/x-icon" />
+    <link rel="icon" href="/static/img/icon/favi.ico" type="image/x-icon" />
 
         <link rel="stylesheet" href="/static/css/normalize.css">
         <link rel="stylesheet" href="/static/css/font-awesome.min.css">
@@ -76,6 +76,15 @@
                  
                 </div>
                 <ul class="main-nav nav navbar-nav navbar-right">
+                  {% if user.is_authenticated %} {# 유저가 로그인 중이면 #}
+                  <li class="wow fadeInDown" data-wow-delay="0.5s">
+                    <a>{{user.username}}님 안녕하세요</a>
+                  </li>
+                  {% else %}
+                  <li class="wow fadeInDown" data-wow-delay="0.5s">
+                    <a></a>
+                  </li>
+                  {% endif %}
                   <li class="wow fadeInDown" data-wow-delay="0.2s">
                     <a class="" href="/selection/">입지선정</a>
                   </li>
