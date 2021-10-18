@@ -128,6 +128,12 @@ def search(request):
     data = []
     for i in search_result:
         row = {'apt_name': i[0], 'apt_lon': i[1], 'apt_lat': i[2]}
+        try:
+            row = {'apt_name': i[0],
+                'apt_lon': float( i[1] ), 'apt_lat': float( i[2].replace(r'\r', '') ) }
+            data.append(row)
+        except:
+            pass  
     context['select_apt'] = data
     apt_df = pd.DataFrame(context['select_apt'])
 # 버스 데이터 불러오기---------------------------------------
@@ -456,7 +462,12 @@ def search(request):
         go.Bar(
             y=['버스 정류장', '어린이집', '편의점', '백화점', '소방서', '병원', '유치원', '주차장', '약국', '경찰서', '우체국', '학교', '전통시장', '지하철'],
             x=[len(bus_distance), len(care_distance), len(convenience_distance), len(depart_distance), len(fire_distance), len(hospital_distance), len(kinder_distance), len(parking_distance), len(pharmacy_distance), len(police_distance), len(post_distance), len(school_distance), len(store_distance), len(subway_distance)],
-            orientation='h'))
+            orientation='h',
+            marker = dict(
+                color='rgba(253, 198, 0, 1.0)',
+                line = dict(color='rgba(253, 198, 0, 1.0)', width=3)
+            )
+            ))
     # layout = {
     # 'title': 'Title of the figure',
     # 'xaxis_title': 'X',
@@ -470,15 +481,29 @@ def search(request):
     group1 = [len(bus_distance), len(convenience_distance), len(depart_distance), len(hospital_distance), len(parking_distance), len(pharmacy_distance), len(post_distance), len(store_distance),len(subway_distance)]
     group2 = [len(care_distance), len(kinder_distance)]
     group3 = [len(fire_distance), len(police_distance)]
-    df = pd.DataFrame(dict(
-    r=[np.mean(group1), np.mean(group2), np.mean(group3)],
-    theta=['편의시설', '교육시설', '기피시설']))
-    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+    # df = pd.DataFrame(dict(
+    # r=[np.mean(group1), np.mean(group2), np.mean(group3)],
+    # theta=['편의시설', '교육시설', '기피시설']))
+    # fig = px.line_polar(df, r='r', theta='theta', line_close=True)
      # layout = {
     # 'title': 'Title of the figure',
     # 'height': 420,
     # 'width': 560,
     # }
+    fig = go.Figure(data=go.Scatterpolar(
+        r=[np.mean(group1), np.mean(group2), np.mean(group3)],
+        theta=['편의시설', '교육시설', '기피시설'],
+        fill = 'toself',
+        line_color = 'rgba(253, 198, 0, 1.0)'
+    ))
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
     radar_chart = plot({'data' : fig}, output_type='div')
     context['radar_chart'] = radar_chart
     return render(request, 'test1/search.html', context)
