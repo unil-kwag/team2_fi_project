@@ -489,20 +489,33 @@ def search(request):
     maps = map._repr_html_()
     context['map'] = maps
 # 막대그래프 만들기
-    fig = go.Figure(go.Bar(
-            x=[20, 14, 23],
-            y=['giraffes', 'orangutans', 'monkeys'],
+    fig = go.Figure(
+        go.Bar(
+            y=['버스 정류장', '어린이집', '편의점', '백화점', '소방서', '병원', '유치원', '주차장', '약국', '경찰서', '우체국', '학교', '상점', '지하철'],
+            x=[len(bus_distance), len(care_distance), len(convenience_distance), len(depart_distance), len(fire_distance), len(hospital_distance), len(kinder_distance), len(parking_distance), len(pharmacy_distance), len(police_distance), len(post_distance), len(school_distance), len(store_distance), len(subway_distance)],
             orientation='h'))
     layout = {
     'title': 'Title of the figure',
     'xaxis_title': 'X',
     'yaxis_title': 'Y',
-    'height': 420,
-    'width': 560,
+    'height': 1000,
+    'width': 1000,
     }
     bar_chart = plot({'data' : fig, 'layout' : layout}, output_type='div')
     context['bar_chart'] = bar_chart
 # 레이더차트 그리기
+    df = pd.DataFrame(dict(
+    r=[1, 5, 2, 2, 3],
+    theta=['processing cost','mechanical properties','chemical stability',
+           'thermal stability', 'device integration']))
+    fig = px.line_polar(df, r='r', theta='theta', line_close=True)
+    layout = {
+    'title': 'Title of the figure',
+    'height': 420,
+    'width': 560,
+    }
+    radar_chart = plot({'data' : fig, 'layout' : layout}, output_type='div')
+    context['radar_chart'] = radar_chart
     return render(request, 'test1/search.html', context)
 
 # ====================================================================================================================
