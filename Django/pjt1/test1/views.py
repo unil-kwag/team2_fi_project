@@ -12,7 +12,7 @@ import os
 
 import requests
 import re
-
+import numpy as np
 import pandas as pd
 import folium
 import json
@@ -332,9 +332,9 @@ def search(request):
         data.append(row)
     context['all_school'] = data
     school_df = pd.DataFrame(context['all_school'])
-# 상점 데이터 불러오기---------------------------------------
+# 전통시장 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, small_category, longitude, latitude FROM store'
+    strSql = f'SELECT  DISTINCT id, store_name, longitude, latitude FROM store'
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -389,12 +389,12 @@ def search(request):
     g10 = folium.FeatureGroup(name = '경찰서')
     g11 = folium.FeatureGroup(name = '우체국')
     g12 = folium.FeatureGroup(name = '학교')
-    g13 = folium.FeatureGroup(name = '상점')
+    g13 = folium.FeatureGroup(name = '전통시장')
     g14 = folium.FeatureGroup(name = '지하철')
     g_category = [g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11, g12, g13, g14]
     for i in g_category:
         map.add_child(i)
-    folium.LayerControl(collapsed=False).add_to(map)
+    folium.LayerControl().add_to(map)
     folium.Marker([lat, lon],
                   icon=(folium.Icon(icon='home', prefix='fa', color='green')),
                   tooltip=name
@@ -419,13 +419,13 @@ def search(request):
         lon = convenience_distance.loc[i, 'convenience_lon']
         folium.Marker([lat, lon],
                         icon = (folium.Icon(icon='building', prefix='fa', color='green')),
-                        tooltip = convenience_distance.loc[i, 'convenience_name']).add_to(g3)
+                        tooltip = '편의점').add_to(g3)
     for i in range( len(depart_distance)):
         lat = depart_distance.loc[i, 'depart_lat']
         lon = depart_distance.loc[i, 'depart_lon']
         folium.Marker([lat, lon],
                         icon = (folium.Icon(icon='building', prefix='fa', color='purple')),
-                        tooltip = depart_distance.loc[i, 'depart_name']).add_to(g4)
+                        tooltip = '백화점').add_to(g4)
     for i in range( len(fire_distance)):
         lat = fire_distance.loc[i, 'fire_lat']
         lon = fire_distance.loc[i, 'fire_lon']
@@ -449,7 +449,7 @@ def search(request):
         lon = parking_distance.loc[i, 'parking_lon']
         folium.Marker([lat, lon],
                         icon = (folium.Icon(icon='building', prefix='fa', color='lightred')),
-                        tooltip = parking_distance.loc[i, 'parking_name']).add_to(g8)
+                        tooltip = '주차장').add_to(g8)
     for i in range( len(pharmacy_distance)):
         lat = pharmacy_distance.loc[i, 'pharmacy_lat']
         lon = pharmacy_distance.loc[i, 'pharmacy_lon']
@@ -491,30 +491,32 @@ def search(request):
 # 막대그래프 만들기
     fig = go.Figure(
         go.Bar(
-            y=['버스 정류장', '어린이집', '편의점', '백화점', '소방서', '병원', '유치원', '주차장', '약국', '경찰서', '우체국', '학교', '상점', '지하철'],
+            y=['버스 정류장', '어린이집', '편의점', '백화점', '소방서', '병원', '유치원', '주차장', '약국', '경찰서', '우체국', '학교', '전통시장', '지하철'],
             x=[len(bus_distance), len(care_distance), len(convenience_distance), len(depart_distance), len(fire_distance), len(hospital_distance), len(kinder_distance), len(parking_distance), len(pharmacy_distance), len(police_distance), len(post_distance), len(school_distance), len(store_distance), len(subway_distance)],
             orientation='h'))
-    layout = {
-    'title': 'Title of the figure',
-    'xaxis_title': 'X',
-    'yaxis_title': 'Y',
-    'height': 1000,
-    'width': 1000,
-    }
-    bar_chart = plot({'data' : fig, 'layout' : layout}, output_type='div')
+    # layout = {
+    # 'title': 'Title of the figure',
+    # 'xaxis_title': 'X',
+    # 'yaxis_title': 'Y',
+    # 'height': 1000,
+    # 'width': 1000,
+    # }
+    bar_chart = plot({'data' : fig}, output_type='div')
     context['bar_chart'] = bar_chart
 # 레이더차트 그리기
+    group1 = [len(bus_distance), len(convenience_distance), len(depart_distance), len(hospital_distance), len(parking_distance), len(pharmacy_distance), len(post_distance), len(store_distance),len(subway_distance)]
+    group2 = [len(care_distance), len(kinder_distance)]
+    group3 = [len(fire_distance), len(police_distance)]
     df = pd.DataFrame(dict(
-    r=[1, 5, 2, 2, 3],
-    theta=['processing cost','mechanical properties','chemical stability',
-           'thermal stability', 'device integration']))
+    r=[np.mean(group1), np.mean(group2), np.mean(group3)],
+    theta=['편의시설', '교육시설', '기피시설']))
     fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-    layout = {
-    'title': 'Title of the figure',
-    'height': 420,
-    'width': 560,
-    }
-    radar_chart = plot({'data' : fig, 'layout' : layout}, output_type='div')
+    # layout = {
+    # 'title': 'Title of the figure',
+    # 'height': 420,
+    # 'width': 560,
+    # }
+    radar_chart = plot({'data' : fig}, output_type='div')
     context['radar_chart'] = radar_chart
     return render(request, 'test1/search.html', context)
 
