@@ -400,7 +400,7 @@ def search(request):
                   tooltip=name
                   ).add_to(map)
     folium.Circle([lat, lon],
-                  radius=1500, popup='편의시설 범위'
+                  radius=1500, popup='편의시설 범위', color='grey', fill_color=1
                   ).add_to(map)
     for i in range( len(bus_distance)):
         lat = bus_distance.loc[i, 'bus_lat']
@@ -511,7 +511,7 @@ def search(request):
     r=[np.mean(group1), np.mean(group2), np.mean(group3)],
     theta=['편의시설', '교육시설', '기피시설']))
     fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-    # layout = {
+     # layout = {
     # 'title': 'Title of the figure',
     # 'height': 420,
     # 'width': 560,
