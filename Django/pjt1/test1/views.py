@@ -128,7 +128,6 @@ def search(request):
     data = []
     for i in search_result:
         row = {'apt_name': i[0], 'apt_lon': i[1], 'apt_lat': i[2]}
-        data.append(row)
     context['select_apt'] = data
     apt_df = pd.DataFrame(context['select_apt'])
 # 버스 데이터 불러오기---------------------------------------
