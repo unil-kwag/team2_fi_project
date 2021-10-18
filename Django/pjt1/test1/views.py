@@ -121,7 +121,6 @@ def search(request):
     context['select_name'] = name
 # 아파트 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT land_name, longitude, latitude FROM cluster_data WHERE land_name = "{name}" and supply_type = "{kind}"'
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
