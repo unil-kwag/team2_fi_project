@@ -59,52 +59,20 @@ def make_distance(apt_df, bus_df, bus_distance, name, lon, lat):
 #             folium.Marker([lat, lon],
 #                         icon = (folium.Icon(icon=bus, prefix='fa', color='red')),
 #                         tooltip = bus_distance.loc[i, bus_name]).add_to(g1)
-def index(request):
-    seoul = Seoul.objects.all().values('address_gu','supply_type','land_name').distinct() ####################
-    
-    gu = request.GET.get('select_gu')
-    kind = request.GET.get('select_kind')
-    name = request.GET.get('select_name')
-    cursor = connection.cursor()
-    strSql = f'SELECT DISTINCT  address_gu FROM seoul'
-    result = cursor.execute(strSql)
-    search_result = cursor.fetchall()
-    connection.commit()
-    connection.close()
-    data = []
-    for i in search_result:
-        row = {'gu': i[0]}
-        data.append(row)
-    context = {}
-    context['search_result1'] = data
-    if gu != None and gu != '':
-        cursor = connection.cursor()
-        strSql = f'SELECT DISTINCT supply_type FROM seoul WHERE address_gu = "{gu}"'
-        result = cursor.execute(strSql)
-        search_result = cursor.fetchall()
-        connection.commit()
-        connection.close()
-        data = []
-        for i in search_result:
-            row = {'kind': i[0]}
-            data.append(row)
-        context['select_gu'] = gu
-        context['housing_kind'] = data
 
-    if kind != None and kind != '':
-        cursor = connection.cursor()
-        strSql = f'SELECT DISTINCT land_name FROM seoul WHERE address_gu = "{gu}" and supply_type = "{kind}"'
-        result = cursor.execute(strSql)
-        search_result = cursor.fetchall()
-        connection.commit()
-        connection.close()
-        data = []
-        for i in search_result:
-            row = {'name': i[0]}
-            data.append(row)
-        context['select_kind'] = kind
-        context['housing_name'] = data
-        context['select_name'] = name
+
+def index_option2(request):
+    supply_type = Seoul.objects.filter(address_gu=request.GET.get('select_gu')).values('supply_type').distinct()
+    return render(request, 'test1/index_option2.html',{'supply_type':supply_type})
+
+def index_option3(request):
+    land_name = Seoul.objects.filter(supply_type = request.GET.get('select_kind'), address_gu=request.GET.get('select_gu')).values('land_name').distinct()
+    return render(request, 'test1/index_option3.html',{'land_name':land_name})
+
+def index(request):
+    ###seoul = Seoul.objects.all().values('address_gu','supply_type','land_name').distinct() ####################
+    seoul = Seoul.objects.values('address_gu').distinct()
+    
 
     search = '서울 부동산'
     page = request.GET.get('page')
@@ -137,11 +105,8 @@ def index(request):
     # 게시판 제목을 index.html에 주기
     jemok = Blog.objects.all().order_by('-id')
     notice = NoticeBlog.objects.all().order_by('-id')
-    context['result'] = result
-    context['jemok'] = jemok
-    context['notice'] = notice
-    context['seoul'] = seoul#######################
-    return render(request, 'test1/index.html', context)
+
+    return render(request, 'test1/index.html',{'result':result,'jemok':jemok,'notice':notice, 'seoul':seoul})
 
 
 

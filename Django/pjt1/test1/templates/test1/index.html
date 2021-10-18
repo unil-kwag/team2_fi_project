@@ -163,71 +163,35 @@
             <div class="search-form wow pulse" data-wow-delay="0.8s" style="height: 80px;">
 
 <!-------------------------------------------- 지역구 선택------------------------------------->
-                         
-
               <form name="selectForm" action="/" method="GET" class="col-sm-11" style="padding: 2px; " onsubmit="fn_search();"> 
-                <div class="form-group" style="float: left; width: 30%;">
-                  <select
-                    id="lunchBegins"
-                    class="selectpicker show-tick form-control"
-                    data-live-search="true"
-                    data-live-search-style="begins"
-                    title="지역구 선택"
-                    name="select_gu"
-                  >
-                  {% for list in search_result1 %}
-                  {% if list.gu == select_gu %}
-                    <option selected="true" value="{{list.gu}}">{{list.gu}}</option>
-                  {% else %}
-                    <option value="{{list.gu}}">{{list.gu}}</option>
-                   {% endif %}
-                  {%endfor%}
+                  <div class="form-group" style="float: left; width: 30%;">
+                    <select
+                      id="select_gu"
+                      class="show-tick form-control"
+                      data-live-search="true"
+                      data-live-search-style="begins"
+                      title="지역구 선택"
+                      name="select_gu"
+                      onchange="option1();"
+                    >
+                    <option value="none">선택</option>
+                    {% for list in seoul%}
+                    <option >{{list.address_gu}}</option>
+                    {% endfor %}
                   </select>
-
                 </div>
               <!-- </form> -->
 <!-------------------------------------------- 임대 선택------------------------------------->
               <!-- <form name="kindForm" action="/" method="GET" class="col-sm-3" style="padding: 5px;"> -->
                 <div class="form-group" style="float: left; width: 30%;">
-                  <select
-                    id="basic"
-                    class="selectpicker show-tick form-control"
-                    title= '임대유형'
-                    name="select_kind"
-                  >
-                  {% for list in housing_kind %}
-                  {% if list.kind == select_kind %}
-                    <option selected='true' value="{{list.kind}}">{{list.kind}}</option>
-                  {% else %}
-                    <option value="{{list.kind}}">{{list.kind}}</option>
-                  {% endif %}
-                  {%endfor%}
-                  </select>
+                  <select id="select_kind" class="show-tick form-control" title= '임대유형' name="select_kind" onchange="option2();"><option value="none">선택</option></select>
                 </div>
               <!-- </form> -->
 <!-------------------------------------------- 아파트 선택------------------------------------->              
               <!-- <form action="" class="col-sm-4" style="padding: 5px;"> -->
                 <div class="form-group" style="float: left; width: 30%;">
-                  <!-- <input
-                    type="text"
-                    class="form-control"
-                    placeholder="신혼부부 임대주택 검색"
-                  /> -->
-                  <select
-                  id="basic2"
-                  class="selectpicker show-tick form-control"
-                  title= '아파트'
-                  name="select_name"
-                >
-                {% for list in housing_name %}
-                {% if list.name == select_name %}
-                  <option selected='true' value="{{list.name}}">{{list.name}}</option>
-                {% else %}
-                <option value="{{list.name}}">{{list.name}}</option>
-                {% endif %}
-                {%endfor%}
-                </select>
-              </div>
+                  <select id="select_name" class="show-tick form-control" title= '아파트' name="select_name"><option value="none">선택</option></select>
+                </div>
                 
               <button class="btn search-btn" type="submit" >
                 <i class="fa fa-search"></i>
@@ -348,19 +312,33 @@
 
     <script src="/static/js/main.js"></script>
     <script>
-     
+    
+    function option1(){
+          var select_gu = document.getElementById('select_gu').value;
+            $.ajax({
+                    type: "GET",
+                    url: "/index_option2",
+                    data : {'select_gu':select_gu,},                
+                    datatype : 'json',
+                    success : function(result){
+                        $('#select_kind').html(result);
+                    }
+                })
+        }
 
-
-      console.log($('#lunchBegins').val());
-      $('#lunchBegins').on('change', function() {
-          document.selectForm.submit();
-      });
-      $('#basic').on('change', function() {
-          document.selectForm.submit();
-      });
-      $('#basic2').on('change', function() {
-        document.selectForm.submit();
-      });
+    function option2(){
+        var select_gu = document.getElementById('select_gu').value;
+        var select_kind = document.getElementById('select_kind').value;
+          $.ajax({
+                  type: "GET",
+                  url: "/index_option3",
+                  data : {'select_gu':select_gu,'select_kind':select_kind},                
+                  datatype : 'json',
+                  success : function(result){
+                      $('#select_name').html(result);
+                  }
+          })
+        }
 
       function fn_search() {
         document.selectForm.action = "search/";
