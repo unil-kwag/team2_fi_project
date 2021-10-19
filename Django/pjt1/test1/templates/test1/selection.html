@@ -251,6 +251,36 @@
                       <form action="/test/" method='POST' class="form-inline">
                         <fieldset>
                           <div class="row">
+                            <div class="col-xs-12" style="border-bottom: 1px double #fdc600; padding-bottom: 10px; margin-bottom: 10px;">
+                              <span>지역명</span>
+                                  <select id="location_features_name" name="location_features_name" class="selectpicker" title="지역선택">
+                                    <option>강남구</option>
+                                      <option>강동구</option>
+                                      <option>강북구</option>
+                                      <option>강서구</option>
+                                      <option>관악구</option>
+                                      <option>광진구</option>
+                                      <option>구로구</option>
+                                      <option>금천구</option>
+                                      <option>노원구</option>
+                                      <option>도봉구</option>
+                                      <option>동대문구</option>
+                                      <option>동작구</option>
+                                      <option>마포구</option>
+                                      <option>서대문구</option>
+                                      <option>서초구</option>
+                                      <option>성동구</option>
+                                      <option>성북구</option>
+                                      <option>송파구</option>
+                                      <option>양천구</option>
+                                      <option>영등포구</option>
+                                      <option>용산구</option>
+                                      <option>은평구</option>
+                                      <option>종로구</option>
+                                      <option>중구</option>
+                                      <option>중랑구</option>
+                                </select>
+                          </div>
                             <div class="col-xs-12">
                                 <span>1순위</span>
                                     <select id="location_features1" name="location_features" class="selectpicker" title="1순위 희망">
@@ -322,7 +352,7 @@
 
                       <div class="row">
                         <div class="col-sm-6">
-                          <p style="color: #000000;" class='author-category' id='ml_map_name'>지역명</p>
+                          <p style="color: #000000;" class='author-category' id='map_name'>지역명</p>
                         </div>
                         <div class='col-sm-6 right'>
                           <p style="color: #000000;" class='date-comments' id='current_date' value='2021'></p>
@@ -343,7 +373,7 @@
 
                       <div class="row">
                         <div class="col-sm-6">
-                          <p style="color: #000000;" class='author-category' id='map_name'>입지요인</p>
+                          <p style="color: #000000;" class='author-category' id='ml_map_name'>입지요인</p>
                         </div>
                         <div class='col-sm-6 right'>
                           <p style="color: #000000;" class='date-comments' id='current_date2' value='2021'></p>
@@ -416,19 +446,25 @@
           var feature1 = document.getElementById('location_features1').value
           var feature2 = document.getElementById('location_features2').value
           var feature3 = document.getElementById('location_features3').value
+          var feature_name = document.getElementById('location_features_name').value
 
           try{
             if((feature1.length>0) & (feature2.length>0) & (feature3.length>0)){
-              $.ajax({
-                type: "GET",
-                url: "/test/",
-                async:false,
-                data : {'feature1':feature1, 'feature2':feature2, 'feature3':feature3},
-                datatype : 'json',
-                success : function(result){
-                    $('#fuck2').html(result)
-                }
-            })
+              if(feature_name.length > 0 ){
+                $.ajax({
+                  type: "GET",
+                  url: "/test/",
+                  async:false,
+                  data : {'feature1':feature1, 'feature2':feature2, 'feature3':feature3,'location_features_name':feature_name},
+                  datatype : 'json',
+                  success : function(result){
+                      $('#fuck2').html(result)
+                  }
+                })
+              }
+              else{
+                swal("경고!","지역명을 선택해주세요.");
+              }
             }
             else{
               swal("경고!","입지요인을 모두 선택해주세요.");

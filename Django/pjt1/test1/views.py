@@ -525,17 +525,23 @@ def test(request):
     feature1 = request.GET.get('feature1')+' 평균거리'
     feature2 = request.GET.get('feature2')+' 평균거리'
     feature3 = request.GET.get('feature3')+' 평균거리'
+    location_name = request.GET.get('location_features_name')
+
 
     geo_path = './test1/templates/test1/map/seoul_municipalities_geo.json'
     seoul = json.load(open(geo_path, encoding='utf-8'))
+
     kmeans_final_score = pd.read_csv(
         './test1/templates/test1/map/군집결과_입지점수계산.csv', encoding='cp949')  # 모델학습용 파일
     # X = kmeans_final_score.iloc[:, 1:-1]  # 독립변수 X 분리
     X2 = kmeans_final_score.loc[:, [feature1, feature2, feature3]]
     y = kmeans_final_score.iloc[:, [-1]]  # 종속변수 Y 분리
 
-    songpa = pd.read_csv('./test1/templates/test1/map/송파구_거리계산결과.csv',
-                         encoding='cp949')  # 송파 군집 csv 파일 불러오기 송파구 입지선정용
+    seoul_result = pd.read_csv('./test1/templates/test1/map/서울전역_결과.csv',encoding='cp949')
+
+    # songpa = pd.read_csv('./test1/templates/test1/map/송파구_거리계산결과.csv',
+    #                      encoding='cp949')  # 송파 군집 csv 파일 불러오기 송파구 입지선정용
+    # print("SONGPA :", songpa)
 
     Model = RandomForestClassifier(random_state=40)  # RandomForest 객체 생성
     params = {'max_depth': [4], 'n_estimators': [30]}
@@ -543,36 +549,37 @@ def test(request):
                            param_grid=params,
                            cv=5)  # 교차횟수 5회
     grid_dt.fit(X2, y)  # 모델 학습
-    songpa_predict = grid_dt.predict(songpa.loc[:, [feature1, feature2, feature3]])  # 모델 예측
-    songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
+    seoul_predict= grid_dt.predict(seoul_result.loc[seoul_result['시군구']==location_name].loc[:,[feature1, feature2, feature3]]) # 서울 모델 예측
+    seoul_location = seoul_result.loc[seoul_result['시군구']==location_name].iloc[:,:4].reset_index() # 인덱스를 리셋해주기 위함
+    seoul_location = seoul_location[['주소','위도','경도','시군구']]
+    seoul_predict_result = pd.concat([seoul_location,pd.DataFrame(seoul_predict,columns=['입지점수'])],axis=1) #서울 데이터프레임의 입지점수 concat
 
-    lat = 37.508182
-    lon = 127.110053
-    map = folium.Map(location=[lat, lon], zoom_start=14)
-    for i in range(len(songpa_result)):
-        lat = songpa_result.loc[i, '위도']
-        lng = songpa_result.loc[i, '경도']
-        if songpa_result.loc[i, '입지점수'] == 1:  # 입지점수가 1이면 초록으로 마커 지정
+    # songpa_predict = grid_dt.predict(songpa.loc[:, [feature1, feature2, feature3]])  # 모델 예측
+    # songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
+
+    latt = 37.508182
+    lonn = 127.110053
+    map = folium.Map(location=[latt, lonn], zoom_start=14)
+    for i in range(len(seoul_predict_result)):
+        lat = seoul_predict_result.loc[i, '위도']
+        lng = seoul_predict_result.loc[i, '경도']
+        if seoul_predict_result.loc[i, '입지점수'] == 1:  # 입지점수가 1이면 초록으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='green')),).add_to(map)
-        elif songpa_result.loc[i, '입지점수'] == 2:  # 입지점수가 2이면 빨강으로 마커 지정
+        elif seoul_predict_result.loc[i, '입지점수'] == 2:  # 입지점수가 2이면 빨강으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='red')),).add_to(map)
-        elif songpa_result.loc[i, '입지점수'] == 3:  # 입지점수가 3이면 보라로 마커 지정
+        elif seoul_predict_result.loc[i, '입지점수'] == 3:  # 입지점수가 3이면 보라로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='purple')),).add_to(map)
-        elif songpa_result.loc[i, '입지점수'] == 4:  # 입지점수가 2이면 빨강으로 마커 지정
+        elif seoul_predict_result.loc[i, '입지점수'] == 4:  # 입지점수가 2이면 빨강으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='orange')),).add_to(map)
-        elif songpa_result.loc[i, '입지점수'] == 0:  # 입지점수가 2이면 파랑으로 마커 지정
+        elif seoul_predict_result.loc[i, '입지점수'] == 0:  # 입지점수가 2이면 파랑으로 마커 지정
             folium.Marker([lat, lng], icon=(folium.Icon(
                 icon='home', prefix='fa', color='blue')),).add_to(map)
         else:
             continue
-
-    if request.GET.get('name') == 'dojun':
-        folium.Marker([lat, lon], icon=(folium.Icon(
-            icon='home', prefix='fa', color='black')),).add_to(map)
 
     map.choropleth(geo_data=seoul, fill_color='white')
     map = map._repr_html_()
