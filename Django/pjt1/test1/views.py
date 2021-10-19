@@ -479,9 +479,9 @@ def search(request):
     bar_chart = plot({'data' : fig}, output_type='div')
     context['bar_chart'] = bar_chart
 # 레이더차트 그리기
-    group1 = [len(bus_distance), len(convenience_distance), len(depart_distance), len(hospital_distance), len(parking_distance), len(pharmacy_distance), len(post_distance), len(store_distance),len(subway_distance)]
-    group2 = [len(care_distance), len(kinder_distance)]
-    group3 = [len(fire_distance), len(police_distance)]
+    group1 = [len(bus_distance), len(subway_distance)]
+    group2 = [len(post_distance), len(convenience_distance), len(store_distance)]
+    group3 = [len(care_distance), len(kinder_distance), len(school_distance)]
     # df = pd.DataFrame(dict(
     # r=[np.mean(group1), np.mean(group2), np.mean(group3)],
     # theta=['편의시설', '교육시설', '기피시설']))
@@ -493,7 +493,7 @@ def search(request):
     # }
     fig = go.Figure(data=go.Scatterpolar(
         r=[np.mean(group1), np.mean(group2), np.mean(group3)],
-        theta=['편의시설', '교육시설', '기피시설'],
+        theta=['교통입지', '편의입지', '교육입지'],
         fill = 'toself',
         line_color = 'rgba(253, 198, 0, 1.0)'
     ))
