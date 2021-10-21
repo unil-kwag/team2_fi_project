@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="/static/css/style.css">
         <link rel="stylesheet" href="/static/css/responsive.css">
     </head>
-    <body>
+    <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -83,7 +83,7 @@
                       </li>
                       {% endif %}
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/selection/">입지선정</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/">뉴스</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/5">뉴스</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/blog/">게시판</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/contact/">연락망</a></li>
                     </ul>
@@ -214,16 +214,16 @@
                       <ul>
                         <li>
                           <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                            <img src="/static/img/demo/bus.png">
+                            <img src="/static/img/demo/market.png">
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                            <h6>버스 정류장</h6>
-                            <span >p-value : 0.0236</span>
+                            <h6>전통시장</h6>
+                            <span >p-value : 0.0121</span>
                           </div>
                         </li>
                         <li>
                           <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                            <img src="/static/img/demo/subway.png">
+                            <img src="/static/img/demo/subway2.png">
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                             <h6>지하철</h6>
@@ -232,7 +232,7 @@
                         </li>
                         <li>
                           <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                            <img src="/static/img/demo/gs.png">
+                            <img src="/static/img/demo/gs25.png">
                           </div>
                           <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                             <h6>편의점</h6>
@@ -435,7 +435,9 @@
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
       <script >
-        //$("input").removeAttr("javascript");
+        window.history.forward();
+        function noBack(){window.history.forward();}
+
         var d = new Date(); 
         var localeDate  =  d.toLocaleDateString(); 
         var localeTime  =  d.toLocaleTimeString(); 

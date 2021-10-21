@@ -59,9 +59,8 @@ urlpatterns = [
     # ======================================================입지선정
 
     path('search/', search, name='Search'),
-    path('news/', news, name='News'),
-    path('news_1/', news_1, name='News_1'),
-    path('news_2/', news_2, name='News_2'),
+    path('news/<int:news_index>', news, name='news'),
+
 
 
 
@@ -70,8 +69,7 @@ urlpatterns = [
     path('blog/', blog, name='blog'),
 
     path('detail/<int:blog_id>', detail, name="detail"),
-    path('detail/comment_insert/<int:blog_id>',
-         comment_insert, name='comment_insert'),
+    path('detail/comment_insert/<int:blog_id>',comment_insert, name='comment_insert'),
     path('blog/new', new, name="new"),
     path('blog/create', create, name='create'),
     path('blog/edit/<int:blog_id>', edit, name="edit"),
@@ -85,8 +83,7 @@ urlpatterns = [
     path('notice/<int:notice_id>', notice, name="notice"),
     path('notice_register/', notice_register, name='notice_register'),
     path('notice_register/notice_create', notice_create, name='notice_create'),
-    path('notice/notice_delete/<int:notice_id>',
-         notice_delete, name='notice_delete'),
+    path('notice/notice_delete/<int:notice_id>',notice_delete, name='notice_delete'),
     path('logout/', logout, name="logout"),
     path('contact/', contact, name='contact'),
 

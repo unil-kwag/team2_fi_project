@@ -121,7 +121,7 @@
               <a class="" href="/selection/">입지선정</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
-              <a class="" href="/news/">뉴스</a>
+              <a class="" href="/news/5">뉴스</a>
             </li>
             <li class="wow fadeInDown" data-wow-delay="0.3s">
               <a class="" href="/blog/">게시판</a>
@@ -295,22 +295,18 @@
     </div>
 
     <script src="/static/js/modernizr-2.6.2.min.js"></script>
-
     <script src="/static/js/jquery-1.10.2.min.js"></script>
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/js/bootstrap-select.min.js"></script>
     <script src="/static/js/bootstrap-hover-dropdown.js"></script>
-
     <script src="/static/js/easypiechart.min.js"></script>
     <script src="/static/js/jquery.easypiechart.min.js"></script>
-
     <script src="/static/js/owl.carousel.min.js"></script>
     <script src="/static/js/wow.js"></script>
-
     <script src="/static/js/icheck.min.js"></script>
     <script src="/static/js/price-range.js"></script>
-
     <script src="/static/js/main.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
     
     function option1(){
@@ -341,9 +337,35 @@
         }
 
       function fn_search() {
-        document.selectForm.action = "search/";
-        document.selectForm.submit();
-        return true;
+        var select_gu = $('#select_gu').val()
+        var select_kind = $('#select_kind').val()
+        var select_name = $('#select_name').val()
+
+        function preventClick(e){
+	        e.preventDefault()
+        }
+
+        if (select_gu == 'none'){
+          swal("경고!",'지역구를 선택해주세요.');
+          preventClick(event);
+          return false;
+        }
+        else if(select_kind == 'none'){
+          swal('경고!','임대유형을 선택해주세요.');
+          preventClick(event);
+          return false;
+        }
+        else if(select_name=='none'){
+          swal("경고!","아파트명을 선택해주세요.");
+          preventClick(event);
+          return false;
+        }
+        else{
+          document.selectForm.action = "search/";
+          document.selectForm.submit();
+          return true;
+        }
+
       }
     </script>
   </body>

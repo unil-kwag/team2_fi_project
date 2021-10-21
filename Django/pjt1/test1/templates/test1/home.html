@@ -54,7 +54,7 @@
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/responsive.css" />
   </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
   <div id="preloader">
     <div id="status">&nbsp;</div>
   </div>
@@ -110,7 +110,7 @@
                 <a class="" href="/selection/">입지선정</a>
               </li>
               <li class="wow fadeInDown" data-wow-delay="0.3s">
-                <a class="" href="/news/">뉴스</a>
+                <a class="" href="/news/5/">뉴스</a>
               </li>
               <li class="wow fadeInDown" data-wow-delay="0.3s">
                 <a class="" href="/blog/">게시판</a>
@@ -236,21 +236,20 @@
       </div>
   
       <script src="/static/js/modernizr-2.6.2.min.js"></script>
-  
       <script src="/static/js/jquery-1.10.2.min.js"></script>
       <script src="/static/bootstrap/js/bootstrap.min.js"></script>
       <script src="/static/js/bootstrap-select.min.js"></script>
       <script src="/static/js/bootstrap-hover-dropdown.js"></script>
-  
       <script src="/static/js/easypiechart.min.js"></script>
       <script src="/static/js/jquery.easypiechart.min.js"></script>
-  
       <script src="/static/js/owl.carousel.min.js"></script>
       <script src="/static/js/wow.js"></script>
-  
       <script src="/static/js/icheck.min.js"></script>
       <script src="/static/js/price-range.js"></script>
-  
       <script src="/static/js/main.js"></script>
+      <script>
+        window.history.forward();
+        function noBack(){window.history.forward();}
+      </script>
 </body>
 </html>

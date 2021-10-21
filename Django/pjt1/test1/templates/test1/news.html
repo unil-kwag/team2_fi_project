@@ -125,7 +125,7 @@
                         </li>
                         {% endif %}                 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/selection/">입지선정</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/">뉴스</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="/news/5/">뉴스</a></li>
                         <li class="dropdown yamm-fw" data-wow-delay="0.1s"><a class="" href="/blog/">게시판</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="/contact/">연락망</a></li>
                     </ul>
@@ -269,7 +269,7 @@
                                     {{news.description}} <br>
                                     {{news.title}}<br>
                                     <strong>자세한 뉴스: </strong>
-                                    <A href = "{{news.link}}" target = "self" > {{news.link}} </A>
+                                    <a href = "{{news.link}}" target = "self" > {{news.link}} </A>
                                 </p>
                             </div>
                             </div>
@@ -278,8 +278,14 @@
                             <!-- 페이지 이동 부분, 구현 힘들다면 상위 5개 기사만 뜨게 만들기 -->
                             <div class="post-footer single wow fadeInBottum animated">
                                 <ul class="pager">
-                                    <li class="previous"><a href="/news_1"><i class=""></i>← 이전 페이지 </a></li>
-                                    <li class="next disabled"><a href="/news_1">다음 페이지 →<i class=""></i> </a></li>
+                                    {% if prev_index == 0 %}
+                                    {% else %}
+                                        <li class="previous"><a href="{%url 'news' prev_index%}"><i class=""></i>← 이전 페이지 </a></li>
+                                    {% endif %}
+                                    {% if next_index == 105 %}
+                                    {% else %}
+                                        <li class="next disabled"><a href="{%url 'news' next_index%}" style="cursor: pointer">다음 페이지 →<i class=""></i> </a></li>
+                                    {% endif %}
                                 </ul> 
                             </div>    
 
@@ -333,8 +339,9 @@
         <script src="/static/js/icheck.min.js"></script>
         <script src="/static/js/price-range.js"></script>
         <script src="/static/js/main.js"></script>
-
         <script>
+            window.history.forward();
+            function noBack(){window.history.forward();}
             $(document).ready(function () {
 
                 $('#image-gallery').lightSlider({

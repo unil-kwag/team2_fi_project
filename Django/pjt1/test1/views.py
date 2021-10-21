@@ -839,15 +839,16 @@ def clean_html(x):
     return x
 
 
-def news(request):
+def news(request,news_index):
     search = request.GET.get('search')
+    search = '부동산'
     page = request.GET.get('page')
-
     client_id = "6HlcFx6Fi1uXNPCW7pmG"
     client_secret = "6Hx6DIiFP_"
 
     encode_type = 'json'  # 출력 방식 json 또는 xml
-    max_display = 5  # 출력 뉴스 수
+    # max_display = 5  # 출력 뉴스 수
+    max_display = news_index
     sort = 'date'  # 결과값의 정렬기준 시간순 date, 관련도 순 sim
     start = 1  # 출력 위치
 
@@ -868,109 +869,8 @@ def news(request):
                    'description': clean_html(i['description']),
                    'pubDate': i['pubDate']}
         result.append(tmp_dic)
-    return render(request, 'test1/news.html', {'result': result})
-
-
-def news1(request):
-    search = '서울 부동산'
-    page = request.GET.get('page')
-
-    client_id = "6HlcFx6Fi1uXNPCW7pmG"
-    client_secret = "6Hx6DIiFP_"
-
-    encode_type = 'json'  # 출력 방식 json 또는 xml
-    max_display = 2  # 출력 뉴스 수
-    sort = 'date'  # 결과값의 정렬기준 시간순 date, 관련도 순 sim
-    start = 1  # 출력 위치
-
-    url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search}&display={str(int(max_display))}&start={str(int(start))}&sort={sort}"
-
-    # 헤더에 아이디와 키 정보 넣기
-    headers = {'X-Naver-Client-Id': client_id,
-               'X-Naver-Client-Secret': client_secret
-               }
-
-    # HTTP요청 보내기
-    r = requests.get(url, headers=headers)
-    result = []
-    for i in r.json()['items']:
-        tmp_dic = {'title': clean_html(i['title']),
-                   'originallink': i['originallink'],
-                   'link': i['link'],
-                   'description': clean_html(i['description']),
-                   'pubDate': i['pubDate']}
-        result.append(tmp_dic)
-    return render(request, 'test1/index.html', {'result': result})
-
-# ---------------------- 다음페이지, 이전페이지 뉴스 HTML -----------------------------------------
-
-
-def news_1(request):
-    search = "서울 부동산"
-    page = request.GET.get('page')
-
-    client_id = "6HlcFx6Fi1uXNPCW7pmG"
-    client_secret = "6Hx6DIiFP_"
-
-    encode_type = 'json'  # 출력 방식 json 또는 xml
-    max_display = 5  # 출력 뉴스 수
-    sort = 'sim'  # 결과값의 정렬기준 시간순 date, 관련도 순 sim
-    start = 1  # 출력 위치
-
-    url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search}&display={str(int(max_display))}&start={str(int(start))}&sort={sort}"
-
-    # 헤더에 아이디와 키 정보 넣기
-    headers = {'X-Naver-Client-Id': client_id,
-               'X-Naver-Client-Secret': client_secret
-               }
-
-    # HTTP요청 보내기
-    r = requests.get(url, headers=headers)
-    result = []
-    for i in r.json()['items']:
-        tmp_dic = {'title': clean_html(i['title']),
-                   'originallink': i['originallink'],
-                   'link': i['link'],
-                   'description': clean_html(i['description']),
-                   'pubDate': i['pubDate']}
-        result.append(tmp_dic)
-        random.shuffle(result)
-    return render(request, 'test1/news_1.html', {'result': result})
-
-# ---------------------- END, 다음페이지, 이전페이지 뉴스 HTML -----------------------------------------
-
-
-def news_2(request):
-    search = "서울시 집값"
-    page = request.GET.get('page')
-
-    client_id = "6HlcFx6Fi1uXNPCW7pmG"
-    client_secret = "6Hx6DIiFP_"
-
-    encode_type = 'json'  # 출력 방식 json 또는 xml
-    max_display = 5  # 출력 뉴스 수
-    sort = 'sim'  # 결과값의 정렬기준 시간순 date, 관련도 순 sim
-    start = 1  # 출력 위치
-
-    url = f"https://openapi.naver.com/v1/search/news.{encode_type}?query={search}&display={str(int(max_display))}&start={str(int(start))}&sort={sort}"
-
-    # 헤더에 아이디와 키 정보 넣기
-    headers = {'X-Naver-Client-Id': client_id,
-               'X-Naver-Client-Secret': client_secret
-               }
-
-    # HTTP요청 보내기
-    r = requests.get(url, headers=headers)
-    result = []
-    for i in r.json()['items']:
-        tmp_dic = {'title': clean_html(i['title']),
-                   'originallink': i['originallink'],
-                   'link': i['link'],
-                   'description': clean_html(i['description']),
-                   'pubDate': i['pubDate']}
-        result.append(tmp_dic)
-        random.shuffle(result)
-    return render(request, 'test1/news_2.html', {'result': result})
+    result=result[(news_index-5):news_index]
+    return render(request, 'test1/news.html', {'result': result, 'next_index':news_index+5, 'prev_index':news_index-5})
 
 
 # -------------------END, 다음페이지, 이전페이지 뉴스 2 HTML--------------------------------------------
