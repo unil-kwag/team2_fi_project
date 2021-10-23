@@ -139,9 +139,14 @@ def search(request):
             pass
     context['select_apt'] = data
     apt_df = pd.DataFrame(context['select_apt'])
+    APT_LON_prev = apt_df['apt_lon'][0]-0.01
+    APT_LON_next = apt_df['apt_lon'][0]+0.01
+    APT_LAT_prev = apt_df['apt_lat'][0]-0.015
+    APT_LAT_next = apt_df['apt_lat'][0]+0.015
+
 # 버스 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM bus'
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM bus WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -154,7 +159,7 @@ def search(request):
     bus_df = pd.DataFrame(context['all_bus'])
 # 어린이집 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM care'
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM care WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -168,7 +173,7 @@ def search(request):
     care_df = pd.DataFrame(context['all_care'])
 # 편의점 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM convenience'
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM convenience WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -182,7 +187,7 @@ def search(request):
     convenience_df = pd.DataFrame(context['all_convenience'])
 # 백화점 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM depart'
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM depart WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -196,7 +201,7 @@ def search(request):
     depart_df = pd.DataFrame(context['all_depart'])
 # 소방서 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, name, longitude, latitude FROM fire'
+    strSql = f'SELECT  DISTINCT  id, name, longitude, latitude FROM fire WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -210,7 +215,7 @@ def search(request):
     fire_df = pd.DataFrame(context['all_fire'])
 # 병원 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM hospital'
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM hospital WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -227,7 +232,7 @@ def search(request):
     hospital_df = pd.DataFrame(context['all_hospital'])
 # 유치원 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, edu_name, longitude, latitude FROM kinder'
+    strSql = f'SELECT  DISTINCT id, edu_name, longitude, latitude FROM kinder WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -241,7 +246,7 @@ def search(request):
     kinder_df = pd.DataFrame(context['all_kinder'])
 # 주차장 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM parking'
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM parking WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -255,7 +260,7 @@ def search(request):
     parking_df = pd.DataFrame(context['all_parking'])
 # 약국 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, name, longitude, latitude FROM pharmacy'
+    strSql = f'SELECT  DISTINCT  id, name, longitude, latitude FROM pharmacy WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -272,7 +277,7 @@ def search(request):
     pharmacy_df = pd.DataFrame(context['all_pharmacy'])
 # 경찰서 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, police_station, longitude, latitude FROM police'
+    strSql = f'SELECT  DISTINCT  id, police_station, longitude, latitude FROM police WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -285,7 +290,7 @@ def search(request):
     police_df = pd.DataFrame(context['all_police'])
 # 우체국 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM post'
+    strSql = f'SELECT  DISTINCT  id, longitude, latitude FROM post WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -299,7 +304,7 @@ def search(request):
     post_df = pd.DataFrame(context['all_post'])
 # 학교 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM school'
+    strSql = f'SELECT  DISTINCT id, name, longitude, latitude FROM school WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -313,7 +318,7 @@ def search(request):
     school_df = pd.DataFrame(context['all_school'])
 # 전통시장 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, store_name, longitude, latitude FROM store'
+    strSql = f'SELECT  DISTINCT id, store_name, longitude, latitude FROM store WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -327,7 +332,7 @@ def search(request):
     store_df = pd.DataFrame(context['all_store'])
 # 지하철 데이터 불러오기---------------------------------------
     cursor = connection.cursor()
-    strSql = f'SELECT  DISTINCT id, station_num, longitude, latitude FROM subway'
+    strSql = f'SELECT  DISTINCT id, station_num, longitude, latitude FROM subway WHERE longitude <=' + str(APT_LON_next) +' AND longitude >=' + str(APT_LON_prev) + ' AND latitude <= '+ str(APT_LAT_next) + ' AND latitude >= '+ str(APT_LAT_prev)
     result = cursor.execute(strSql)
     search_result = cursor.fetchall()
     connection.commit()
@@ -566,7 +571,7 @@ def test(request):
     feature2 = request.GET.get('feature2')+' 평균거리'
     feature3 = request.GET.get('feature3')+' 평균거리'
     location_name = request.GET.get('location_features_name')
-
+    print(location_name)
     geo_path = './test1/templates/test1/map/seoul_municipalities_geo.json'
     seoul = json.load(open(geo_path, encoding='utf-8'))
 
@@ -599,7 +604,12 @@ def test(request):
 
     # songpa_predict = grid_dt.predict(songpa.loc[:, [feature1, feature2, feature3]])  # 모델 예측
     # songpa_result = pd.concat([songpa.iloc[:, :3], pd.DataFrame(songpa_predict, columns=['입지점수'])], axis=1)  # 송파구 데이터프레임의 입지점수 concat
-
+    # if location_name == '강남구' :
+    #     latt = 561561
+    #     lonn = 165156
+    # elif location_name =='도봉구':
+    #     latt = 37.657891
+    #     lonn = 127.039005
     latt = 37.508182
     lonn = 127.110053
     map = folium.Map(location=[latt, lonn], zoom_start=14)
