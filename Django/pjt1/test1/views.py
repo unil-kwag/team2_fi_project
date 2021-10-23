@@ -345,34 +345,34 @@ def search(request):
     context['all_subway'] = data
     subway_df = pd.DataFrame(context['all_subway'])
 # 아파트 1km 필터---------------------------------------
-    bus_distance = make_distance(
-        apt_df, bus_df, 'bus_distance', 'bus_name', 'bus_lon', 'bus_lat')
-    care_distance = make_distance(
-        apt_df, care_df, 'care_distance', 'care_name', 'care_lon', 'care_lat')
-    convenience_distance = make_distance(
-        apt_df, convenience_df, 'convenience_distance', 'convenience_name', 'convenience_lon', 'convenience_lat')
-    depart_distance = make_distance(
-        apt_df, convenience_df, 'depart_distance', 'depart_name', 'depart_lon', 'depart_lat')
-    fire_distance = make_distance(
-        apt_df, fire_df, 'fire_distance', 'fire_name', 'fire_lon', 'fire_lat')
-    hospital_distance = make_distance(
-        apt_df, hospital_df, 'hospital_distance', 'hospital_name', 'hospital_lon', 'hospital_lat')
-    kinder_distance = make_distance(
-        apt_df, kinder_df, 'kinder_distance', 'kinder_name', 'kinder_lon', 'kinder_lat')
-    parking_distance = make_distance(
-        apt_df, parking_df, 'parking_distance', 'parking_name', 'parking_lon', 'parking_lat')
-    pharmacy_distance = make_distance(
-        apt_df, pharmacy_df, 'pharmacy_distance', 'pharmacy_name', 'pharmacy_lon', 'pharmacy_lat')
-    police_distance = make_distance(
-        apt_df, police_df, 'police_distance', 'police_name', 'police_lon', 'police_lat')
-    post_distance = make_distance(
-        apt_df, post_df, 'post_distance', 'post_name', 'post_lon', 'post_lat')
-    school_distance = make_distance(
-        apt_df, school_df, 'school_distance', 'school_name', 'school_lon', 'school_lat')
-    store_distance = make_distance(
-        apt_df, store_df, 'store_distance', 'store_name', 'store_lon', 'store_lat')
-    subway_distance = make_distance(
-        apt_df, subway_df, 'subway_distance', 'subway_name', 'subway_lon', 'subway_lat')
+    # bus_distance = make_distance(
+    #     apt_df, bus_df, 'bus_distance', 'bus_name', 'bus_lon', 'bus_lat')
+    # care_distance = make_distance(
+    #     apt_df, care_df, 'care_distance', 'care_name', 'care_lon', 'care_lat')
+    # convenience_distance = make_distance(
+    #     apt_df, convenience_df, 'convenience_distance', 'convenience_name', 'convenience_lon', 'convenience_lat')
+    # depart_distance = make_distance(
+    #     apt_df, convenience_df, 'depart_distance', 'depart_name', 'depart_lon', 'depart_lat')
+    # fire_distance = make_distance(
+    #     apt_df, fire_df, 'fire_distance', 'fire_name', 'fire_lon', 'fire_lat')
+    # hospital_distance = make_distance(
+    #     apt_df, hospital_df, 'hospital_distance', 'hospital_name', 'hospital_lon', 'hospital_lat')
+    # kinder_distance = make_distance(
+    #     apt_df, kinder_df, 'kinder_distance', 'kinder_name', 'kinder_lon', 'kinder_lat')
+    # parking_distance = make_distance(
+    #     apt_df, parking_df, 'parking_distance', 'parking_name', 'parking_lon', 'parking_lat')
+    # pharmacy_distance = make_distance(
+    #     apt_df, pharmacy_df, 'pharmacy_distance', 'pharmacy_name', 'pharmacy_lon', 'pharmacy_lat')
+    # police_distance = make_distance(
+    #     apt_df, police_df, 'police_distance', 'police_name', 'police_lon', 'police_lat')
+    # post_distance = make_distance(
+    #     apt_df, post_df, 'post_distance', 'post_name', 'post_lon', 'post_lat')
+    # school_distance = make_distance(
+    #     apt_df, school_df, 'school_distance', 'school_name', 'school_lon', 'school_lat')
+    # store_distance = make_distance(
+    #     apt_df, store_df, 'store_distance', 'store_name', 'store_lon', 'store_lat')
+    # subway_distance = make_distance(
+    #     apt_df, subway_df, 'subway_distance', 'subway_name', 'subway_lon', 'subway_lat')
     lat = apt_df.iloc[0, 2]
     lon = apt_df.iloc[0, 1]
     name = apt_df.iloc[0, 0]
@@ -402,102 +402,102 @@ def search(request):
     folium.Circle([lat, lon],
                   radius=1500, popup='편의시설 범위', color='grey', fill_color=1
                   ).add_to(map)
-    for i in range(len(bus_distance)):
-        lat = bus_distance.loc[i, 'bus_lat']
-        lon = bus_distance.loc[i, 'bus_lon']
+    for i in range(len(bus_df)):
+        lat = bus_df.loc[i, 'bus_lat']
+        lon = bus_df.loc[i, 'bus_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='bus', prefix='fa', color='red')),
-                      tooltip=bus_distance.loc[i, 'bus_name']).add_to(g1)
-    for i in range(len(care_distance)):
-        lat = care_distance.loc[i, 'care_lat']
-        lon = care_distance.loc[i, 'care_lon']
+                      tooltip=bus_df.loc[i, 'bus_name']).add_to(g1)
+    for i in range(len(care_df)):
+        lat = care_df.loc[i, 'care_lat']
+        lon = care_df.loc[i, 'care_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='child', prefix='fa', color='blue')),
-                      tooltip=care_distance.loc[i, 'care_name']).add_to(g2)
-    for i in range(len(convenience_distance)):
-        lat = convenience_distance.loc[i, 'convenience_lat']
-        lon = convenience_distance.loc[i, 'convenience_lon']
+                      tooltip=care_df.loc[i, 'care_name']).add_to(g2)
+    for i in range(len(convenience_df)):
+        lat = convenience_df.loc[i, 'convenience_lat']
+        lon = convenience_df.loc[i, 'convenience_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='green')),
                       tooltip='편의점').add_to(g3)
-    for i in range(len(depart_distance)):
-        lat = depart_distance.loc[i, 'depart_lat']
-        lon = depart_distance.loc[i, 'depart_lon']
+    for i in range(len(depart_df)):
+        lat = depart_df.loc[i, 'depart_lat']
+        lon = depart_df.loc[i, 'depart_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='purple')),
                       tooltip='백화점').add_to(g4)
-    for i in range(len(fire_distance)):
-        lat = fire_distance.loc[i, 'fire_lat']
-        lon = fire_distance.loc[i, 'fire_lon']
+    for i in range(len(fire_df)):
+        lat = fire_df.loc[i, 'fire_lat']
+        lon = fire_df.loc[i, 'fire_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='orange')),
-                      tooltip=fire_distance.loc[i, 'fire_name']).add_to(g5)
-    for i in range(len(hospital_distance)):
-        lat = hospital_distance.loc[i, 'hospital_lat']
-        lon = hospital_distance.loc[i, 'hospital_lon']
+                      tooltip=fire_df.loc[i, 'fire_name']).add_to(g5)
+    for i in range(len(hospital_df)):
+        lat = hospital_df.loc[i, 'hospital_lat']
+        lon = hospital_df.loc[i, 'hospital_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='darkred')),
-                      tooltip=hospital_distance.loc[i, 'hospital_name']).add_to(g6)
-    for i in range(len(kinder_distance)):
-        lat = kinder_distance.loc[i, 'kinder_lat']
-        lon = kinder_distance.loc[i, 'kinder_lon']
+                      tooltip=hospital_df.loc[i, 'hospital_name']).add_to(g6)
+    for i in range(len(kinder_df)):
+        lat = kinder_df.loc[i, 'kinder_lat']
+        lon = kinder_df.loc[i, 'kinder_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='child',
                             prefix='fa', color='lightred')),
-                      tooltip=kinder_distance.loc[i, 'kinder_name']).add_to(g7)
-    for i in range(len(parking_distance)):
-        lat = parking_distance.loc[i, 'parking_lat']
-        lon = parking_distance.loc[i, 'parking_lon']
+                      tooltip=kinder_df.loc[i, 'kinder_name']).add_to(g7)
+    for i in range(len(parking_df)):
+        lat = parking_df.loc[i, 'parking_lat']
+        lon = parking_df.loc[i, 'parking_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='lightred')),
                       tooltip='주차장').add_to(g8)
-    for i in range(len(pharmacy_distance)):
-        lat = pharmacy_distance.loc[i, 'pharmacy_lat']
-        lon = pharmacy_distance.loc[i, 'pharmacy_lon']
+    for i in range(len(pharmacy_df)):
+        lat = pharmacy_df.loc[i, 'pharmacy_lat']
+        lon = pharmacy_df.loc[i, 'pharmacy_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='beige')),
-                      tooltip=pharmacy_distance.loc[i, 'pharmacy_name']).add_to(g9)
-    for i in range(len(police_distance)):
-        lat = police_distance.loc[i, 'police_lat']
-        lon = police_distance.loc[i, 'police_lon']
+                      tooltip=pharmacy_df.loc[i, 'pharmacy_name']).add_to(g9)
+    for i in range(len(police_df)):
+        lat = police_df.loc[i, 'police_lat']
+        lon = police_df.loc[i, 'police_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='darkblue')),
-                      tooltip=police_distance.loc[i, 'police_name']).add_to(g10)
-    for i in range(len(post_distance)):
-        lat = post_distance.loc[i, 'post_lat']
-        lon = post_distance.loc[i, 'post_lon']
+                      tooltip=police_df.loc[i, 'police_name']).add_to(g10)
+    for i in range(len(post_df)):
+        lat = post_df.loc[i, 'post_lat']
+        lon = post_df.loc[i, 'post_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='darkgreen')),
-                      tooltip=post_distance.loc[i, 'post_name']).add_to(g11)
-    for i in range(len(school_distance)):
-        lat = school_distance.loc[i, 'school_lat']
-        lon = school_distance.loc[i, 'school_lon']
+                      tooltip=post_df.loc[i, 'post_name']).add_to(g11)
+    for i in range(len(school_df)):
+        lat = school_df.loc[i, 'school_lat']
+        lon = school_df.loc[i, 'school_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='cadetblue')),
-                      tooltip=school_distance.loc[i, 'school_name']).add_to(g12)
-    for i in range(len(store_distance)):
-        lat = store_distance.loc[i, 'store_lat']
-        lon = store_distance.loc[i, 'store_lon']
+                      tooltip=school_df.loc[i, 'school_name']).add_to(g12)
+    for i in range(len(store_df)):
+        lat = store_df.loc[i, 'store_lat']
+        lon = store_df.loc[i, 'store_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='darkpurple')),
-                      tooltip=store_distance.loc[i, 'store_name']).add_to(g13)
-    for i in range(len(subway_distance)):
-        lat = subway_distance.loc[i, 'subway_lat']
-        lon = subway_distance.loc[i, 'subway_lon']
+                      tooltip=store_df.loc[i, 'store_name']).add_to(g13)
+    for i in range(len(subway_df)):
+        lat = subway_df.loc[i, 'subway_lat']
+        lon = subway_df.loc[i, 'subway_lon']
         folium.Marker([lat, lon],
                       icon=(folium.Icon(icon='building',
                             prefix='fa', color='pink')),
-                      tooltip=subway_distance.loc[i, 'subway_name']).add_to(g14)
+                      tooltip=ssubway_df.loc[i, 'subway_name']).add_to(g14)
     maps = map._repr_html_()
     context['map'] = maps
 # 막대그래프 만들기
@@ -505,8 +505,8 @@ def search(request):
         go.Bar(
             y=['버스 정류장', '어린이집', '편의점', '백화점', '소방서', '병원', '유치원',
                 '주차장', '약국', '경찰서', '우체국', '학교', '전통시장', '지하철'],
-            x=[len(bus_distance), len(care_distance), len(convenience_distance), len(depart_distance), len(fire_distance), len(hospital_distance), len(kinder_distance), len(
-                parking_distance), len(pharmacy_distance), len(police_distance), len(post_distance), len(school_distance), len(store_distance), len(subway_distance)],
+            x=[len(bus_df), len(care_df), len(convenience_df), len(depart_df), len(fire_df), len(hospital_df), len(kinder_df), len(
+                parking_df), len(pharmacy_df), len(police_df), len(post_df), len(school_df), len(store_df), len(subway_df)],
             orientation='h',
             marker=dict(
                 color='rgba(253, 198, 0, 1.0)',
@@ -523,10 +523,10 @@ def search(request):
     bar_chart = plot({'data': fig}, output_type='div')
     context['bar_chart'] = bar_chart
 # 레이더차트 그리기
-    group1 = [len(bus_distance), len(subway_distance)]
-    group2 = [len(post_distance), len(
-        convenience_distance), len(store_distance)]
-    group3 = [len(care_distance), len(kinder_distance), len(school_distance)]
+    group1 = [len(bus_df), len(subway_df)]
+    group2 = [len(post_df), len(
+        convenience_df), len(store_df)]
+    group3 = [len(care_df), len(kinder_df), len(school_df)]
     # df = pd.DataFrame(dict(
     # r=[np.mean(group1), np.mean(group2), np.mean(group3)],
     # theta=['편의시설', '교육시설', '기피시설']))
